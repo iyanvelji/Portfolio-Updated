@@ -1,0 +1,523 @@
+$accent-purple: #bc3bf0;
+$accent-blue: #00bfff;
+$accent-green: #39ff14;
+$bg-matrix: #020104;
+$accent-dim: rgba(188, 59, 240, 0.15);
+
+
+$cube-size: 70px; 
+$grid-gap: 8px;
+
+.cyber-edu-container {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-color: $bg-matrix;
+  color: #fff;
+  padding: 4rem 1.5rem;
+  overflow: hidden;
+}
+
+
+
+// ==========================================================================
+// HIGH ACCURACY CENTERING & BREATHING MARGINS
+// ==========================================================================
+.matrix-columns-grid {
+  display: flex;
+  flex-direction: column; // 🚀 Forces each cluster category onto its own new line
+  align-items: center;    // 🎯 Centers every single cluster perfectly horizontally on the screen
+  gap: 0.2rem;
+  margin-top: 4rem; // Added distinct clearance from upper structural dividers
+  justify-items: center; // Guarantees columns are perfectly centered on the X-axis
+  align-items: center;
+}
+
+.matrix-column-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  width: 100%;
+  max-width: 450px;
+}
+
+.glitch-title {
+  width: 100%;
+  text-align: center;     // 🎯 THE FIX: Centers the header text
+  margin-bottom: 6rem;
+     font-size: clamp(2.25rem, 5vw, 3.5rem);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 900;
+
+    // ✨ FANCY: Cyberpunk neon color-bleed gradient
+    background: linear-gradient(180deg, #ffffff 30%, $accent-dim 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+
+    // Deep luminous aura that scales nicely on dark backgrounds
+
+    border: none;
+    padding-left: 0;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    
+    // 🎯 THE FIX: Adds exactly 10px of space directly under the text
+    margin: 0 0 10px 0; 
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .glitch-title2 {
+  width: 100%;
+  text-align: center;     // 🎯 THE FIX: Centers the header text
+  margin-bottom: 6rem;
+     font-size: clamp(2.25rem, 5vw, 3.5rem);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 900;
+
+    // ✨ FANCY: Cyberpunk neon color-bleed gradient
+    background: linear-gradient(180deg, #ffffff 30%, $accent-dim 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+
+    // Deep luminous aura that scales nicely on dark backgrounds
+
+    border: none;
+    padding-left: 0;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    
+    // 🎯 THE FIX: Adds exactly 10px of space directly under the text
+    margin: 0 0 10px 0; 
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+.viewport-3d {
+  width: 100%;
+  height: 520px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center; // Direct horizontal absolute centering alignment
+  perspective: 1100px;
+  margin-top: 3.5rem; // Provides generous breathing space below headers
+}
+
+.cube-cluster-matrix {
+  position: relative;
+  // Dynamic scaling tracks perfectly to width profiles
+  width: calc((#{$cube-size} * 3) + (#{$grid-gap} * 2)); 
+  height: calc((#{$cube-size} * 6) + (#{$grid-gap} * 5));
+  transform-style: preserve-3d;
+  transform: rotateX(54deg) rotateZ(-42deg);
+  transition: transform 0.6s cubic-bezier(0.15, 0.85, 0.35, 1);
+
+  &:hover {
+    transform: rotateX(50deg) rotateZ(-36deg);
+  }
+}
+
+// ==========================================================================
+// THE GLOWING SCI-FI PLATFORM (PEDESTAL)
+// ==========================================================================
+.matrix-pedestal {
+  position: absolute;
+  // Offsets layout geometry boundary to box the cube map arrangement perfectly
+  top: calc(#{$grid-gap} * -1);
+  left: calc(#{$grid-gap} * -1);
+  width: calc(100% + (#{$grid-gap} * 2));
+  
+  // Height configuration expands downward to cleanly house up to 6 module layers
+  height: calc((#{$cube-size} * 6) + (#{$grid-gap} * 6)); 
+  
+  // Placed flat at the baseline foundation, slightly recessed below voxels
+  transform: translateZ(calc((#{$cube-size} / 2) * -1 - 4px)); 
+  
+  background: radial-gradient(
+    circle at 50% 30%, 
+    var(--theme-pedestal-core) 0%, 
+    rgba(2, 1, 4, 0.4) 75%
+  );
+  border: 1px solid var(--theme-pedestal-rim);
+  border-radius: 8px;
+  pointer-events: none; // Ensures mouse click arrays bypass floor plates safely
+  z-index: 1;
+  
+  // Multi-layered light projection mappings
+  box-shadow: 
+    0 0 30px rgba(0, 0, 0, 0.9),
+    inset 0 0 15px var(--theme-pedestal-core),
+    0 0 25px var(--theme-pedestal-blur);
+  
+  &::after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border: 1px dashed rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+  }
+}
+
+// ==========================================================================
+// DYNAMIC COMPONENT VOXELS
+// ==========================================================================
+.mini-cube-node {
+  position: absolute;
+  width: $cube-size;
+  height: $cube-size;
+  transform-style: preserve-3d;
+  z-index: 5; // Layered safely over base illumination rings
+  
+  transform: translate3d(
+    calc(var(--x) * (#{$cube-size} + #{$grid-gap})), 
+    calc(var(--y) * (#{$cube-size} + #{$grid-gap})), 
+    0px
+  );
+  transition: all 0.3s cubic-bezier(0.15, 0.85, 0.35, 1);
+  cursor: pointer;
+
+  &:hover {
+    transform: translate3d(
+      calc(var(--x) * (#{$cube-size} + #{$grid-gap})), 
+      calc(var(--y) * (#{$cube-size} + #{$grid-gap})), 
+      12px
+    );
+    
+    .cube-face {
+      filter: brightness(1.4);
+      border-color: #fff;
+      box-shadow: 0 0 15px var(--theme-glow);
+    }
+
+    .cube-tooltip {
+      opacity: 1;
+      visibility: visible;
+      transform: translate3d(-50%, -115%, 50px) rotateZ(42deg) rotateX(-54deg);
+    }
+  }
+}
+
+.cube-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.55rem;
+  font-weight: 900;
+  backdrop-filter: blur(2px);
+  transition: all 0.25s ease;
+
+  span {
+    transform: rotateZ(42deg); 
+  }
+}
+
+.face-top { background: var(--theme-top); transform: rotateX(0deg) translateZ(calc(#{$cube-size} / 2)); }
+.face-left { background: var(--theme-left); transform: rotateY(-90deg) translateZ(calc(#{$cube-size} / 2)); }
+.face-right { background: var(--theme-right); transform: rotateX(-90deg) translateZ(calc(#{$cube-size} / 2)); }
+
+// Tooltips
+.cube-tooltip {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translate3d(-50%, -115%, 35px) rotateZ(42deg) rotateX(-54deg);
+  transform-origin: bottom center;
+  background: rgba(6, 3, 11, 0.98);
+  border: 1px solid var(--theme-glow);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.9);
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  width: 140px;
+  text-align: center;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  transition: opacity 0.2s, visibility 0.2s, transform 0.3s cubic-bezier(0.15, 0.85, 0.35, 1);
+
+  .tt-code { font-family: monospace; font-size: 0.65rem; font-weight: 800; color: var(--theme-glow); }
+  .tt-name { font-size: 0.62rem; color: #fcfaff; font-weight: 500; line-height: 1.2; }
+}
+
+// ==========================================================================
+// CATEGORICAL SCIFI COLOR PROFILE SCHEMES
+// ==========================================================================
+.cluster-theme-computing {
+  --theme-top: rgba(140, 40, 255, 0.3);
+  --theme-left: rgba(90, 20, 180, 0.45);
+  --theme-right: rgba(50, 10, 110, 0.6);
+  --theme-glow: #{$accent-purple};
+  // 🛰️ Pedestal Emissive Maps
+  --theme-pedestal-core: rgba(140, 40, 255, 0.12);
+  --theme-pedestal-rim: rgba(140, 40, 255, 0.35);
+  --theme-pedestal-blur: rgba(140, 40, 255, 0.2);
+  .cube-face { border-color: rgba($accent-purple, 0.45); color: #ebd1ff; }
+}
+
+.cluster-theme-business {
+  --theme-top: rgba(0, 140, 255, 0.3);
+  --theme-left: rgba(0, 90, 200, 0.45);
+  --theme-right: rgba(0, 45, 120, 0.6);
+  --theme-glow: #{$accent-blue};
+  // 🛰️ Pedestal Emissive Maps
+  --theme-pedestal-core: rgba(0, 140, 255, 0.12);
+  --theme-pedestal-rim: rgba(0, 140, 255, 0.35);
+  --theme-pedestal-blur: rgba(0, 140, 255, 0.2);
+  .cube-face { border-color: rgba($accent-blue, 0.45); color: #cfeeff; }
+}
+
+.cluster-theme-gen-ed {
+  --theme-top: rgba(40, 220, 80, 0.25);
+  --theme-left: rgba(20, 150, 50, 0.45);
+  --theme-right: rgba(10, 90, 30, 0.55);
+  --theme-glow: #{$accent-green};
+  // 🛰️ Pedestal Emissive Maps
+  --theme-pedestal-core: rgba(40, 220, 80, 0.08);
+  --theme-pedestal-rim: rgba(40, 220, 80, 0.25);
+  --theme-pedestal-blur: rgba(40, 220, 80, 0.15);
+  .cube-face { border-color: rgba($accent-green, 0.35); color: #d6ffd6; }
+}
+
+// ==========================================================================
+// DIALOG SYSTEMS (STAYS UNCHANGED)
+// ==========================================================================
+.hud-modal-blur-screen {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 1, 4, 0.75);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  padding: 1.5rem;
+}
+
+.hud-modal-dialog-panel {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  background: rgba(12, 6, 22, 0.98);
+  border: 1px solid rgba($accent-purple, 0.5);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.85);
+  border-radius: 12px;
+  padding: 2rem;
+  
+  .modal-close-trigger {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: transparent;
+    border: none;
+    color: #625370;
+    font-size: 1.75rem;
+    cursor: pointer;
+    &:hover { color: #fff; }
+  }
+
+  .modal-tag-pill { font-size: 0.7rem; color: $accent-blue; font-weight: 700; text-transform: uppercase; }
+  .modal-course-code { font-size: 1.25rem; margin: 0.25rem 0; color: #fff; }
+  .modal-course-title { font-size: 1.05rem; color: #bdaec7; margin-bottom: 1.25rem; }
+  
+  .modal-body-content p {
+    color: #fcfaff;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 1rem;
+    border-radius: 6px;
+    border-left: 3px solid $accent-purple;
+    margin: 0;
+  }
+
+  .modal-action-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    padding: 0.5rem 1.25rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    float: right;
+    &:hover { background: #fff; color: #000; }
+  }
+}
+
+$card-bg-glass: rgba(16, 10, 26, 0.65);
+$mru-identity-fuchsia: #d11177; // Recalibrated vivid fuchsia from your image sample
+$text-silver-white: #f3f0f7;
+$text-dim-purple: #a597b4;
+$card-border-tint: rgba(209, 17, 119, 0.14);
+
+.edu-hero-card {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  margin: 3rem auto;
+  padding: 2.5rem;
+  
+  // Luxury Glassmorphism Foundations
+  background: $card-bg-glass;
+  border: 1px solid $card-border-tint;
+  border-radius: 16px;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.55), 
+              inset 0 1px 2px rgba(255, 255, 255, 0.05);
+  
+  // Flex Engine: Perfectly aligns layout row elements
+  display: flex;
+  align-items: center;
+  gap: 2.25rem;
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.4s ease, 
+              box-shadow 0.4s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    border-color: rgba($mru-identity-fuchsia, 0.35);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.65),
+                0 0 30px rgba($mru-identity-fuchsia, 0.04);
+    
+    .card-ambient-flare { opacity: 0.15; }
+    .mru-logo-pod { transform: scale(1.02); box-shadow: 0 12px 28px rgba(0,0,0,0.4), 0 0 20px rgba($mru-identity-fuchsia, 0.2); }
+  }
+}
+
+// Internal Ambient Soft Backglow Layer
+.card-ambient-flare {
+  position: absolute;
+  top: -50%;
+  left: -20%;
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, rgba($mru-identity-fuchsia, 0.25) 0%, transparent 70%);
+  pointer-events: none;
+  opacity: 0.08;
+  transition: opacity 0.4s ease;
+}
+
+// Sci-Fi Tech Corner Branding Brackets
+.card-corner-bracket {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border: 2px solid rgba($mru-identity-fuchsia, 0.4);
+  pointer-events: none;
+  
+  &.top-left { top: 12px; left: 12px; border-right: none; border-bottom: none; }
+  &.bottom-right { bottom: 12px; right: 12px; border-left: none; border-top: none; }
+}
+
+// 🏛️ EXPANDED LARGE LOGO DOCK FRAME
+.mru-logo-pod {
+  flex-shrink: 0;
+  width: 100px;  // Significantly enlarged structural profile
+  height: 100px; // Maintained solid 1:1 crisp aspect framing
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.35);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+
+  .logo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; // Ensures standard high-fidelity scaling
+  }
+}
+
+// Metadata Information Alignment Column
+.mru-meta {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  // Proudly Displayed University Title Block
+  .university-title {
+    font-size: 1.65rem;
+    font-weight: 800;
+    margin: 0 0 0.25rem 0;
+    letter-spacing: 0.2px;
+    
+    // Smooth energetic fuchsia color gradient mapping
+    background: linear-gradient(135deg, #fff 15%, $mru-identity-fuchsia 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .degree-text {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: $text-silver-white;
+    margin: 0 0 1.25rem 0;
+    letter-spacing: 0.1px;
+  }
+}
+
+// 🎯 DATE UNDER EVERYTHING LAYOUT STRATEGY
+.date-wrapper {
+  display: flex;
+  margin-top: auto; // Locks wrapper block securely down to the baseline
+}
+
+.timeline-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-family: monospace;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: $text-dim-purple;
+  letter-spacing: 0.5px;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,0.2);
+
+  .calendar-icon {
+    width: 14px;
+    height: 14px;
+    color: rgba($mru-identity-fuchsia, 0.7);
+  }
+}
+
+// Clean Breakpoint Wrapping Matrix Controls
+@media (max-width: 600px) {
+  .edu-hero-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem 1.5rem;
+    gap: 1.5rem;
+  }
+  
+  .mru-meta {
+    align-items: center;
+    
+    .university-title { font-size: 1.4rem; }
+    .degree-text { font-size: 1rem; margin-bottom: 1rem; }
+  }
+
+  .date-wrapper {
+    justify-content: center;
+  }
+}

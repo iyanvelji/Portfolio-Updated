@@ -1,0 +1,427 @@
+// Linked Palette System
+$accent-purple: rgb(89, 3, 113);
+$accent-neon-violet: #8a2be2;
+$accent-glow-magenta: #da70d6;
+$accent-vivid-purple: #c084fc;
+$bg-dark-surface: #0e0814;
+$bg-card-high-contrast: #060309;
+$text-light: #ffffff;
+$text-silver: #e4e4e7;
+$text-muted: #71717a;
+$transition-fancy: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+
+.courses-viewport-wrapper {
+  width: 100%;
+  background-color: $bg-dark-surface;
+  padding: 6rem 2rem;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.courses-layout-container {
+  width: 100%;
+  max-width: 1200px; // Slightly expanded bounds to hold dense multi-column arrays safely
+  display: flex;
+  flex-direction: column;
+}
+
+// ==========================================================================
+// SECTION HEADER
+// ==========================================================================
+.courses-section-header {
+  margin-bottom: 4rem;
+  
+  .header-telemetry {
+    font-family: monospace;
+    font-size: 0.75rem;
+    color: $accent-glow-magenta;
+    letter-spacing: 0.25em;
+    margin-bottom: 0.5rem;
+  }
+
+  .courses-main-title {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: 800;
+    color: $text-light;
+    letter-spacing: -0.01em;
+    margin: 0;
+    text-transform: uppercase;
+  }
+}
+
+// ==========================================================================
+// DENSE SYSTEM GRID
+// ==========================================================================
+.courses-dense-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); // Structured small card constraint
+  gap: 1.5rem;
+  width: 100%;
+}
+
+// ==========================================================================
+// SMALL FUTURISTIC CARDS
+// ==========================================================================
+.small-course-card {
+  position: relative;
+  background: $bg-card-high-contrast;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid rgba($accent-neon-violet, 0.2);
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: $transition-fancy;
+  height: 220px;
+
+  .card-content-wrapper {
+    position: relative;
+    z-index: 5;
+    padding: 1.75rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+  // Textured Sci-Fi Micro BG
+  .card-mesh-texture {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0.12;
+    background-size: 4px 4px;
+    background-image: 
+      linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  }
+
+  // Reactive Neon Ambient Glow Layer
+  .card-reactive-neon-glow {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0.15;
+    transition: opacity 0.5s ease, background 0.5s ease;
+    background: radial-gradient(circle at 50% 50%, rgba($accent-purple, 0.4) 0%, transparent 60%);
+  }
+
+  // Technical Bracket Highlights
+  .card-corner-bracket {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    opacity: 0.2;
+    transition: $transition-fancy;
+    pointer-events: none;
+    z-index: 6;
+
+    &.topleft {
+      top: 4px;
+      left: 4px;
+      border-top: 1px solid #ffffff;
+      border-left: 1px solid #ffffff;
+    }
+    &.bottomright {
+      bottom: 4px;
+      right: 4px;
+      border-bottom: 1px solid #ffffff;
+      border-right: 1px solid #ffffff;
+    }
+  }
+
+  // Meta Branding Row (Top)
+  .card-top-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    .issuer-svg {
+      width: 16px;
+      height: 16px;
+      object-fit: contain;
+
+      &.ink-linkedin { color: #0077b5; }
+      &.ink-microsoft { color: #f25022; }
+      &.ink-google { color: #ea4335; }
+      &.ink-generic { color: $accent-glow-magenta; }
+    }
+
+    .issuer-name-text {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: $text-silver;
+      letter-spacing: 0.02em;
+    }
+  }
+
+  // Course Title
+  .course-title-heading {
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.4;
+    color: $text-light;
+    margin: 1rem 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    /* Standard property for compatibility */
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  // Meta Timeline (Bottom)
+  .card-bottom-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    padding-top: 0.75rem;
+
+    .course-date-stamp {
+      font-family: monospace;
+      font-size: 0.8rem;
+      color: $accent-vivid-purple;
+      font-weight: 600;
+    }
+
+    .telemetry-action-hint {
+      font-family: monospace;
+      font-size: 0.7rem;
+      color: $text-muted;
+      letter-spacing: 1px;
+      transition: $transition-fancy;
+    }
+  }
+
+  // Hover Mechanics
+  &:hover {
+    transform: translateY(-4px);
+    border-color: rgba($accent-glow-magenta, 0.4);
+    box-shadow: 
+      0 12px 30px -10px rgba(0,0,0,0.8),
+      0 0 20px rgba($accent-neon-violet, 0.25);
+
+    .card-corner-bracket {
+      opacity: 1;
+      border-color: $accent-glow-magenta;
+    }
+
+    .card-reactive-neon-glow {
+      opacity: 0.4;
+      background: radial-gradient(circle at 50% 50%, rgba($accent-neon-violet, 0.5) 0%, transparent 60%);
+    }
+
+    .telemetry-action-hint {
+      color: $text-light;
+      text-shadow: 0 0 8px $accent-glow-magenta;
+    }
+  }
+}
+
+// ==========================================================================
+// TECH CONSOLE MODAL OVERLAY BOX
+// ==========================================================================
+.console-overlay-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  background-color: rgba(4, 2, 8, 0.8);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  animation: backdropReveal 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.console-description-box {
+  position: relative;
+  width: 100%;
+  max-width: 550px;
+  background: #09050d;
+  border: 1px solid rgba($accent-neon-violet, 0.4);
+  box-shadow: 
+    0 30px 70px rgba(0, 0, 0, 0.9),
+    0 0 40px rgba($accent-purple, 0.3),
+    inset 0 0 25px rgba(255, 255, 255, 0.01);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: consoleSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+
+  // Sci-fi flickering top scanline accent
+  .console-scanner-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, $accent-glow-magenta, transparent);
+    animation: sweepTrack 3s ease-in-out infinite;
+  }
+
+  .console-box-header {
+    padding: 1.25rem 1.75rem;
+    background: rgba(255, 255, 255, 0.02);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .console-telemetry-status {
+      font-family: monospace;
+      font-size: 0.75rem;
+      color: $text-muted;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      .pulse-node {
+        width: 6px;
+        height: 6px;
+        background-color: #10b981;
+        border-radius: 50%;
+        box-shadow: 0 0 8px #10b981;
+      }
+    }
+
+    .console-close-button {
+      background: transparent;
+      border: none;
+      color: $accent-glow-magenta;
+      font-family: monospace;
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      letter-spacing: 0.5px;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: #ffffff;
+      }
+    }
+  }
+
+  .console-box-body {
+    padding: 2.25rem 2rem;
+
+    .console-meta-row {
+      display: flex;
+      gap: 3rem;
+      margin-bottom: 1.5rem;
+
+      .meta-block {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+
+        .meta-label {
+          font-family: monospace;
+          font-size: 0.65rem;
+          color: $text-muted;
+          letter-spacing: 1px;
+        }
+
+        .meta-val {
+          font-size: 0.95rem;
+          font-weight: 600;
+          color: $text-silver;
+
+          &.highlight {
+            color: #ffffff;
+          }
+        }
+      }
+    }
+
+    .console-divider-line {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.08), transparent);
+      margin-bottom: 1.75rem;
+    }
+
+    .console-course-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      line-height: 1.35;
+      color: #ffffff;
+      margin: 0 0 1.5rem 0;
+    }
+
+    .console-description-wrapper {
+      background: rgba(0, 0, 0, 0.3);
+      border-left: 2px solid $accent-neon-violet;
+      padding: 1.25rem;
+      border-radius: 0 6px 6px 0;
+
+      .terminal-prompt {
+        display: block;
+        font-family: monospace;
+        font-size: 0.75rem;
+        color: $accent-vivid-purple;
+        margin-bottom: 0.5rem;
+        letter-spacing: 0.5px;
+      }
+
+      .console-description-text {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: $text-silver;
+        margin: 0;
+      }
+    }
+  }
+
+  .console-box-footer {
+    padding: 1rem 2rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.03);
+    
+    .footer-telemetry-string {
+      font-family: monospace;
+      font-size: 0.65rem;
+      color: rgba($text-muted, 0.6);
+      letter-spacing: 1px;
+    }
+  }
+}
+
+// ==========================================================================
+// SCIFI ANIMATION CHANNELS
+// ==========================================================================
+@keyframes backdropReveal {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes consoleSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes sweepTrack {
+  0% { left: -100%; }
+  50% { left: 100%; }
+  100% { left: 100%; }
+}

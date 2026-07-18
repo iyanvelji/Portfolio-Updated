@@ -1,0 +1,249 @@
+// Linked Palette System
+$accent-purple: rgb(89, 3, 113);
+$accent-neon-violet: #8a2be2;
+$accent-glow-magenta: #da70d6;
+$accent-vivid-purple: #c084fc; // Sharp readable purple for technical text elements
+$bg-dark-surface: #0e0814;
+$bg-card-high-contrast: #060309;
+$text-light: #ffffff;
+$text-muted: #6b7280;
+$text-silver: #d4d4d8;
+$transition-fancy: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+
+.awards-ledger-wrapper {
+  width: 100%;
+  background-color: $bg-dark-surface;
+  padding: 6rem 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.awards-ledger-container {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+}
+
+// ==========================================================================
+// CLEAN, HIGH-CONTRAST MAIN HEADING
+// ==========================================================================
+.ledger-main-header {
+  margin-bottom: 3.5rem;
+  position: relative;
+  width: 100%;
+
+  .ledger-main-heading {
+    font-size: clamp(2rem, 3.5vw, 2.5rem);
+    font-weight: 800;
+    color: $text-light;
+    letter-spacing: -0.01em;
+    margin: 0;
+    text-transform: uppercase;
+    text-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+  }
+}
+
+// ==========================================================================
+// GRID COLUMN ARCHITECTURE
+// ==========================================================================
+.ledger-header-row, 
+.ledger-matrix-row {
+  display: grid;
+  grid-template-columns: 160px 1.8fr 1.2fr;
+  align-items: center;
+  gap: 2rem;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+}
+
+// ==========================================================================
+// FANCY COLUMN HEADINGS (NO SLASHES / NO DOTS)
+// ==========================================================================
+.ledger-header-row {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08); // Clean, thin premium boundary line
+  padding-bottom: 1.25rem;
+  margin-bottom: 1rem;
+  user-select: none;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+
+  .ledger-header-label {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.18em; // High-end tracking focus
+    color: rgba($text-silver, 0.4);
+    text-transform: uppercase;
+    position: relative;
+    
+    // Tiny elegant neon accent anchor marker under header labels
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -1.3rem;
+      left: 0;
+      width: 12px;
+      height: 2px;
+      background-color: $accent-neon-violet;
+      opacity: 0.4;
+    }
+  }
+}
+
+// ==========================================================================
+// FUTURISTIC LEDGER ROWS
+// ==========================================================================
+.ledger-matrix-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem; 
+}
+
+.ledger-matrix-row {
+  position: relative;
+  padding: 2rem 1.5rem;
+  background: rgba($bg-card-high-contrast, 0.4);
+  
+  // Clean solid futuristic frame styling
+  border: 1px solid rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid rgba($accent-neon-violet, 0.15);
+  border-radius: 4px;
+  
+  transition: $transition-fancy;
+
+  @media (max-width: 768px) {
+    padding: 1.5rem 1.25rem;
+    background: rgba($bg-card-high-contrast, 0.8);
+    border: 1px solid rgba($accent-neon-violet, 0.2);
+  }
+
+  // Micro structural tech geometric corner details
+  .row-corner-tick {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    opacity: 0;
+    transition: $transition-fancy;
+    pointer-events: none;
+
+    &.top-left {
+      top: -1px;
+      left: -1px;
+      border-top: 1px solid $accent-glow-magenta;
+      border-left: 1px solid $accent-glow-magenta;
+    }
+
+    &.bottom-right {
+      bottom: -1px;
+      right: -1px;
+      border-bottom: 1px solid $accent-glow-magenta;
+      border-right: 1px solid $accent-glow-magenta;
+    }
+  }
+
+  // Cell Properties
+  .ledger-cell {
+    position: relative;
+    z-index: 4;
+    transition: $transition-fancy;
+    font-size: 1.05rem;
+
+    // Entire date column systematically rendered in vibrant purple
+    &.date-col {
+      font-family: monospace;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: $accent-vivid-purple;
+      letter-spacing: 0.05em;
+      text-shadow: 0 0 10px rgba($accent-neon-violet, 0.2);
+    }
+
+    &.title-col {
+      color: $text-silver;
+      font-weight: 500;
+    }
+
+    &.issuer-col {
+      color: $text-muted;
+      font-weight: 400;
+    }
+  }
+
+  // Background Interactive Plasma Glow Layer
+  .row-ambient-flash {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    background: linear-gradient(90deg, rgba($accent-purple, 0.18) 0%, rgba($bg-card-high-contrast, 0) 100%);
+  }
+
+  // Solid Moving Base Neon Tracker Indicator
+  .row-neon-indicator {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 0%;
+    height: 1px;
+    z-index: 2;
+    background: linear-gradient(90deg, $accent-neon-violet, $accent-glow-magenta, transparent);
+    box-shadow: 0 0 12px rgba($accent-glow-magenta, 0.8);
+    transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  // ==========================================================================
+  // HOVER ACTIVATION SYSTEM
+  // ==========================================================================
+  &:hover {
+    background: rgba($bg-card-high-contrast, 0.95);
+    border-color: rgba($accent-neon-violet, 0.3);
+    padding-left: 2.25rem; // Seamless responsive layout sliding action
+    box-shadow: 0 12px 35px -10px rgba(0, 0, 0, 0.8);
+
+    @media (max-width: 768px) {
+      padding-left: 1.25rem;
+    }
+
+    .row-corner-tick {
+      opacity: 1;
+    }
+
+    .ledger-cell {
+      &.date-col {
+        color: #ffffff;
+        text-shadow: 0 0 12px $accent-glow-magenta;
+      }
+
+      &.title-col {
+        font-weight: 700; // Bolded title
+        color: $text-light;
+        text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+      }
+
+      &.issuer-col {
+        font-weight: 700; // Bolded issuer
+        color: #ffffff;
+        text-shadow: 0 0 15px rgba($accent-glow-magenta, 0.3);
+      }
+    }
+
+    .row-ambient-flash {
+      opacity: 1;
+    }
+
+    .row-neon-indicator {
+      width: 100%;
+    }
+  }
+}

@@ -1,0 +1,437 @@
+$bg-dark-core: #030106;
+$panel-bg-glass: rgba(14, 8, 24, 0.65);
+$accent-neon-purple: #bc3bf0;
+$accent-cyan-laser: #00bfff;
+$text-muted-purple: #a698b5;
+$text-bright-white: #fdfbff;
+$border-glass-line: rgba(188, 59, 240, 0.12);
+$accent-dim: rgba(188, 59, 240, 0.15);
+
+.experience-header {
+  width: 100%;
+  text-align: center;     // 🎯 THE FIX: Centers the header text
+  margin-bottom: 4.5rem;  // Spacing for the entire header section wrapper
+  
+  // ❌ REMOVED: border-left and padding-left so it centers flawlessly
+
+  h2 {
+     font-size: clamp(2.25rem, 5vw, 3.5rem);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 900;
+
+    // ✨ FANCY: Cyberpunk neon color-bleed gradient
+    background: linear-gradient(180deg, #ffffff 30%, $accent-dim 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+
+    // Deep luminous aura that scales nicely on dark backgrounds
+
+    border: none;
+    padding-left: 0;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    
+    // 🎯 THE FIX: Adds exactly 10px of space directly under the text
+    margin: 0 0 10px 0; 
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+.experience-section-container {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-color: $bg-dark-core;
+  color: $text-bright-white;
+  padding: 6rem 2rem;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+// Background Matrix Elements
+.cyber-grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(188, 59, 240, 0.01) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(188, 59, 240, 0.01) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+
+.ambient-glow-core {
+  position: absolute;
+  top: 10%;
+  right: -10%;
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba($accent-neon-purple, 0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.experience-inner-content {
+  width: 100%;
+  max-width: 840px;
+  position: relative;
+  z-index: 2;
+}
+
+
+
+// ==========================================================================
+// MASTER TIMELINE TRACK ARCHITECTURE
+// ==========================================================================
+.timeline-master-wrapper {
+  position: relative;
+  padding-left: 4rem; // Gives spacing for the isolated global rail
+}
+
+// Separate, Radiant Glowing Track Line
+.timeline-neon-rail {
+  position: absolute;
+  left: 1rem;
+  top: 5px;
+  bottom: 5px;
+  width: 4px;
+  
+  // Toned down baseline glass track
+  background: rgba($accent-neon-purple, 0.08); 
+  border-radius: 6px;
+  
+  // Softer ambient bloom projection
+  box-shadow: 0 0 10px rgba($accent-neon-purple, 0.15);
+
+  .rail-pulse-beam {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    
+    // 📉 LESS BRIGHT: Dimmed the pure white hot spots to a translucent glaze
+    // and relaxed the surrounding purple power distribution levels
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba($accent-neon-purple, 0.15) 15%,
+      rgba(255, 255, 255, 0.35) 20%, // Softer, lower-contrast core
+      rgba($accent-neon-purple, 0.4) 25%,
+      transparent 40%,
+      transparent 60%,
+      rgba($accent-neon-purple, 0.15) 75%,
+      rgba(255, 255, 255, 0.35) 80%, // Softer second core
+      rgba($accent-neon-purple, 0.4) 85%,
+      transparent 100%
+    );
+    
+    // Spread the pattern frequency slightly wider apart (600px) for a calmer rhythm
+    background-size: 100% 600px; 
+    
+    // 📉 LESS BRIGHT: Subdued drop-shadow blur so it stays contained
+    filter: drop-shadow(0 0 4px rgba($accent-neon-purple, 0.4));
+    opacity: 0.8;
+    
+    // ⏳ SLOWER: Shifted from 4 seconds to 12 seconds for a gentle, rhythmic crawl
+    animation: infiniteLaserStream 12s infinite linear;
+  }
+}
+@keyframes pulseBeam {
+  0% { transform: translateY(-150px); }
+  100% { transform: translateY(100%); }
+}
+
+@keyframes infiniteLaserStream {
+  0% {
+    // Starts the pattern tracking at absolute zero baseline
+    background-position: 0 0;
+  }
+  100% {
+    // 🎯 THE FIX: Continuously drives the background coordinates forward by 
+    // exactly its repeating size unit (500px), creating a flawless, non-fading waterfall effect.
+    background-position: 0 500px;
+  }
+}
+
+.experience-list-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+
+// Timeline Row Block Anchor Frame
+.company-timeline-block {
+  position: relative;
+}
+
+// Global Connecting Node Core Dock
+.timeline-hub-anchor {
+  position: absolute;
+  left: calc(-4rem + 1rem); 
+  top: 30px;
+  width: 15px;
+  height: 15px;
+  background: $bg-dark-core;
+  border: 3px solid $accent-neon-purple;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  box-shadow: 0 0 10px rgba($accent-neon-purple, 0.8);
+
+  .hub-core-pulse {
+    position: absolute;
+    inset: -1px;
+    border-radius: 50%;
+    background: transparent;
+    
+    // 💜 CONNECTED CORRECTION: Swapped out the cyan boundary highlight for an elegant purple profile
+    border: 1px solid $accent-neon-purple; 
+    opacity: 0;
+    transform: scale(1);
+    animation: hubPulse 2.5s infinite ease-out;
+  }
+}
+
+@keyframes hubPulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+// ==========================================================================
+// THE CARDS DESIGN (FANCY GLASS PANEL)
+// ==========================================================================
+.company-group-card {
+  background: $panel-bg-glass;
+  border: 1px solid $border-glass-line;
+  border-radius: 14px;
+  padding: 2.5rem;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 
+              inset 0 1px 1px rgba(255, 255, 255, 0.05);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+
+  &:hover {
+    border-color: rgba($accent-neon-purple, 0.4);
+    box-shadow: 0 25px 50px rgba($accent-neon-purple, 0.06),
+                inset 0 1px 2px rgba(255, 255, 255, 0.1);
+    transform: translateX(4px);
+  }
+}
+
+.company-main-row {
+  display: flex;
+  gap: 1.75rem;
+  align-items: center;
+}
+
+// Professional Image Logo Container
+.company-logo-frame {
+  flex-shrink: 0;
+  width: 64px;
+  height: 64px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+
+  .company-brand-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; // Maintains geometric aspect clean ratios
+  }
+}
+
+.company-meta-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+
+  .single-role-title { font-size: 1.3rem; font-weight: 800; color: $text-bright-white; letter-spacing: 0.3px; margin: 0; }
+  .single-role-subline { font-size: 1rem; color: #e2d9eb; font-weight: 500; }
+  .date-duration-timeline { font-size: 0.88rem; color: $text-muted-purple; }
+  
+  .company-name-heading { font-size: 1.4rem; font-weight: 800; color: $text-bright-white; margin: 0; }
+  .global-duration-label { font-size: 0.95rem; color: #e2d9eb; }
+  .location-label { font-size: 0.88rem; color: $text-muted-purple; }
+}
+
+// Descriptions and Content Margins
+.single-role-additions {
+  margin-top: 1.5rem;
+}
+
+.role-bullet-list {
+  margin: 0.5rem 0 0 0;
+  padding-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  li {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: #cbd5e1;
+    list-style-type: square;
+
+    &::marker {
+      color: rgba($accent-neon-purple, 0.5);
+    }
+  }
+
+  .more-trigger {
+    color: $accent-cyan-laser;
+    font-size: 0.85rem;
+    cursor: pointer;
+    font-weight: 600;
+    margin-left: 4px;
+    &:hover { text-decoration: underline; }
+  }
+}
+
+ 
+
+// Sub-timeline Rail for Inner Grouped Corporate Tiers
+.nested-roles-container {
+  position: relative;
+  margin-top: 2rem;
+  padding-left: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.2rem;
+
+  .nested-timeline-subrail {
+    position: absolute;
+    left: 0;
+    top: 10px;
+    bottom: 10px;
+    width: 2px;
+    
+    // 🔮 THE FIX: Swapped white for a sleek purple gradient that fades at the ends
+    background: linear-gradient(
+      to bottom,
+      rgba($accent-neon-purple, 0.2) 0%,
+      rgba($accent-neon-purple, 0.7) 50%,
+      rgba($accent-neon-purple, 0.2) 100%
+    );
+    
+    // ⚡ THE FIX: Added a soft, controlled ambient neon bloom
+    box-shadow: 0 0 8px rgba($accent-neon-purple, 0.5);
+  }
+}
+
+.nested-role-node {
+  position: relative;
+
+  .role-bullet-indicator {
+    position: absolute;
+    left: -2rem;
+    top: 7px;
+    width: 6px;
+    height: 6px;
+    
+    // 🔮 THE FIX: Turned the default dull gray node into a glowing purple node
+    background: rgba($accent-neon-purple, 0.6);
+    border-radius: 50%;
+    transform: translateX(-50%);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 0 4px rgba($accent-neon-purple, 0.4);
+  }
+
+  // Intense reactive burst when the user hovers over a specific role block
+  &:hover {
+    .role-bullet-indicator {
+      background: #df6fff; // Electric violet pop
+      box-shadow: 0 0 12px #df6fff, 0 0 4px #fff;
+      transform: translateX(-50%) scale(1.3); // Micro-scale accentuation
+    }
+  }
+
+  .nested-role-title { font-size: 1.12rem; font-weight: 700; color: $text-bright-white; margin: 0 0 0.2rem 0; }
+  .nested-role-dates { font-size: 0.88rem; color: $text-muted-purple; display: block; margin-bottom: 0.85rem; }
+}
+
+// ==========================================================================
+// 🛠️ FANCY GLOWING SKILLS BLURBS
+// ==========================================================================
+.skills-section-footer {
+  margin-top: 2.2rem;
+  padding-top: 1.5rem;
+  border-top: 1px dashed rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  .skills-section-title {
+    font-size: 0.88rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: $text-muted-purple;
+  }
+}
+
+.skills-blurbs-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+// Individual Interactive Link Pillars
+.skill-blurb-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 0.45rem 1rem;
+  border-radius: 30px;
+  text-decoration: none;
+  transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  .skill-micro-icon {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+    filter: opacity(0.85);
+    transition: filter 0.25s ease;
+  }
+
+  .skill-text-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #e2e8f0;
+    transition: color 0.25s ease;
+  }
+
+  // Neon Active Flare-Up Action
+  &:hover {
+    background: rgba($accent-neon-purple, 0.04);
+    border-color: rgba($accent-neon-purple, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba($accent-neon-purple, 0.15);
+
+    .skill-micro-icon {
+      filter: opacity(1) drop-shadow(0 0 4px $accent-neon-purple);
+    }
+
+    .skill-text-name {
+      color: #fff;
+    }
+  }
+}
+
+// Media Control Queries
+@media (max-width: 650px) {
+  .timeline-master-wrapper { padding-left: 2.5rem; }
+  .timeline-neon-rail { left: 0.5rem; }
+  .timeline-hub-anchor { left: calc(-2.5rem + 0.5rem); }
+  .company-group-card { padding: 1.75rem; }
+  .company-main-row { gap: 1.25rem; }
+  .company-logo-frame { width: 52px; height: 52px; }
+}

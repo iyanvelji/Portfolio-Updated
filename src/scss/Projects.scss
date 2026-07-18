@@ -1,0 +1,262 @@
+// Linked Palette System
+$accent-purple: rgb(89, 3, 113);
+$accent-neon-violet: #8a2be2;
+$accent-glow-magenta: #da70d6;
+$accent-vivid-purple: #c084fc;
+$bg-dark-surface: #0e0814;
+$bg-card-high-contrast: #060309;
+$text-light: #ffffff;
+$text-silver: #e4e4e7;
+$text-muted: #71717a;
+$transition-fancy: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+
+.projects-viewport-wrapper {
+  width: 100%;
+  background-color: $bg-dark-surface;
+  padding: 6rem 0 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+// ==========================================================================
+// CLEAN STREAMLINED PAGE HEADER
+// ==========================================================================
+.projects-page-header {
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 2rem 4rem 2rem;
+  align-self: center;
+
+  .projects-main-title {
+    font-size: clamp(2.2rem, 5vw, 3rem);
+    font-weight: 800;
+    color: $text-light;
+    letter-spacing: -0.02em;
+    margin: 0;
+    text-transform: uppercase;
+  }
+}
+
+// ==========================================================================
+// PARALLAX STRIP HOUSING
+// ==========================================================================
+.parallax-strip-stack {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.parallax-project-row {
+  position: relative;
+  width: 100%;
+  height: 650px; // EXPANDED HEIGHT: Dramatic scale layout footprint
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; // Clips the inner oversized parallax graphic box securely
+  text-decoration: none;
+  border-bottom: 1px solid rgba($accent-neon-violet, 0.15);
+
+  @media (max-width: 768px) {
+    height: 450px; // Responsive mobile proportion scaling
+  }
+
+  // True Moving Dynamic Background Canvas Layer
+  .parallax-bg-image {
+    position: absolute;
+    top: -10%; // Extension margins to absorb the vertical offset motion paths safely
+    left: 0;
+    width: 100%;
+    height: 120%; // Extended canvas height ensures zero white-space gaps during speed drift
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 1;
+    
+    // Hardware acceleration optimization tags to prevent screen-tearing/jank
+    will-change: transform;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    
+    // Smooth transition buffer for scaling states
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  // Depth Layering Dark Tint Interceptor
+  .parallax-ambient-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background: linear-gradient(
+      180deg, 
+      rgba($bg-dark-surface, 0.5) 0%, 
+      rgba($bg-card-high-contrast, 0.75) 50%, 
+      rgba($bg-dark-surface, 0.5) 100__
+    );
+    transition: $transition-fancy;
+  }
+
+  // Foreground Interactive Placement Layer
+  .project-foreground-content {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  // ==========================================================================
+  // HIGH-LUMINANCE PURPLE CONSOLE BOX
+  // ==========================================================================
+  .purple-glowing-box {
+    position: relative;
+    width: 100%;
+    max-width: 460px;
+    background: rgba($bg-card-high-contrast, 0.82);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    
+    border: 1px solid rgba($accent-vivid-purple, 0.45);
+    box-shadow: 
+      0 25px 50px rgba(0, 0, 0, 0.7),
+      0 0 35px rgba($accent-neon-violet, 0.3),
+      inset 0 0 20px rgba($accent-glow-magenta, 0.08);
+    
+    padding: 2.5rem;
+    border-radius: 8px;
+    transition: $transition-fancy;
+    overflow: hidden;
+
+    .box-corner {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-color: $accent-glow-magenta;
+      border-style: solid;
+      opacity: 0.7;
+      transition: $transition-fancy;
+      pointer-events: none;
+
+      &.tl { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+      &.br { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+    }
+
+    .box-scanner-flicker {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, transparent 0%, rgba($accent-vivid-purple, 0.06) 50%, transparent 100%);
+      transform: translateY(-100%);
+      pointer-events: none;
+    }
+
+    .project-category-tag {
+      display: block;
+      font-family: monospace;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: $accent-vivid-purple;
+      letter-spacing: 0.15em;
+      margin-bottom: 0.8rem;
+    }
+
+    .project-title-text {
+      font-size: 1.6rem;
+      font-weight: 700;
+      line-height: 1.35;
+      color: $text-light;
+      margin: 0 0 1.75rem 0;
+      letter-spacing: -0.01em;
+      transition: color 0.3s ease;
+    }
+
+    .box-action-hint {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: monospace;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: $text-muted;
+      transition: $transition-fancy;
+
+      .hint-arrow {
+        transform: translateX(0);
+        transition: transform 0.3s ease;
+      }
+    }
+  }
+
+  // ==========================================================================
+  // ROW INTERACTION MATRIX
+  // ==========================================================================
+  &:hover {
+    // Zoom manipulation layers combined with dynamic parallax offset translation vectors
+    .parallax-bg-image {
+      // Retains code animation logic scaling base while pushing zoom layer slightly further
+      transition: transform 0.3s ease-out; 
+    }
+
+    .parallax-ambient-overlay {
+      background: linear-gradient(
+        180deg, 
+        rgba($bg-dark-surface, 0.3) 0%, 
+        rgba($bg-card-high-contrast, 0.55) 50%, 
+        rgba($bg-dark-surface, 0.3) 100%
+      );
+    }
+
+    .purple-glowing-box {
+      background: rgba($bg-card-high-contrast, 0.95);
+      border-color: rgba($accent-glow-magenta, 0.9);
+      transform: translateX(12px);
+      box-shadow: 
+        0 35px 70px rgba(0, 0, 0, 0.85),
+        0 0 55px rgba($accent-glow-magenta, 0.5),
+        inset 0 0 25px rgba($accent-neon-violet, 0.25);
+
+      @media (max-width: 768px) {
+        transform: none;
+      }
+
+      .box-corner {
+        opacity: 1;
+        width: 14px;
+        height: 14px;
+        border-color: #ffffff;
+      }
+
+      .box-scanner-flicker {
+        animation: laserSweep 2s infinite linear;
+      }
+
+      .project-title-text {
+        color: #ffffff;
+        text-shadow: 0 0 15px rgba(255, 255, 255, 0.25);
+      }
+
+      .box-action-hint {
+        color: #ffffff;
+        text-shadow: 0 0 10px $accent-glow-magenta;
+
+        .hint-arrow {
+          transform: translateX(6px);
+        }
+      }
+    }
+  }
+}
+
+@keyframes laserSweep {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}

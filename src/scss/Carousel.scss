@@ -1,0 +1,216 @@
+// Cohesive Shared Palette System
+$accent-purple: rgb(89, 3, 113);
+$accent-neon-violet: #8a2be2;
+$accent-glow-magenta: #da70d6;
+$bg-dark-surface: #0e0814;
+$text-light: #e6f1ff;
+$text-muted: #8a8a93;
+$transition-fancy: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+
+.carousel-fullscreen-wrapper {
+  position: relative;
+  width: 100vw;
+  height: 80vh;
+  
+  // Edge-to-edge breakout matrix safety net (incase component is inside a padded layout)
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  overflow: hidden;
+}
+
+.carousel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: $bg-dark-surface;
+}
+
+// ==========================================================================
+// FULL DISPLAY IMMERSION TRACK
+// ==========================================================================
+.carousel-track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.carousel-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end; 
+  padding: 10% 8% 8% 8%; 
+  opacity: 0;
+  transform: scale(1.03); 
+  visibility: hidden;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1;
+  text-decoration:none;
+
+  background-size: contain;     // Forces the entire 1920x1080 frame to fit inside the viewport
+  background-repeat: no-repeat; // Prevents the image from duplicating/tiling
+  background-position: center;  // Dead-centers the image on any screen size
+
+  &.active {
+    opacity: 1;
+    transform: scale(1);
+    visibility: visible;
+    z-index: 2;
+  }
+
+  @media (max-width: 768px) {
+    padding: 10% 8% 4.5rem 8%; /* Safely pushes the text up by 3.5rem instead of 8% */
+  }
+}
+
+.slide-content-frame {
+  max-width: 750px;
+  z-index: 5;
+  animation: slideContentUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+
+  h2 {
+    text-decoration: none;
+    font-size: 3.5rem; // Bold, high impact layout presentation scaled up
+    font-weight: 700;
+    color: $text-light;
+    margin: 0;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    text-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
+
+    @media (max-width: 768px) {
+      font-size: 2.2rem;
+    }
+  }
+}
+
+// ==========================================================================
+// PREMIUM INLINE VECTOR CONTROLS
+// ==========================================================================
+// ==========================================================================
+// HARDENED INLINE VECTOR CONTROLS
+// ==========================================================================
+.carousel-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: rgba(14, 8, 20, 0.6); // Slightly darkened for pristine contrast against white containment backgrounds
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0; // Strips default browser button padding resets
+  transition: $transition-fancy;
+  
+  // CRITICAL FIX 1: Maximize stacking priority to sit completely over full-bleed slide track frames
+  z-index: 999; 
+  user-select: none;
+
+  &.prev { left: 2rem; }
+  &.next { right: 2rem; }
+
+  // CRITICAL FIX 2: Explicitly force vector path parameters to prevent global CSS overrides
+  svg {
+    width: 26px;
+    height: 26px;
+    display: block;
+    overflow: visible;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+    polyline, path {
+      stroke: #e6f1ff !important; // Hard-coded fallback to absolute light tone tokens
+      fill: none !important;
+      stroke-width: 2.5px;
+    }
+  }
+
+  &:hover {
+    background-color: rgba($accent-purple, 0.6);
+    border-color: rgba($accent-glow-magenta, 0.6);
+    box-shadow: 0 0 30px rgba($accent-neon-violet, 0.5);
+    
+    &.prev svg { transform: translateX(-3px); }
+    &.next svg { transform: translateX(3px); }
+  }
+
+  &:active {
+    transform: translateY(-50%) scale(0.92);
+  }
+
+  @media (max-width: 768px) {
+    width: 48px;
+    height: 48px;
+    &.prev { left: 1rem; }
+    &.next { right: 1rem; }
+    
+    svg {
+      width: 22px;
+      height: 22px;
+    }
+  }
+}
+
+// ==========================================================================
+// OVERLAID CHRONO INDICATORS
+// ==========================================================================
+.carousel-indicators {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  z-index: 10;
+}
+
+.indicator-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: $transition-fancy;
+
+  &.active {
+    width: 36px; 
+    background: linear-gradient(90deg, $accent-purple, $accent-glow-magenta);
+    box-shadow: 0 0 12px rgba($accent-glow-magenta, 0.6);
+  }
+
+  &:hover:not(.active) {
+    background-color: rgba($text-light, 0.5);
+  }
+}
+
+.carousel-empty {
+  text-align: center;
+  color: $text-muted;
+  padding: 8rem 0;
+  background-color: $bg-dark-surface;
+}
+
+@keyframes slideContentUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

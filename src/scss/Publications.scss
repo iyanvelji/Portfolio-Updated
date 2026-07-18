@@ -1,0 +1,301 @@
+$accent-purple: rgb(89, 3, 113);
+$accent-neon-violet: #8a2be2;
+$accent-glow-magenta: #da70d6;
+$bg-dark-surface: #0e0814;
+$bg-card-high-contrast: #060309; // Ultra dark premium interior for intense contrast
+$text-light: #ffffff; // Swapped to pure white for crisp readability
+$text-muted: #a1a1aa;
+$transition-fancy: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+$accent-dim: rgba(188, 59, 240, 0.15);
+
+.publications-viewport-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 85vh;
+  background-color: $bg-dark-surface;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4rem 2rem 2rem 2rem;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 3rem;
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 900;
+
+  // ✨ FANCY: Cyberpunk neon color-bleed gradient
+  background: linear-gradient(180deg, #ffffff 30%, $accent-dim 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+
+  // Deep luminous aura that scales nicely on dark backgrounds
+
+  border: none;
+  padding-left: 0;
+}
+
+.publications-main-container {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  flex-grow: 1;
+}
+
+.publications-side-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.5rem;
+  width: 100%;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.logo-emulation-header {
+    display: flex;
+    flex-direction: column;
+    line-height: 0.85;
+    margin-bottom: 2.5rem;
+    user-select: none;
+    transition: transform 0.4s ease;
+
+    .logo-the {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: rgba($text-light, 0.8);
+      letter-spacing: 0.05em;
+      text-transform: lowercase;
+    }
+
+    .logo-reflector {
+      font-family: "Times New Roman", Times, Baskerville, Georgia, serif;
+      font-size: 2.6rem;
+      font-weight: 900;
+      color: #ffffff;
+      letter-spacing: -0.03em;
+      text-transform: lowercase;
+      text-shadow: 0 2px 10px rgba($accent-neon-violet, 0.2);
+    }
+  }
+
+// ==========================================================================
+// HIGH-CONTRAST NEON GLOW CARDS
+// ==========================================================================
+.premium-pub-card {
+  position: relative;
+  border-radius: 24px;
+  background: $bg-card-high-contrast; // Keeps card interior pitch black/dark carbon
+  border: 1px solid rgba($accent-neon-violet, 0.25); // Clean defined neon border line
+
+  // Continuous Ambient Purple Outer & Inner Glow System
+  box-shadow:
+    0 0 30px -5px rgba($accent-neon-violet, 0.35),
+    inset 0 0 15px rgba($accent-purple, 0.2);
+
+  transition: $transition-fancy;
+  overflow: hidden;
+
+  .pub-card-inner-frame {
+    position: relative;
+    z-index: 5;
+    padding: 3.5rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    min-height: 310px;
+    height: 100%;
+  }
+
+  // Multi-Layered Futuristic Nebula/Fluid Texture Overlay
+  .card-texture-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0.85;
+    background:
+      radial-gradient(
+        at 0% 0%,
+        rgba($accent-purple, 0.25) 0px,
+        transparent 55%
+      ),
+      radial-gradient(
+        at 100% 100%,
+        rgba($accent-glow-magenta, 0.12) 0px,
+        transparent 60%
+      ),
+      radial-gradient(at 50% 0%, rgba(20, 10, 40, 0.4) 0px, transparent 70%);
+  }
+
+  // Deep Static Plasma Under-Glow
+  .card-neon-core-glow {
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    width: 120%;
+    height: 120%;
+    z-index: 2;
+    pointer-events: none;
+    background: radial-gradient(
+      circle at 15% 15%,
+      rgba($accent-neon-violet, 0.18) 0%,
+      transparent 50%
+    );
+  }
+
+  // Interactive Hover Flare Highlight Engine
+  .card-interactive-pulse {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s ease;
+    background: radial-gradient(
+      circle at 75% 85%,
+      rgba($accent-glow-magenta, 0.2),
+      transparent 60%
+    );
+  }
+
+  // ==========================================================================
+  // LOGO INTEGRATION & BLENDING PIPELINE
+  // ==========================================================================
+  .pub-logo-container {
+    margin-bottom: 2.5rem;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .pub-card-logo {
+    height: 36px;
+    width: auto;
+    object-fit: contain;
+    opacity: 0.85; // Softens visual weight to adapt natively
+
+    // Auto-inverts dark assets to white & blends natively into background colors
+    filter: invert(1) brightness(0.95)
+      drop-shadow(0 2px 10px rgba($accent-neon-violet, 0.2));
+    mix-blend-mode: screen;
+
+    transition:
+      opacity 0.4s ease,
+      filter 0.4s ease;
+  }
+
+  .pub-article-title {
+    font-size: 1.65rem;
+    font-weight: 600;
+    line-height: 1.35;
+    color: $text-light; // Sharp bright contrast against dark background
+    margin: 0 0 2.5rem 0;
+    letter-spacing: -0.01em;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+  }
+
+  // ==========================================================================
+  // ACTION CONTROLS
+  // ==========================================================================
+  .pub-read-more-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.8rem 1.85rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 30px;
+    color: $text-muted;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+
+    .pub-arrow-icon {
+      width: 16px;
+      height: 16px;
+      stroke: $text-muted;
+      transition:
+        transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        stroke 0.4s ease;
+    }
+
+    &:hover {
+      color: #ffffff !important;
+      background-color: rgba($accent-purple, 0.75);
+      border-color: rgba($accent-glow-magenta, 0.8);
+      box-shadow: 0 0 25px rgba($accent-neon-violet, 0.5);
+
+      .pub-arrow-icon {
+        stroke: #ffffff;
+        transform: translateX(5px);
+      }
+    }
+  }
+
+  // ==========================================================================
+  // CARD HOVER ANIMATIONS
+  // ==========================================================================
+  &:hover {
+    transform: translateY(-6px);
+    border-color: rgba($accent-glow-magenta, 0.5);
+
+    // Amplified rich purple aura on hover focus
+    box-shadow:
+      0 25px 50px -10px rgba(0, 0, 0, 0.7),
+      0 0 45px 2px rgba($accent-neon-violet, 0.65),
+      inset 0 0 20px rgba($accent-glow-magenta, 0.15);
+
+    .pub-card-logo {
+      opacity: 1;
+      filter: invert(1) brightness(1)
+        drop-shadow(0 2px 15px rgba($accent-glow-magenta, 0.4));
+    }
+
+    .card-interactive-pulse {
+      opacity: 1;
+    }
+
+    .pub-read-more-action {
+      border-color: rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+    }
+  }
+}
+
+.publications-page-footer {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  text-align: center;
+  margin-top: 5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
+
+  p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: $text-muted;
+    letter-spacing: 0.5px;
+  }
+}

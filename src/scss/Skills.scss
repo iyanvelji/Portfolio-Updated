@@ -1,0 +1,548 @@
+// Import existing layout variables if they reside in separate theme maps
+$accent-purple: rgb(89, 3, 113);
+$bg-dark-surface: #0e0814;
+$text-light: #e6f1ff;
+$text-muted: #8a8a93;
+$transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+#skills {
+  padding: 4rem 0;
+
+  h2 {
+    margin-bottom: 2rem;
+  }
+}
+
+// Search Interface Configurations
+.skills-search-container {
+  position: relative;
+  max-width: 80%;
+  margin: 0 auto 3rem auto;
+
+  input {
+    width: 100%;
+    padding: 0.9rem 1.2rem 0.9rem 3rem;
+    background-color: $bg-dark-surface;
+    border: 1px solid rgba($accent-purple, 0.2);
+    border-radius: 8px;
+    color: $text-light;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: $transition-smooth;
+
+    &:focus {
+      outline: none;
+      border-color: rgba($accent-purple, 0.8);
+      box-shadow: 0 0 15px rgba($accent-purple, 0.25);
+    }
+  }
+
+ .search-icon {
+    position: absolute;
+    left: 0.9rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+
+    img {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+      opacity: 0.4; 
+      
+      // ADD THESE TWO LINES 👇
+      filter: brightness(0) invert(1); 
+      
+      transition: opacity 0.25s ease;
+    }
+  }
+  }
+
+  // Visual hook to illuminate the graphic icon when the container is targeted
+  input:focus ~ .search-icon img {
+    opacity: 0.85;
+  }
+
+// Category Blocks Layout
+.skills-group {
+  margin-bottom: 3.5rem;
+  transition: opacity 0.25s ease, margin 0.25s ease;
+
+  // Allows clean hidden hooks for search mechanics
+  &.is-hidden {
+    display: none;
+  }
+}
+
+.group-title {
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: $text-light;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.02em;
+}
+
+// ==========================================================================
+// THE RESPONSIVE RESPONSIVE GRID CONFIGURATION
+// ==========================================================================
+.skills-grid {
+  display: grid;
+  gap: 1.5rem;
+  
+  // 1. DESKTOP LOGIC (4 items per row)
+  grid-template-columns: repeat(4, 1fr);
+
+  @media (max-width: 1024px) {
+    // Intermediate layout shift for mid-range tablet surfaces
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (max-width: 768px) {
+    // 2. MOBILE LOGIC (Strictly 2 items per row)
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+}
+
+// Core Component Cards Architecture
+.skill-card {
+  background-color: rgba($bg-dark-surface, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  border-radius: 10px;
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 1rem;
+  cursor: default;
+  transition: $transition-smooth;
+
+  // Handles state animations elegantly
+  &.is-hidden {
+    display: none !important;
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+    background-color: $bg-dark-surface;
+    border-color: rgba($accent-purple, 0.4);
+    box-shadow: 
+      0 10px 25px rgba(0, 0, 0, 0.4),
+      0 0 15px rgba($accent-purple, 0.15);
+
+    .skill-icon {
+      transform: scale(1.08);
+            filter: brightness(0) invert(1);
+
+    }
+
+    p {
+      color: $text-light;
+    }
+  }
+
+  .skill-icon {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    transition: transform 0.25s ease, filter 0.25s ease;
+  }
+
+  p {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: $text-muted;
+    margin: 0;
+    line-height: 1.3;
+    transition: color 0.25s ease;
+  }
+}
+
+.skill-card {
+  cursor: pointer; // Updated from 'default' to signal clickable detail states
+}
+
+// ==========================================================================
+// INFO MODAL PORTAL STYLES
+// ==========================================================================
+.skills-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(5, 2, 8, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  animation: fadeIn 0.2s ease-out forwards;
+}
+
+.skills-modal-content {
+  position: relative;
+  background-color: $bg-dark-surface;
+  border: 1px solid rgba($accent-purple, 0.3);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba($accent-purple, 0.15);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 520px;
+  padding: 2.5rem 2rem;
+  animation: slideUp 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}
+
+.skills-modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1.2rem;
+  background: none;
+  border: none;
+  color: $text-muted;
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: $text-light;
+  }
+}
+
+.skills-modal-header {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 1.2rem;
+
+  .modal-header-icon {
+    width: 44px;
+    height: 44px;
+    object-fit: contain;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    color: $text-light;
+    margin: 0;
+    font-weight: 600;
+  }
+}
+
+.skills-modal-desc {
+  font-size: 1rem;
+  color: $text-light;
+  line-height: 1.5;
+  margin: 0 0 1.5rem 0;
+  opacity: 0.9;
+}
+
+.modal-divider {
+  border: 0;
+  height: 1px;
+  background: linear-gradient(90deg, rgba($accent-purple, 0.4) 0%, rgba(255,255,255,0.03) 100%);
+  margin-bottom: 1.5rem;
+}
+
+// Metadata Conditional Blocks
+.skills-modal-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+
+  .meta-block {
+    background-color: rgba(255, 255, 255, 0.02);
+    border-left: 3px solid rgba($accent-purple, 0.6);
+    padding: 0.75rem 1rem;
+    border-radius: 0 6px 6px 0;
+
+    h4 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: $text-muted;
+      margin: 0 0 0.35rem 0;
+      font-weight: 600;
+    }
+
+    p {
+      font-size: 0.95rem;
+      color: $text-light;
+      line-height: 1.4;
+      margin: 0;
+    }
+  }
+}
+
+// Keyframe Animations
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+// Premium Extended Theme Tokens
+$accent-purple: rgb(89, 3, 113);
+$accent-neon-violet: #8a2be2;
+$accent-glow-magenta: #da70d6;
+$bg-dark-surface: #0e0814;
+$bg-card-hover: rgba(22, 12, 33, 0.85);
+$text-light: #e6f1ff;
+$text-muted: #8a8a93;
+
+// Cinematic luxury ease-out timing curve
+$transition-fancy: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+
+#skills {
+  padding: 4rem 0;
+
+  h2 {
+    margin-bottom: 2rem;
+  }
+}
+
+// ... keeping your compact search styles here ...
+
+.skills-group {
+  margin-bottom: 3.5rem;
+}
+
+.group-title {
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: $text-light;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.02em;
+}
+
+// ==========================================================================
+// LOCKED GRID LAYOUT ENGINE
+// ==========================================================================
+.skills-grid {
+  display: grid;
+  gap: 1.5rem;
+  
+  // Strict Desktop Setup (Always 4 per row)
+  grid-template-columns: repeat(4, 1fr);
+
+  @media (max-width: 768px) {
+    // Strict Mobile Setup (Always 2 per row)
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+}
+
+// ==========================================================================
+// PREMIUM HOVER STATE CARD WITH ORIGINAL COLOR ICON DATA
+// ==========================================================================
+.skill-card {
+  position: relative; 
+  overflow: hidden; 
+  background-color: rgba($bg-dark-surface, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  padding: 2rem 1.25rem 2.25rem 1.25rem; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 1rem;
+  cursor: pointer;
+  transition: $transition-fancy;
+  z-index: 1;
+
+  // Ambient Internal Glow Layer
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    border-radius: 12px;
+    background: radial-gradient(
+      circle at 50% 0%, 
+      rgba($accent-neon-violet, 0.15) 0%, 
+      rgba($accent-purple, 0.05) 50%, 
+      transparent 100%
+    );
+    opacity: 0;
+    transition: $transition-fancy;
+    z-index: -1;
+  }
+
+  // Expanding Gradient Accent Footer Track
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, $accent-purple, $accent-glow-magenta, $accent-neon-violet);
+    border-radius: 3px 3px 0 0;
+    transition: $transition-fancy;
+  }
+
+  &:hover {
+    transform: translateY(-6px) scale(1.02);
+    background-color: $bg-card-hover;
+    border-color: rgba($accent-glow-magenta, 0.3);
+    
+    // Deep Volumetric Shadow Glow Framework
+    box-shadow: 
+      0 12px 30px rgba(0, 0, 0, 0.5),
+      0 0 15px rgba($accent-purple, 0.35),
+      0 0 30px rgba($accent-neon-violet, 0.15);
+
+    &::before {
+      opacity: 1;
+    }
+
+    &::after {
+      width: 70%; 
+    }
+
+    .skill-icon {
+      transform: translateY(-6px) scale(1.08);
+      // Removed brightness/invert! Original colors shine here with a clean drop-shadow glow 👇
+      filter: drop-shadow(0 4px 12px rgba($accent-glow-magenta, 0.4));
+      opacity: 1;
+    }
+
+    p {
+      color: $text-light;
+      transform: translateY(-4px);
+      text-shadow: 0 0 8px rgba($text-light, 0.2);
+    }
+
+    .skill-action-hint {
+      opacity: 0.85;
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+
+  // Icon configurations back to baseline natural state
+  .skill-icon {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    filter: none; // Completely unmanaged color pass-through
+    opacity: 0.9; // Keep crisp and visible natively 
+    transition: $transition-fancy;
+  }
+
+  p {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: $text-muted;
+    margin: 0;
+    line-height: 1.3;
+    transition: $transition-fancy;
+  }
+
+  .skill-action-hint {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%) translateY(8px);
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: $accent-glow-magenta;
+    opacity: 0;
+    pointer-events: none;
+    transition: $transition-fancy;
+    white-space: nowrap;
+  }
+}
+
+// ... keeping modal overlay styles from previous steps ...
+
+// ==========================================================================
+// FANCY HOME ROUTE "SEE MORE" CTAs
+// ==========================================================================
+.home-preview-group {
+  max-width: 900px;
+  margin: 0 auto 3rem auto; // Centers the box and adds clean spacing below each category section
+
+  .group-title {
+    text-align: left;
+    margin-left: 0;
+    padding-left: 0;
+    margin-bottom: 1.25rem; // Clean breathing room above the grid cards
+  }
+}
+.home-preview-grid {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.skills-see-more-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3.5rem;
+  width: 100%;
+}
+
+.skills-see-more-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.9rem 2rem;
+  background: rgba(14, 8, 20, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 30px;
+  color: $text-light;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none !important; // Absolute protection against global link underlines
+  letter-spacing: 0.5px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+
+  .arrow-icon {
+    width: 18px;
+    height: 18px;
+    stroke: $text-light;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  &:hover {
+    color: #ffffff !important;
+    background-color: rgba($accent-purple, 0.3);
+    border-color: rgba($accent-glow-magenta, 0.5);
+    box-shadow: 0 0 25px rgba($accent-neon-violet, 0.35),
+                inset 0 1px 2px rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+
+    .arrow-icon {
+      transform: translateX(6px); // Smoothly slide the arrow vector outwards on focus
+    }
+  }
+
+  &:active {
+    transform: translateY(0) scale(0.97);
+  }
+}

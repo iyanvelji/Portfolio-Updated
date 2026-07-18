@@ -1,0 +1,193 @@
+// ==========================================================================
+// 1. DESIGN TOKENS & VARIABLES
+// ==========================================================================
+
+// ==========================================================================
+// 1. DESIGN TOKENS & VARIABLES
+// ==========================================================================
+
+// Typography
+$font-sans: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+$font-mono: "Fira Code", monospace;
+
+// Color Palette - CLEAN & NATIVE (No string interpolation)
+$accent-primary: rgb(89, 3, 113);        // Pure Sass color object
+$accent-light: #9c27b0;
+$accent-dim: rgba($accent-primary, 0.3); // Uses the color variable directly!
+
+// Dark Mode Neutral Tones
+$bg-dark-pure: #030303;       
+$bg-dark-surface: #0e0814;    
+$bg-dark-elevated: #171021;   
+
+// Text Colors
+$text-main: #f3f0f7;          
+$text-muted: #a39cb0;         
+$text-disabled: #5c5566;
+
+// Transitions & Timing
+$transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+// ==========================================================================
+// 2. CORE RESET & BASE STYLES
+// ==========================================================================
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: $bg-dark-pure;
+  color: $text-main;
+  font-family: $font-sans;
+  line-height: 1.6;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+// Custom Cyber-Purple Text Selection
+::selection {
+  background-color: rgba($accent-primary, 0.6);
+  color: #ffffff;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+// ==========================================================================
+// 3. TYPOGRAPHY DEFAULTS
+// ==========================================================================
+
+h1, h2, h3, h4, h5, h6 {
+  color: #ffffff;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin-bottom: 1rem;
+}
+
+h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); }
+h2 { font-size: clamp(2rem, 4vw, 3rem); padding-left: 1rem; }
+h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
+p { margin-bottom: 1.25rem; color: $text-muted; }
+
+a {
+  color: $accent-light;
+  text-decoration: none;
+  transition: $transition-smooth;
+  
+  &:hover {
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba($accent-primary, 0.8);
+  }
+}
+
+code, pre {
+  font-family: $font-mono;
+  font-size: 0.9em;
+  background-color: $bg-dark-surface;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  border: 1px solid rgba($accent-primary, 0.2);
+}
+
+// ==========================================================================
+// 4. INTERACTIVE & UI COMPONENT DEFAULTS
+// ==========================================================================
+
+// Premium Core Button Layouts
+button, .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: $font-sans;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.8rem 1.8rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: $transition-smooth;
+
+  &.btn-primary {
+    background: linear-gradient(135deg, $accent-primary 0%, #3a014a 100%);
+    color: #ffffff;
+    box-shadow: 0 4px 15px rgba($accent-primary, 0.4);
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba($accent-primary, 0.7);
+      filter: brightness(1.1);
+    }
+    
+    &:active { transform: translateY(0); }
+  }
+
+  &.btn-secondary {
+    background: transparent;
+    color: $text-main;
+    border: 1px solid rgba($accent-primary, 0.5);
+
+    &:hover {
+      background: $bg-dark-surface;
+      border-color: $accent-light;
+      box-shadow: inset 0 0 10px rgba($accent-primary, 0.2);
+    }
+  }
+}
+
+// Cards & Containers
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.card {
+  background-color: $bg-dark-surface;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  padding: 2rem;
+  transition: $transition-smooth;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: rgba($accent-primary, 0.4);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 15px rgba($accent-primary, 0.15);
+  }
+}
+
+// ==========================================================================
+// 5. SYSTEM SCROLLBAR MODIFICATIONS
+// ==========================================================================
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: $bg-dark-pure;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #423147, $accent-primary);
+  border-radius: 10px;
+  border: 2px solid $bg-dark-pure;
+
+  &:hover {
+    background: $accent-light;
+  }
+}
