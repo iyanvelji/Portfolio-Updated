@@ -21,7 +21,7 @@ const certificationData: Certification[] = [
     title: 'Google Prompting Essentials',
     issuer: 'Google',
     issueDate: 'Issued Jul 2026',
-    image: '../images/google.webp',
+    image: 'images/google.png',
     url: 'https://www.coursera.org/account/accomplishments/specialization/781IWXX6Q35F'
   },
   {
@@ -29,7 +29,7 @@ const certificationData: Certification[] = [
     title: 'Python for Data Science Professional Certificate',
     issuer: 'Anaconda',
     issueDate: 'Issued Jul 2026',
-    image: '../images/anaconda.png',
+    image: 'images/anaconda.png',
     url: 'https://www.linkedin.com/learning/certificates/eb943ae352d2cd1cb6f59a0537186539684ec91c8b529d0adfcfa9ab9cb7d299'
   },
   {
@@ -37,7 +37,7 @@ const certificationData: Certification[] = [
     title: 'Getting Started with R for Data Science',
     issuer: 'LinkedIn',
     issueDate: 'Issued Jul 2026',
-    image: '../images/linkedin.svg',
+    image: 'images/linkedin.svg',
     url: 'https://www.linkedin.com/learning/certificates/f1382855862b405611d68b6f37ea59ab2183978e11f7330f551228c2da481885?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3B9ae54P6iQN6tE1jJONB%2BPg%3D%3D'
   },
   {
@@ -45,7 +45,7 @@ const certificationData: Certification[] = [
     title: 'Supply Chain Foundations: The Essentials Professional Certificate',
     issuer: 'Council of Supply Chain Management Professionals (CSCMP)',
     issueDate: 'Issued Jul 2026',
-    image: '../images/cscmp.jfif',
+    image: 'images/cscmp.jfif',
     url: 'https://www.linkedin.com/learning/certificates/729398d757cb53e0827cec1693bb5ebf9b000266b70977371808da1174af3250?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3B9ae54P6iQN6tE1jJONB%2BPg%3D%3D'
   },
   {
@@ -53,7 +53,7 @@ const certificationData: Certification[] = [
     title: 'Career Essentials in Business Analysis',
     issuer: 'Microsoft and LinkedIn',
     issueDate: 'Issued Jun 2026',
-    image: '../images/microsoft.png',
+    image: 'images/microsoft.png',
     url: 'https://www.linkedin.com/learning/certificates/e2c95af5a9b06623bc2ae9ee261cb6bdcb33a8729022921d61d77840eaa60606'
   },
   {
@@ -61,7 +61,7 @@ const certificationData: Certification[] = [
     title: 'Skills for Change AI Training',
     issuer: 'Calgary Economic Development',
     issueDate: 'Issued Jun 2026',
-    image: '../images/calgary-economic-development.jfif',
+    image: 'images/calgary-economic-development.jfif',
     url: "https://ibb.co/q3QWzQ0W"
   },
   {
@@ -69,7 +69,7 @@ const certificationData: Certification[] = [
     title: 'Customer Service Professional Certificate',
     issuer: 'Zendesk',
     issueDate: 'Issued Jun 2026',
-    image: '../images/zendesk.svg',
+    image: 'images/zendesk.svg',
     url: 'https://www.linkedin.com/learning/certificates/2321d24b971b0e24398459e10a7512ca4766c347c8e7a178bd0bd15ede31463c?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3Bkw6ncOanRBSudHiQkzNAhA%3D%3D'
   },
   {
@@ -77,7 +77,7 @@ const certificationData: Certification[] = [
     title: 'Become a Full-Stack Web Developer',
     issuer: 'LinkedIn',
     issueDate: 'Issued Jun 2026',
-    image: '../images/linkedin.svg',
+    image: 'images/linkedin.svg',
     url: 'https://www.linkedin.com/learning/certificates/9af83a368975624941a5ec24564b1c2d43a786c49392ef8b13f92503beae3ce8?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3Bkw6ncOanRBSudHiQkzNAhA%3D%3D'
   },
   {
@@ -85,7 +85,7 @@ const certificationData: Certification[] = [
     title: 'Statistics Foundations Professional Certificate',
     issuer: 'Wolfram Research',
     issueDate: 'Issued Jun 2026',
-    image: '../images/wolfram.jfif',
+    image: 'images/wolfram.jfif',
     url: 'https://www.linkedin.com/learning/certificates/7e0dec9a85d651dd6a90725ae27c9f1afdcc75a90253755b2172adc58ea2bcbf?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3Bkw6ncOanRBSudHiQkzNAhA%3D%3D'
   },
   {
@@ -93,7 +93,7 @@ const certificationData: Certification[] = [
     title: 'Career Essentials in System Administration',
     issuer: 'Microsoft and LinkedIn',
     issueDate: 'Issued May 2026',
-    image: '../images/microsoft.png',
+    image: 'images/microsoft.png',
     url: 'https://www.linkedin.com/learning/certificates/5c18cea8d89803e5470f23558c2fdb9a95246943ea49481d249c0fbce3d316c2'
   },
   {
@@ -101,7 +101,7 @@ const certificationData: Certification[] = [
     title: 'Career Essentials in Generative AI',
     issuer: 'Microsoft and LinkedIn',
     issueDate: 'Issued May 2026',
-    image: '../images/microsoft.png',
+    image: 'images/microsoft.png',
     url: 'https://www.linkedin.com/learning/certificates/87e3cf6b48fe88c492448572b71f442c0d0ac3314f6b146f148177a75061c890?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3BFJVSiFBZRpy%2BCOa1dJq61A%3D%3D'
   },
   {
@@ -109,7 +109,7 @@ const certificationData: Certification[] = [
     title: 'Career Essentials in Administrative Assistance',
     issuer: 'Microsoft',
     issueDate: 'Issued Jun 2025',
-    image: '../images/microsoft.png',
+    image: 'images/microsoft.png',
     url: 'https://www.linkedin.com/learning/certificates/6a119356fc39700ae4c185f53e45c6c5c11c622bbe6946b67ddff9ed215f0926?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3BFJVSiFBZRpy%2BCOa1dJq61A%3D%3D'
   },
   {
@@ -117,7 +117,7 @@ const certificationData: Certification[] = [
     title: 'Career Essentials in Cybersecurity',
     issuer: 'Microsoft',
     issueDate: 'Issued May 2025',
-    image: '../images/microsoft.png',
+    image: 'images/microsoft.png',
     url: 'https://www.linkedin.com/learning/certificates/023ed4f89f46e01d59864d071445b51ef65617e1006e042f89e521eb381885c9?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3BFJVSiFBZRpy%2BCOa1dJq61A%3D%3D'
   },
   {
@@ -125,7 +125,7 @@ const certificationData: Certification[] = [
     title: 'Career Essentials in Data Analysis',
     issuer: 'Microsoft and LinkedIn',
     issueDate: 'Issued May 2025',
-    image: '../images/microsoft.png',
+    image: 'images/microsoft.png',
     url: "https://www.linkedin.com/learning/certificates/005662171122365e7c5546c6d03e3c824a0247ab9222b327d043c9d3fdfa93be?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3BFJVSiFBZRpy%2BCOa1dJq61A%3D%3D"
   },
   {
@@ -133,7 +133,7 @@ const certificationData: Certification[] = [
     title: 'Neo4j Certified Professional',
     issuer: 'Neo4j',
     issueDate: 'Issued Mar 2022',
-    image: '../images/neo4j.png',
+    image: 'images/neo4j.png',
   }   
 ];
 
@@ -164,7 +164,7 @@ export const CertificationsTimeline: React.FC<CertificationsProps> = ({ isHomePa
           {!isHomePage && (
             <div className="search-container">
               <div className="search-icon">
-                <img src="../images/search.png" alt="Search" />
+                <img src="images/search.png" alt="Search" />
               </div>
               <input
                 type="text"

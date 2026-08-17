@@ -37,7 +37,7 @@ const experienceData: ExperienceCompany[] = [
     companyName: 'Mindrift',
     totalDuration: '2 mos', // Added to populate the Enserva-style header duration
     employmentType: 'Freelance',
-    logoUrl: '../images/mindrift.jfif',
+    logoUrl: 'images/mindrift.jfif',
     roles: [
       {
         title: 'English Writer - AI Trainer',

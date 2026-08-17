@@ -19,27 +19,27 @@ function App() {
   const carouselSlides = [
     {
       title: "Education",
-      image: "../images/education.png",
+      image: "images/education.png",
       path: "/education",
     },
     {
       title: "Experience",
-      image: "../images/experience.png",
+      image: "images/experience.png",
       path: "/experience",
     },
     {
       title: "Skills",
-      image: "../images/skills.png",
+      image: "images/skills.png",
       path: "/skills",
     },
     {
       title: "Certifications",
-      image: "../images/certifications.png",
+      image: "images/certifications.png",
       path: "/certifications",
     },
     {
       title: "Publications",
-      image: "../images/publications.png",
+      image: "images/publications.png",
       path: "/publications",
     },
   ];
@@ -47,7 +47,7 @@ function App() {
   return (
     <>
       <Heading />
-      <Router>
+      <Router basename={import.meta.env.BASE_URL}>
         <Nav />
         <Routes>
           <Route
