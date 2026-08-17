@@ -1,5 +1,6 @@
 import React from 'react';
 import '../scss/Experience.scss';
+import { Link } from 'react-router-dom';
 
 interface WorkRole {
   title: string;
@@ -25,6 +26,11 @@ interface ExperienceCompany {
   skillsList?: SkillItem[];
 }
 
+interface ExperienceProps {
+  limit?: number;        // Limits items displayed (e.g., 1 for Mindrift)
+  isHomePage?: boolean;  // Enables pure black background & See More button
+}
+
 const experienceData: ExperienceCompany[] = [
   {
     id: 'exp-1',
@@ -46,7 +52,7 @@ const experienceData: ExperienceCompany[] = [
     ],
     skillsList: [
       { name: 'Artificial Intelligence', iconUrl: 'images/promptengineering.png' },
-      { name: 'Generative AI', iconUrl: 'images/generative-ai.png' }
+      { name: 'Generative AI', iconUrl: 'images/gemini.webp' }
     ]
   },
   {
@@ -85,11 +91,12 @@ const experienceData: ExperienceCompany[] = [
       }
     ],
     skillsList: [
-      { name: 'Monday.com', iconUrl: '/assets/skills/monday.png' },
-      { name: 'Dashboards', iconUrl: '/assets/skills/dashboards.png' },
-      { name: 'WordPress', iconUrl: '/assets/skills/wordpress.png' },
-      { name: 'Data Analytics', iconUrl: '/assets/skills/analytics.png' },
-      { name: 'CRM Automation', iconUrl: '/assets/skills/automation.png' }
+      { name: 'Monday.com', iconUrl: 'images/monday.png' },
+      { name: 'Dashboards', iconUrl: 'images/dashboards.png' },
+      { name: 'WordPress', iconUrl: 'images/wordpress.png' },
+      { name: 'Data Analysis', iconUrl: 'images/data analysis.png' },
+      { name: 'Mailchimp', iconUrl: 'images/mailchimp.jfif' },
+      { name: 'Canva', iconUrl: 'images/canva.jpeg' },
     ]
   },
   {
@@ -111,8 +118,8 @@ const experienceData: ExperienceCompany[] = [
       }
     ],
     skillsList: [
-      { name: 'Customer Service', iconUrl: '/assets/skills/customer-service.png' },
-      { name: 'Public Relations', iconUrl: '/assets/skills/public-relations.png' }
+      { name: 'Customer Service', iconUrl: 'images/customerservice.png' },
+      { name: 'Teamwork', iconUrl: 'images/teamwork.png' }
     ]
   },
   {
@@ -134,28 +141,36 @@ const experienceData: ExperienceCompany[] = [
           'Updated computers appearing on the security vulnerability report helping secure the organization',
           'Provided remote desktop support such as software installation and troubleshooting',
           'Significantly contributed to the configuration and deployment of 7 self-service kiosk laptops currently in production at UFA petroleum agencies',
-          'Troubleshooted Microsoft Teams Rooms and provided technical support during town hall meetings',
+          'Troubleshot Microsoft Teams Rooms and provided technical support during town hall meetings',
           'Configured Honeywell Mobile Barcode Scanners and OptiSigns digital signage',
           'Created technical documentation about software, hardware, and company processes',
           'Utilized Active Directory and Microsoft System Center Configuration Manager to onboard and offboard employees',
           'Provided support for Modern Point of Sale systems helping farm stores and petroleum agencies run smoothly',
-          'Troubleshooted printers using PrinterLogic and maintained printers',
+          'Troubleshot printers using PrinterLogic and maintained printers',
           'Maintained the computer lab and managed the stock room inventory in ServiceNow'
         ]
       }
     ],
     skillsList: [
-      { name: 'Active Directory', iconUrl: '/assets/skills/active-directory.png' },
-      { name: 'Desktop Support', iconUrl: '/assets/skills/desktop-support.png' },
-      { name: 'IT Infrastructure', iconUrl: '/assets/skills/it-infra.png' }
+      { name: 'Active Directory', iconUrl: 'images/activedirectory.webp' },
+      { name: 'Microsoft Office', iconUrl: 'images/office.png' },
+      { name: 'Powershell', iconUrl: 'images/powershell.png' },
+      { name: 'Customer Service', iconUrl: 'images/customerservice.png' },
+      { name: 'ServiceNow', iconUrl: 'images/snow.png' },
+      { name: 'Microsoft Teams', iconUrl: 'images/teams.png' },
+      { name: 'Microsoft System Center Configuration Manager', iconUrl: 'images/sccm.png' },
     ]
   }
 ];
 
-export const Experience: React.FC = () => {
+const createSkillId = (name: string) =>
+  name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+
+export const Experience: React.FC<ExperienceProps> = ({ limit, isHomePage = false }) => {
+  const displayedExperience = limit ? experienceData.slice(0, limit) : experienceData;
+
   return (
-    <section className="experience-section-container">
-      <div className="cyber-grid-overlay" />
+<section className={`experience-section-container ${isHomePage ? 'is-home-page' : ''}`}>      <div className="cyber-grid-overlay" />
       <div className="ambient-glow-core" />
 
       <div className="experience-inner-content container">
@@ -170,7 +185,7 @@ export const Experience: React.FC = () => {
           </div>
 
           <div className="experience-list-wrapper">
-            {experienceData.map((company) => {
+            {displayedExperience.map((company) => {
               // 🛠️ CHANGED LOGIC: Use the nested structure if there are multiple roles 
               // OR if the first role contains description bullets (like Mindrift now does)
               const useNestedTimeline = company.roles.length > 1 || !!company.roles[0].descriptionBullets;
@@ -252,22 +267,25 @@ export const Experience: React.FC = () => {
                       <div className="skills-section-footer">
                         <span className="skills-section-title">Skills:</span>
                         <div className="skills-blurbs-grid">
-                          {company.skillsList.map((skill, sIdx) => (
-                            <a 
-                              key={sIdx}
-                              href={`/skills#${skill.name.toLowerCase().replace(/\s+/g, '-')}`}
-                              className="skill-blurb-link"
-                              title={`Explore skills related to ${skill.name}`}
-                            >
-                              <img 
-                                src={skill.iconUrl} 
-                                alt="" 
-                                className="skill-micro-icon"
-                                aria-hidden="true"
-                              />
-                              <span className="skill-text-name">{skill.name}</span>
-                            </a>
-                          ))}
+                         {company.skillsList.map((skill, sIdx) => {
+                            const skillId = createSkillId(skill.name);
+                            return (
+                              <Link
+                                key={sIdx}
+                                to={`/skills#${skillId}`}
+                                className="skill-blurb-link"
+                                title={`Explore skills related to ${skill.name}`}
+                              >
+                                <img 
+                                  src={skill.iconUrl} 
+                                  alt="" 
+                                  className="skill-micro-icon"
+                                  aria-hidden="true"
+                                />
+                                <span className="skill-text-name">{skill.name}</span>
+                              </Link>
+                            );
+                          })}
                         </div>
                       </div>
                     )}
@@ -278,6 +296,16 @@ export const Experience: React.FC = () => {
             })}
           </div>
         </div>
+        {isHomePage && (
+          <div className="see-more-container">
+            <a href="/experience" className="see-more-btn" onClick={() => window.scrollTo(0, 0)}>
+              <span>SEE MORE</span>
+              <svg className="see-more-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        )}
       </div>
     </section>
   );

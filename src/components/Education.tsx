@@ -30,97 +30,97 @@ const categories: CourseCategory[] = [
         code: "COMP 1501",
         name: "Programming I: Intro to Problem Solving",
         description:
-          "Introduction to fundamental programming concepts, algorithmic thinking, and problem-solving methodologies using a modern high-level language.",
+          "An introduction to problem solving in the context of computer programming. The design of fundamental algorithmic solutions and the implementation of those solutions in a visual development environment.",
       },
       {
         code: "COMP 1502",
         name: "Programming II: Object-Oriented Programming",
         description:
-          "Deep dive into object-oriented design principles including inheritance, polymorphism, encapsulation, and robust exception handling structures.",
+          "The concepts and practices essential to programming within an object-oriented environment.",
       },
       {
         code: "COMP 2503",
         name: "Programming III: Data Structures",
         description:
-          "Analysis and implementation of core data structures such as linked lists, binary trees, heaps, hash tables, and advanced search/sort algorithms.",
+          "Data structures important to computing such as basic linear structures, trees, heaps and hash tables. Additionally searching and sorting methods.",
       },
       {
         code: "COMP 2511",
         name: "Web I: Client Development",
         description:
-          "Building modern responsive interfaces using HTML5, semantic CSS3, layout systems, and asynchronous vanilla JavaScript client architecture.",
+          "The concepts and practice necessary for creating Internet content. A technical overview of the Internet environment and the structure of the World Wide Web.",
       },
       {
         code: "COMP 2521",
         name: "Database I: Modelling & Query",
         description:
-          "Relational database design principles, entity-relationship diagrams (ERD), normalization rules, and writing optimized relational SQL queries.",
+          "Concepts necessary to design and implement databases. Conceptual and logical data modeling is covered in detail.",
       },
       {
         code: "COMP 2531",
         name: "Architecture & Operating Systems",
         description:
-          "Understanding hardware abstraction layers, CPU instructions, memory mapping, process scheduling, and concurrency models within Unix/Linux systems.",
+          "Fundamental hardware and system software topics. Hardware including CPU architecture and computer organization. The inner workings of operating systems, including file systems, process scheduling, concurrency, and memory management.",
       },
       {
         code: "COMP 2541",
         name: "Systems Analysis",
         description:
-          "The software development lifecycle (SDLC), capturing complex user requirements, system modeling, and agile solution blueprinting frameworks.",
+          "An introduction to systems analysis in the development of computer-based information systems. System development methodologies and key systems analysis tools and techniques, with a focus on object-oriented strategies.",
       },
       {
         code: "COMP 3309",
         name: "IT and Society",
         description:
-          "Examining professional code of ethics, digital privacy laws, societal impacts of AI automation, and security policies in modern tech ecosystems.",
-      },
-      {
-        code: "COMP 3532",
-        name: "System Administration",
-        description:
-          "Advanced deployment automation, shell scripting, access control lists, network file systems configuration, and monitoring remote cloud infrastructure.",
-      },
-      {
-        code: "COMP 3533",
-        name: "Network Infrastructure",
-        description:
-          "In-depth study of OSI model layers, TCP/IP protocols, subnetting matrices, packet routing mechanics, and secure network architecture configurations.",
+          "The implications of information technology for society. Historical perspectives, social context of computing, legal and ethical problems, economic issues, and philosophical frameworks for analysis.",
       },
       {
         code: "COMP 3512",
         name: "Web II: Web Application Development",
         description:
-          "Engineering secure end-to-end fullstack applications using server-side rendering, API routing design, state management, and continuous deployment pipelines.",
+          "The concepts and technologies needed to develop web-centric applications. Special emphasis is given to server-side programming, including the creation of multi-tier and multi-layer web applications and using Web Services to integrate web applications with other IT applications.",
+      },
+       {
+        code: "COMP 3532",
+        name: "System Administration",
+        description:
+          "The deployment and maintenance of modern computer systems, with particular emphasis on the administration of user accounts. An overview of basic administrative tasks associated with network operating systems such as Windows and Linux.",
+      },
+       {
+        code: "COMP 3533",
+        name: "Network Infrastructure",
+        description:
+          "The principles and practice of computer networking, focusing on the high-level protocol-oriented aspects of computer networks. Networking as it relates to database and file service applications is examined along with Internet structure, protocols and routing.",
+      },
+        {
+        code: "COMP 3553",
+        name: "Human-Computer Interaction",
+        description:
+          "The fundamental theory and practice in the design and evaluation of human-computer interfaces. The impacts of computer-based information systems on individuals and organizations are examined along with the rationale for a user-centric approach in all IT applications and systems.",
       },
       {
         code: "COMP 4522",
         name: "Database II: Advanced Database",
         description:
-          "Exploring non-relational database models (NoSQL), distributed data clusters, indexing optimization metrics, and query execution performance analysis.",
-      },
-      {
-        code: "COMP 3553",
-        name: "Human-Computer Interaction",
-        description:
-          "Cognitive usability frameworks, interactive low/high-fidelity prototyping methods, behavioral user-testing methodologies, and interface heuristics.",
+          "Advanced concepts and techniques associated with information management. Database implementation and administration issues. Emerging database trends such as data warehousing and data mining. An overview of distributed database topics, including distributed transactions.",
       },
       {
         code: "COMP 4543",
         name: "Project Management & QA",
         description:
-          "Managing delivery cycles using SCRUM frameworks, resource scheduling algorithms, risk mitigation strategies, and test-driven development methodologies.",
+          "Strategic approaches for successful management of system development or enhancement projects, from both technical and organizational perspectives. The steps involved in ensuring a high quality deployment of a new application.",
+      },
+       {
+        code: "COMP 4635",
+        name: "Distributed Systems",
+        description:
+          "The design and implementation of distributed systems. Topics such as grid computing, virtualization, cloud computing and principles such as multithreading, communication, synchronization, replication, fault tolerance and security are covered.",
       },
       {
         code: "COMP 5590",
         name: "Senior Project",
         description:
-          "Capstone course requiring engineering an enterprise-grade software solution from initial scoping to validation for a real-world client sponsor.",
-      },
-      {
-        code: "COMP 4635",
-        name: "Distributed Systems",
-        description:
-          "Architecting cloud-native distributed nodes, microservice orchestration mechanisms, remote procedure calls (RPC), and fault-tolerant consensus systems.",
+          "Students complete a project of their choosing in some area of computer information systems under the guidance of a supervisor. The project results are then presented as a paper and an oral presentation to the department.",
       },
     ],
   },
@@ -129,76 +129,76 @@ const categories: CourseCategory[] = [
     key: "business",
     courses: [
       {
-        code: "MKTG 2150",
-        name: "Introduction to Marketing",
+        code: "ACCT 2121",
+        name: "Financial Accounting",
         description:
-          "Core principles of target audience segmentation, market position strategies, product positioning lifecycles, and distribution channel models.",
+          "An introduction to accounting principles and the accounting cycle. Topics include fundamental concepts such as accounting principles, assumptions, constraints, and the preparation and reporting of financial information to investors, managers, and others. Emphasis is on financial statement preparation and analysis.",
       },
       {
         code: "MGMT 2130",
         name: "Management Principles & Practices",
         description:
-          "Foundational organizational leadership models, strategic operational planning techniques, business decision matrix structures, and team assembly paradigms.",
+          "A comprehensive and practical study of the major functions that comprise management processes, and the constraints within which the manager must operate. The focus (through the use of case studies and experiential exercises) is on how to perform these functions in an ethical and socially responsible manner to maximize productivity within the constraints of the organizational environment.",
       },
       {
-        code: "MGMT 3210",
-        name: "Business Communication",
+        code: "MKTG 2150",
+        name: "Introduction to Marketing",
         description:
-          "Formulating high-impact professional reports, executive briefings, stakeholder crisis strategies, and persuasive technical writing.",
+          "An introduction to the fundamental concepts and principles of marketing including an introduction to the 4 P’s or marketing mix - product, price, place and promotion. Evaluate customer wants and needs; analyze and interpret market research; link trends in the environment to marketing decisions; develop a customer or target market profile for a product (good, service or idea); and communicate a marketing strategy effectively in visual, verbal and written formats.",
       },
       {
         code: "HRES 2170",
         name: "Intro to Human Resources",
         description:
-          "Strategic workforce talent acquisition systems, labor relations frameworks, compensation modeling structures, and performance assessment cycles.",
+          "The various elements of Human Resources management. In addition to the functional areas within HR, students will focus on the legal, ethical, and strategic HR management issues. Additonally, contemporary HR issues.",
       },
-      {
-        code: "ACCT 2121",
-        name: "Financial Accounting",
-        description:
-          "Analyzing corporate financial transactions, double-entry bookkeeping systems, and generating balance sheets and income statements.",
-      },
-      {
+       {
         code: "MKTG 3150",
         name: "The Science of Persuasion",
         description:
-          "Psychological principles of consumer behavior analysis, tactical positioning methods, and neuromarketing decision-making variables.",
+          "Marketing ultimately hinges on the ability to comprehend human motivation in order to understand the attitudes and behaviours of people and organizations. The theory and practice of persuasion and using these concepts to develop persuasive and compelling stories in visual, verbal and written formats.",
       },
       {
-        code: "MKTG 3258",
-        name: "Evidence-Based Marketing",
+        code: "MGMT 3210",
+        name: "Business Communication",
         description:
-          "Utilizing modern web analytics metrics, data-driven marketing campaigns, and statistical modeling to measure conversion efficiency.",
-      },
-      {
-        code: "MGMT 4402",
-        name: "Corporate Social Responsibility",
-        description:
-          "Designing ethical environmental corporate governance structures, sustainable resource models, and stakeholder accountability matrices.",
-      },
-      {
-        code: "ENTR 3305",
-        name: "The Art of the Pitch",
-        description:
-          "Formulating compelling investor presentation models, venture capital capital-raise strategies, and validation of business concepts.",
+          "Writing business letters, memoranda, reports, and preparing and delivering oral presentations. Exploring both internal and external organizational communication strategies.",
       },
       {
         code: "MGMT 3230",
         name: "Business Law",
         description:
-          "Understanding commercial tort liabilities, binding contract validation structures, intellectual property rights, and corporate statutory regulations.",
+          "Legal problem solving with emphasis on legal issues involving business. Critical legal thinking in the following areas: agreements, liability, property rights, constitutional rights, and different ways to set-up businesses and non-profit activities.",
+      },
+      {
+        code: "MKTG 3258",
+        name: "Evidence-Based Marketing",
+        description:
+          "The goals of evidence-based marketing and essential methodologies used to gain insight. How to support effective marketing decisions through focused market research and analysis.",
       },
       {
         code: "MGMT 3276",
         name: "Organizational Behaviour",
         description:
-          "Analyzing internal workplace group dynamics, systemic motivation drivers, structural communication channels, and cultural evolution models.",
+          "An examination of the behaviour of people in organizations. Emphasis on the application of theory through group interaction and case studies. Topics include: individual behaviour, group behaviour, leadership, motivation, conflict resolution, and organizational culture.",
       },
       {
         code: "INBU 3301",
         name: "Global Business Environment",
         description:
-          "Navigating cross-border currency exchange mechanics, international trade agreements, geopolitical risk variables, and global logistics channels.",
+          "An introduction to the field of international business: national economic, political and cultural differences; the issues surrounding globalization; the role of international institutions in facilitating international trade; international trade agreements; the international monetary system; current international business trends and developments. ",
+      },
+      {
+        code: "ENTR 3305",
+        name: "The Art of the Pitch",
+        description:
+          "Prepare for and present business ideas to prospective investors, partners, employees and customers. Skill development in visual, verbal and vocal communications to pitch business ideas and handle questions and answers about presentations.",
+      },
+      {
+        code: "MGMT 4402",
+        name: "Corporate Social Responsibility",
+        description:
+          "The interrelationship of corporate social responsibility, corporate integrity, organizational culture, corporate strategy and organizational management/leadership. Fair-trade and globalization and other converging and emerging ideas about the continuing evolution of CSR.",
       },
     ],
   },
@@ -206,78 +206,79 @@ const categories: CourseCategory[] = [
     title: "General Education",
     key: "gen-ed",
     courses: [
-      {
-        code: "GNED 1401",
-        name: "Writing for Academic Success",
-        description:
-          "Advanced critical textual analysis methods, academic research compilation strategies, argument validation techniques, and citation structuring.",
-      },
-      {
-        code: "MATH 1505",
-        name: "Puzzling Adventures in Math",
-        description:
-          "Discrete mathematical theory structures, logic puzzle matrices, combinatorial optimization algorithms, and introduction to graph networks.",
-      },
-      {
-        code: "GNED 1304",
-        name: "Communities and Societies",
-        description:
-          "Sociological analysis of modern community microstructures, urban development trends, and systemic institutional power distributions.",
-      },
-      {
-        code: "ANTH 1103",
-        name: "Intro to Cultural Anthropology",
-        description:
-          "Comparative ethnographic studies, kinship lineage systems, linguistic evolution models, and cross-cultural structural analysis.",
-      },
-      {
-        code: "GNED 1101",
-        name: "Science & Mathematical Literacy",
-        description:
-          "Application of empirical scientific method testing frameworks, statistical data verification models, and analytical error checking.",
-      },
-      {
-        code: "GNED 1202",
-        name: "Texts and Ideas",
-        description:
-          "Philosophical exploration of foundational historical texts, logic ethics paradigms, and human existential value frameworks.",
-      },
-      {
-        code: "SPCH 2001",
-        name: "Intro to Public Speaking",
-        description:
-          "Rhetorical architecture methods, dynamic vocal modulation styles, physical gesture metrics, and high-impact anxiety control strategies.",
-      },
-      {
-        code: "ASTR 1303",
-        name: "Stars, Galaxies, and Cosmology",
-        description:
-          "Astrophysical stellar evolution pathways, galactic spatial distributions, cosmic background radiation mechanics, and orbital tracking equations.",
-      },
-      {
-        code: "ANTH 1101",
-        name: "Primatology & Human Evolution",
-        description:
-          "Paleoanthropological fossil analysis frameworks, primate social structures, genetic divergence timelines, and evolutionary biology parameters.",
-      },
-      {
-        code: "COMM 2500",
-        name: "Intro to Communication Studies",
-        description:
-          "Mass media dissemination theories, semiotic analysis systems, digital message echo patterns, and societal information filters.",
-      },
-      {
+        {
         code: "UGST 1001",
         name: "Effective Learning",
         description:
-          "Metacognitive cognitive retention methodologies, memory encoding optimization routines, and strategic time-management scheduling blocks.",
+          "Opportunities to increase knowledge of effective learning, enhance use of strategies, and reflect on learning. Activities and assignments in a collaborative classroom setting facilitate the application of concepts from research to the students’ own learning.",
       },
       {
         code: "UGST 1002",
         name: "Change, Challenge and Choice",
         description:
-          "Analyzing personal decision matrix frameworks, leadership behavior strategies during operational crises, and adaptivity models.",
+          "Current research and strategies related to effective coping in a rapidly-changing world. Topics such as stress, effective coping, relating and working well with others, and putting change in perspective are included.",
       },
+      {
+        code: "GNED 1101",
+        name: "Science & Mathematical Literacy",
+        description:
+          "The intersections of mathematics, science and technology with daily life. Critical thinking and scientific reasoning skills are developed through the examination of issues drawn from the real world and current events.",
+      },
+        {
+        code: "ANTH 1101",
+        name: "Primatology & Human Evolution",
+        description:
+          "Human evolution, the role of biosocial phenomena in the evolution of physical structure and social behaviour, and the origins and development of culture.",
+      },
+        {
+        code: "ANTH 1103",
+        name: "Intro to Cultural Anthropology",
+        description:
+          "A cross-cultural exploration of the nature of human culture and society: its elements, variability and perpetuation. Symbolism and meaning, subsistence strategies, sex and gender, kinship, social organization, and political, economic, and religious institutions.",
+      },
+          {
+        code: "GNED 1202",
+        name: "Texts and Ideas",
+        description:
+          "How specific ideas shape attitudes, belief systems, and values through the perspectives of various disciplines. The nature, origins and relevance of ideas such as “leadership,” “mind,” “the self,” “modernity,” and “the good life”.",
+      },
+      {
+        code: "ASTR 1303",
+        name: "Stars, Galaxies, and Cosmology",
+        description:
+          "Basic concepts of astronomy, with emphasis on the universe outside the solar system. Topics include the properties of the Sun and other stars, the life and death of stars, galaxies, large-scale structure, and cosmology.",
+      },
+       {
+        code: "GNED 1304",
+        name: "Communities and Societies",
+        description:
+          "The meaning, power, and obligations of citizenship, and the skills necessary to create positive, effective, and sustainable change.",
+      },
+      {
+        code: "GNED 1401",
+        name: "Writing for Academic Success",
+        description:
+          "Review basics, analyze contemporary examples, develop research and referencing skills, and design writing for specific audiences. Writing for Academic Success provides an opportunity to develop new talents and gain confidence in expressing ideas.",
+      },
+      {
+        code: "MATH 1505",
+        name: "Puzzling Adventures in Math",
+        description:
+          "A problem-solving approach to discrete mathematics covering secret codes, public-key codes, error-correcting codes, applications of graph theory, and parallel algorithms.",
+      },
+      {
+        code: "SPCH 2001",
+        name: "Intro to Public Speaking",
+        description:
+          "An introduction to current theories of communication. An understanding of effective communication and its potential is promoted through participation in a variety of speaking situations. Opportunity is given for group discussion; audience analysis; development of good listening habits and how to research, organize and prepare various types of speeches.",
+      },
+      {
+        code: "COMM 2500",
+        name: "Intro to Communication Studies",
+        description:
+          "When we consume information or communicate with others we are sharing and assessing facts, ideas, opinions, and biases. In doing so we are developing a sense of who we are as individuals, and we’re also making decisions about how our world functions. This course is about the discipline of Communication Studies, and examination of a range of communication theories, which describe these dynamic social and personal processes.",
+      },
+    
     ],
   },
 ];

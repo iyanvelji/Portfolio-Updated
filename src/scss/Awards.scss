@@ -3,19 +3,28 @@ $accent-purple: rgb(89, 3, 113);
 $accent-neon-violet: #8a2be2;
 $accent-glow-magenta: #da70d6;
 $accent-vivid-purple: #c084fc; // Sharp readable purple for technical text elements
-$bg-dark-surface: #0e0814;
+$bg-dark-surface: #000000;
 $bg-card-high-contrast: #060309;
 $text-light: #ffffff;
 $text-muted: #6b7280;
 $text-silver: #d4d4d8;
 $transition-fancy: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 
+$gold-primary: #ffd700;
+$gold-hover: #fff176;
+
 .awards-ledger-wrapper {
   width: 100%;
   background-color: $bg-dark-surface;
-  padding: 6rem 2rem;
+  padding: 6rem 2rem 0rem 2rem;
   display: flex;
   justify-content: center;
+
+  &.homepage-section {
+    min-height: auto !important;
+    padding: 4rem 2rem 0rem 2rem !important; // Top: 0.5rem, Bottom: 0.5rem
+    
+  }
 }
 
 .awards-ledger-container {
@@ -29,15 +38,16 @@ $transition-fancy: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 // CLEAN, HIGH-CONTRAST MAIN HEADING
 // ==========================================================================
 .ledger-main-header {
-  margin-bottom: 3.5rem;
+  margin-bottom: 2rem;
   position: relative;
   width: 100%;
+  letter-spacing: 0.08em;
 
   .ledger-main-heading {
-    font-size: clamp(2rem, 3.5vw, 2.5rem);
+    font-size: clamp(2.25rem, 5vw, 3.5rem);
     font-weight: 800;
     color: $text-light;
-    letter-spacing: -0.01em;
+    letter-spacing: 0.08em;
     margin: 0;
     text-transform: uppercase;
     text-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
@@ -244,6 +254,286 @@ $transition-fancy: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 
     .row-neon-indicator {
       width: 100%;
+    }
+  }
+}
+
+// ==========================================================================
+// SUBHEADING STYLES
+// ==========================================================================
+.ledger-subheading {
+  margin-top: 3.5rem;
+  margin-bottom: 1.5rem;
+
+  h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: $text-silver;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+}
+
+// ==========================================================================
+// FEATURED AWARD HERO CARD (CLICKABLE & GLOWING)
+// ==========================================================================
+a.featured-award-card {
+  display: block;
+  padding: 25px;
+  text-decoration: none;
+  position: relative;
+  background: rgba($bg-card-high-contrast, 0.85);
+  border: 1px solid rgba($accent-neon-violet, 0.3);
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: $transition-fancy;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  
+  letter-spacing: 0.08em;
+
+
+  /* Pin Date to Top Right Corner */
+  .featured-date {
+    position: absolute;
+    top: 1.5rem;
+    right: 2rem;
+    z-index: 5;
+    color: $text-muted;
+    font-family: monospace;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+
+    @media (max-width: 768px) {
+      top: 1rem;
+      right: 1.25rem;
+      font-size: 0.8rem;
+    }
+  }
+
+  /* Soft Purple Ambient Background Glow */
+  .featured-ambient-glow {
+    position: absolute;
+    top: -50%;
+    left: -20%;
+    width: 140%;
+    height: 200%;
+    background: radial-gradient(circle, rgba($accent-purple, 0.25) 0%, transparent 65%);
+    pointer-events: none;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    opacity: 0.6;
+  }
+
+  .card-corner-tick {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-color: rgba($accent-glow-magenta, 0.4);
+    border-style: solid;
+    border-width: 0;
+    pointer-events: none;
+    transition: $transition-fancy;
+
+    &.top-left { top: -1px; left: -1px; border-top-width: 2px; border-left-width: 2px; }
+    &.top-right { top: -1px; right: -1px; border-top-width: 2px; border-right-width: 2px; }
+    &.bottom-left { bottom: -1px; left: -1px; border-bottom-width: 2px; border-left-width: 2px; }
+    &.bottom-right { bottom: -1px; right: -1px; border-bottom-width: 2px; border-right-width: 2px; }
+  }
+
+  .featured-card-inner {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    gap: 3.5rem;
+    align-items: center;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 1.5rem;
+    }
+  }
+
+  /* Centered Gold Trophy Showcase */
+  .trophy-showcase {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    min-width: 120px;
+
+    .trophy-halo {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background: radial-gradient(circle, rgba($gold-primary, 0.2) 0%, transparent 70%);
+      border-radius: 50%;
+      transition: $transition-fancy;
+    }
+
+    .trophy-icon-wrapper {
+      position: relative;
+      z-index: 2;
+      color: $gold-primary;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: $transition-fancy;
+
+      .trophy-svg {
+        width: 68px;
+        height: 68px;
+        filter: drop-shadow(0 0 10px rgba($gold-primary, 0.5));
+        transition: $transition-fancy;
+      }
+    }
+  }
+
+  
+
+  .featured-card-inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column; /* Stack trophy on top of text */
+  align-items: center;    /* Center trophy & text horizontally */
+  text-align: center;     /* Center all text lines */
+  gap: 1.5rem;            /* Spacing between trophy and text */
+}
+
+/* Ensure trophy container doesn't offset */
+.trophy-showcase {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  min-width: auto;
+}
+
+/* Center text content and metadata */
+.featured-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .featured-header-meta {
+    display: flex;
+    justify-content: center; /* Center Issuer and Date together */
+    align-items: center;
+    gap: 1.25rem;            /* Add spacing between Issuer & Date */
+    margin-bottom: 0.6rem;
+    width: 100%;
+
+  
+
+   .featured-issuer {
+        color: $accent-vivid-purple;
+        font-weight: 700;
+        letter-spacing: 0.03em;
+      }
+  }
+
+  .featured-title {
+    text-align: center;
+    margin: 0;
+  }
+}
+
+  /* ======================================================================== */
+  /* HOVER STATES: SOFT PURPLE CARD GLOW + GOLD TROPHY INTENSIFIES          */
+  /* ======================================================================== */
+  &:hover {
+    transform: translateY(-4px);
+    border-color: rgba($accent-glow-magenta, 0.8);
+    box-shadow: 
+      0 15px 40px rgba(0, 0, 0, 0.8),
+      0 0 35px rgba($accent-neon-violet, 0.45); // Soft purple outer card glow
+
+    .featured-ambient-glow {
+      opacity: 1;
+      transform: scale(1.05);
+      background: radial-gradient(circle, rgba($accent-purple, 0.5) 0%, transparent 60%);
+    }
+
+    .card-corner-tick {
+      border-color: $accent-glow-magenta;
+      width: 12px;
+      height: 12px;
+    }
+
+    .featured-title {
+      color: #ffffff;
+      text-shadow: 0 0 15px rgba($accent-glow-magenta, 0.4);
+    }
+
+    /* Trophy Glows Golder on Hover */
+    .trophy-showcase {
+      .trophy-halo {
+        width: 120px;
+        height: 120px;
+        background: radial-gradient(circle, rgba($gold-primary, 0.45) 0%, transparent 70%);
+      }
+
+      .trophy-icon-wrapper {
+        color: $gold-hover;
+        transform: scale(1.08);
+
+        .trophy-svg {
+          filter: drop-shadow(0 0 18px rgba($gold-primary, 0.95));
+        }
+      }
+    }
+  }
+}
+
+// ==========================================================================
+// "SEE MORE" PILL BUTTON (MATCHES CERTIFICATIONS DESIGN)
+// ==========================================================================
+.see-more-container {
+  margin-top: 3.5rem;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.see-more-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+  padding: 0.9rem 2.8rem;
+  font-size: 1rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #06020a;
+  border: 1.5px solid rgba($accent-neon-violet, 0.7);
+  border-radius: 9999px; // Full pill outline shape
+  transition: $transition-fancy;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+
+  .see-more-arrow {
+    width: 22px;
+    height: 22px;
+    color: $accent-glow-magenta;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), color 0.35s ease;
+  }
+
+  &:hover {
+    background-color: #0e0417;
+    border-color: $accent-glow-magenta;
+    transform: translateY(-2px);
+    box-shadow: 
+      0 8px 30px rgba(0, 0, 0, 0.8),
+      0 0 25px rgba($accent-neon-violet, 0.5);
+
+    .see-more-arrow {
+      color: #ffffff;
+      transform: translateX(5px);
     }
   }
 }

@@ -15,15 +15,23 @@ $accent-dim: rgba(188, 59, 240, 0.15);
   background-color: $bg-dark-surface;
   overflow: hidden;
   display: flex;
+  background-color: transparent;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   padding: 4rem 2rem 2rem 2rem;
+
+  &.homepage-section {
+    min-height: auto !important;
+    padding-top: 4rem
+     !important; // Forces exact 1rem top spacing on home page
+     padding-bottom: 0rem !important;
+  }
 }
 
 h2 {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
   font-size: clamp(2.25rem, 5vw, 3.5rem);
   text-transform: uppercase;
   letter-spacing: 0.08em;

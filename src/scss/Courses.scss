@@ -9,10 +9,11 @@ $text-light: #ffffff;
 $text-silver: #e4e4e7;
 $text-muted: #71717a;
 $transition-fancy: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+$transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
 .courses-viewport-wrapper {
   width: 100%;
-  background-color: $bg-dark-surface;
+  background-color: #000000;
   padding: 6rem 2rem;
   display: flex;
   justify-content: center;
@@ -30,8 +31,6 @@ $transition-fancy: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 // SECTION HEADER
 // ==========================================================================
 .courses-section-header {
-  margin-bottom: 4rem;
-  
   .header-telemetry {
     font-family: monospace;
     font-size: 0.75rem;
@@ -46,7 +45,9 @@ $transition-fancy: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     color: $text-light;
     letter-spacing: -0.01em;
     margin: 0;
+    margin-bottom: 2rem;
     text-transform: uppercase;
+    letter-spacing: 0.08em;
   }
 }
 
@@ -55,7 +56,10 @@ $transition-fancy: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 // ==========================================================================
 .courses-dense-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); // Structured small card constraint
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(260px, 1fr)
+  ); // Structured small card constraint
   gap: 1.5rem;
   width: 100%;
 }
@@ -94,7 +98,7 @@ $transition-fancy: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     z-index: 1;
     opacity: 0.12;
     background-size: 4px 4px;
-    background-image: 
+    background-image:
       linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
       linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
   }
@@ -109,8 +113,14 @@ $transition-fancy: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     z-index: 2;
     pointer-events: none;
     opacity: 0.15;
-    transition: opacity 0.5s ease, background 0.5s ease;
-    background: radial-gradient(circle at 50% 50%, rgba($accent-purple, 0.4) 0%, transparent 60%);
+    transition:
+      opacity 0.5s ease,
+      background 0.5s ease;
+    background: radial-gradient(
+      circle at 50% 50%,
+      rgba($accent-purple, 0.4) 0%,
+      transparent 60%
+    );
   }
 
   // Technical Bracket Highlights
@@ -148,10 +158,18 @@ $transition-fancy: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
       height: 16px;
       object-fit: contain;
 
-      &.ink-linkedin { color: #0077b5; }
-      &.ink-microsoft { color: #f25022; }
-      &.ink-google { color: #ea4335; }
-      &.ink-generic { color: $accent-glow-magenta; }
+      &.ink-linkedin {
+        color: #0077b5;
+      }
+      &.ink-microsoft {
+        color: #f25022;
+      }
+      &.ink-google {
+        color: #ea4335;
+      }
+      &.ink-generic {
+        color: $accent-glow-magenta;
+      }
     }
 
     .issuer-name-text {
@@ -206,8 +224,8 @@ $transition-fancy: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   &:hover {
     transform: translateY(-4px);
     border-color: rgba($accent-glow-magenta, 0.4);
-    box-shadow: 
-      0 12px 30px -10px rgba(0,0,0,0.8),
+    box-shadow:
+      0 12px 30px -10px rgba(0, 0, 0, 0.8),
       0 0 20px rgba($accent-neon-violet, 0.25);
 
     .card-corner-bracket {
@@ -217,7 +235,11 @@ $transition-fancy: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 
     .card-reactive-neon-glow {
       opacity: 0.4;
-      background: radial-gradient(circle at 50% 50%, rgba($accent-neon-violet, 0.5) 0%, transparent 60%);
+      background: radial-gradient(
+        circle at 50% 50%,
+        rgba($accent-neon-violet, 0.5) 0%,
+        transparent 60%
+      );
     }
 
     .telemetry-action-hint {
@@ -252,7 +274,7 @@ $transition-fancy: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   max-width: 550px;
   background: #09050d;
   border: 1px solid rgba($accent-neon-violet, 0.4);
-  box-shadow: 
+  box-shadow:
     0 30px 70px rgba(0, 0, 0, 0.9),
     0 0 40px rgba($accent-purple, 0.3),
     inset 0 0 25px rgba(255, 255, 255, 0.01);
@@ -269,7 +291,12 @@ $transition-fancy: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     left: 0;
     width: 100%;
     height: 2px;
-    background: linear-gradient(90deg, transparent, $accent-glow-magenta, transparent);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      $accent-glow-magenta,
+      transparent
+    );
     animation: sweepTrack 3s ease-in-out infinite;
   }
 
@@ -351,7 +378,11 @@ $transition-fancy: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     .console-divider-line {
       width: 100%;
       height: 1px;
-      background: linear-gradient(90deg, rgba(255,255,255,0.08), transparent);
+      background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.08),
+        transparent
+      );
       margin-bottom: 1.75rem;
     }
 
@@ -391,7 +422,7 @@ $transition-fancy: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     padding: 1rem 2rem;
     background: rgba(0, 0, 0, 0.2);
     border-top: 1px solid rgba(255, 255, 255, 0.03);
-    
+
     .footer-telemetry-string {
       font-family: monospace;
       font-size: 0.65rem;
@@ -401,12 +432,70 @@ $transition-fancy: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
 }
 
+.courses-search-container {
+  position: relative;
+  max-width: 80%;
+  margin: 0 auto 3rem auto;
+
+  input {
+    width: 100%;
+    padding: 0.9rem 1.2rem 0.9rem 3rem;
+    background-color: $bg-dark-surface;
+    border: 1px solid rgba($accent-purple, 0.2);
+    border-radius: 8px;
+    color: $text-light;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: $transition-smooth;
+
+    &:focus {
+      outline: none;
+      border-color: rgba($accent-purple, 0.8);
+      box-shadow: 0 0 15px rgba($accent-purple, 0.25);
+    }
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 0.9rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+
+    img {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+      opacity: 0.4;
+
+      // ADD THESE TWO LINES 👇
+      filter: brightness(0) invert(1);
+
+      transition: opacity 0.25s ease;
+    }
+  }
+}
+
+.courses-no-results {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: $text-muted;
+  font-size: 1.05rem;
+}
+
 // ==========================================================================
 // SCIFI ANIMATION CHANNELS
 // ==========================================================================
 @keyframes backdropReveal {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes consoleSlideUp {
@@ -421,7 +510,13 @@ $transition-fancy: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @keyframes sweepTrack {
-  0% { left: -100%; }
-  50% { left: 100%; }
-  100% { left: 100%; }
+  0% {
+    left: -100%;
+  }
+  50% {
+    left: 100%;
+  }
+  100% {
+    left: 100%;
+  }
 }

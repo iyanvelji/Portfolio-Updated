@@ -9,54 +9,59 @@ interface ProjectData {
   backgroundImage: string;
 }
 
+interface ProjectsProps {
+  limit?: number;        // Optional limit for homepage (e.g., 2)
+  isHomePage?: boolean;  // Renders "See More" button & homepage overrides
+}
+
 const PROJECTS_DATA: ProjectData[] = [
   {
     id: 1,
     title: "Starbucks Website Clone",
     category: "HTML, CSS, JAVASCRIPT",
-    link: "https://github.com/yourportfolio/logistics-pipeline",
+    link: "https://ivresume.netlify.app/starbucks",
     backgroundImage: "images/starbucks.avif"
   },
   {
     id: 2,
     title: "Toy Store Demo",
     category: "JAVA",
-    link: "https://github.com/yourportfolio/telemetry-dashboard",
+    link: "https://www.youtube.com/watch?v=bBIF1056TMU",
     backgroundImage: "images/toystore.avif"
   },
   {
     id: 3,
     title: "Task Manager",
     category: "NODE.JS",
-    link: "https://github.com/yourportfolio/agentic-modeler",
+    link: "https://www.youtube.com/watch?v=dcDIXeKTCA4",
     backgroundImage: "images/taskmanager.avif"
   },
   {
     id: 4,
     title: "Calculator",
     category: "PYTHON",
-    link: "https://github.com/yourportfolio/node-matrix",
+    link: "https://www.youtube.com/watch?v=ju8J6riQZvM",
     backgroundImage: "images/calculator.avif"
   },
   {
     id: 5,
     title: "Powershell Scripts",
     category: "POWERSHELL",
-    link: "https://github.com/yourportfolio/node-matrix",
+    link: "https://ivresume.netlify.app/scripts",
     backgroundImage: "images/powershellscripts.avif"
   },
     {
     id: 6,
     title: "Crossword Puzzle App",
     category: "JAVA, MICROSERVICES",
-    link: "https://github.com/yourportfolio/node-matrix",
+    link: "https://github.com/iv571/comp4635assignment2",
     backgroundImage: "images/crosswordpuzzle.avif"
   },
       {
     id: 7,
     title: "RISC vs CISC",
     category: "PAPER",
-    link: "https://github.com/yourportfolio/node-matrix",
+    link: "https://ivresume.netlify.app/rvc.pdf",
     backgroundImage: "images/paper.avif"
   }
 ];
@@ -132,18 +137,31 @@ const ParallaxProjectRow: React.FC<{ project: ProjectData }> = ({ project }) => 
   );
 };
 
-const Projects: React.FC = () => {
-  return (
-    <section className="projects-viewport-wrapper">
-      <header className="projects-page-header">
+const Projects: React.FC<ProjectsProps> = ({ limit, isHomePage = false }) => {
+  const displayedProjects = limit ? PROJECTS_DATA.slice(0, limit) : PROJECTS_DATA;
+
+    return (
+<section className={`projects-viewport-wrapper ${isHomePage ? "is-home-page" : ""}`}>
+  <header className="projects-page-header">
         <h2 className="projects-main-title">Projects</h2>
       </header>
 
       <div className="parallax-strip-stack">
-        {PROJECTS_DATA.map((project) => (
+        {displayedProjects.map((project) => (
           <ParallaxProjectRow key={project.id} project={project} />
         ))}
       </div>
+
+      {isHomePage && (
+        <div className="see-more-container">
+          <a href="/projects" className="see-more-btn">
+            <span>SEE MORE</span>
+            <svg className="see-more-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+      )}
     </section>
   );
 };

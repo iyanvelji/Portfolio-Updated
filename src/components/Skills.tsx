@@ -1,6 +1,6 @@
-import React, { useState, useMemo, type ChangeEvent } from "react";
+import React, { useState, useMemo, useEffect, type ChangeEvent } from "react";
 import "../scss/Skills.scss";
-import { Link } from "react-router-dom"; // Imported for routing redirection
+import { Link, useLocation } from "react-router-dom"; // Imported for routing redirection
 
 interface Skill {
   title: string;
@@ -28,26 +28,30 @@ const SKILLS_DATA: SkillCategory[] = [
     skills: [
        {
         title: "Agentic AI",
-        desc: "Explored agentic AI concepts in a specialized course.",
+        desc: "Explored agentic AI concepts and created an AI agent utilizing Python, Google AI Studio, and Browser Use.",
         imgSrc: "images/agent.png",
-        courses: "Agentic AI Certification Course",
+        certifications: "Skills for Change AI Training",
+        courses: "Agentic AI for Business Analysis",
       },
        {
         title: "AI Ethics",
-        desc: "Explored AI ethics in a specialized course.",
+        desc: "Analyzed ethical considerations in AI and the responsible usage of AI.",
         imgSrc: "images/aiethics.png",
-        courses: "AI Ethics Certification Course",
+        certifications: "Career Essentials in Generative AI by Microsoft and LinkedIn",
+        courses: "Ethics in the Age of Generative AI",
       },
        {
         title: "Generative AI",
-        desc: "Explored generative AI techniques in a specialized course.",
+        desc: "Mastered generative AI techniques and utilized LLMs such as Gemini, Claude, ChatGPT, Perplexity, Grok, and Deepseek.",
         imgSrc: "images/gemini.webp",
-        courses: "Generative AI Certification Course",
+        certifications: "Career Essentials in Generative AI by Microsoft and LinkedIn \n Skills for Change AI Training",
+        courses: "Generative AI for Business Analysts \n What Is Generative AI? \n Ethics in the Age of Generative AI",
       },
       {
         title: "Prompt Engineering",
-        desc: "Crafted AI prompts in a prompt engineering course offered by IBM.",
+        desc: "Crafted AI prompts in various AI courses including a prompt engineering course offered by IBM.",
         imgSrc: "images/promptengineering.png",
+        certifications: "Career Essentials in Generative AI by Microsoft and LinkedIn \n Skills for Change AI Training",
         courses: "Prompt Engineering Certification Course (IBM)",
       },
       
@@ -59,16 +63,16 @@ const SKILLS_DATA: SkillCategory[] = [
     skills: [
       {
         title: "Accounting",
-        desc: "Learned the fundamentals of accounting in ACCT 2121: Financial Accounting at Mount Royal University.",
+        desc: "Learned the fundamentals of accounting in ACCT 2121: Financial Accounting at Mount Royal University",
         imgSrc: "images/accounting.png",
-        education: "Mount Royal University",
-        courses: "ACCT 2121: Financial Accounting",
+        education: "ACCT 2121: Financial Accounting",
       },
       {
         title: "Business Analysis",
         desc: "Gained experience with business analysis at Enserva and through courses and certifications.",
         imgSrc: "images/businessanalysis.png",
-        experience: "Business Analyst (Intern) at Enserva"
+        experience: "Business Analyst (Intern) at Enserva",
+        certifications: "Career Essentials in Business Analysis by Microsoft and LinkedIn",
       },
        {
         title: "Business Process Automation",
@@ -80,8 +84,7 @@ const SKILLS_DATA: SkillCategory[] = [
         title: "Corporate Social Responsibility",
         desc: "Learned CSR in MGMT 4402: Corporate Social Responsibility at Mount Royal University.",
         imgSrc: "images/csr.png",
-        education: "Mount Royal University",
-        courses: "MGMT 4402: Corporate Social Responsibility",
+        education: "MGMT 4402: Corporate Social Responsibility",
       },
          {
         title: "Customer Relationship Management (CRM)",
@@ -95,7 +98,7 @@ const SKILLS_DATA: SkillCategory[] = [
         desc: "Developed customer service skills while working at United Farmers of Alberta and Elections Canada.",
         imgSrc: "images/customerservice.png",
         experience:
-          "End User Support Co-op at United Farmers of Alberta, Service Representative at Elections Canada",
+          "End User Support Co-op at United Farmers of Alberta \n Information Officer at Elections Canada",
         certifications: "Zendesk Customer Service Professional Certificate",
       },
         {
@@ -103,15 +106,15 @@ const SKILLS_DATA: SkillCategory[] = [
         desc: "Demonstrated strong interpersonal communication skills while working at United Farmers of Alberta, Elections Canada, and Enserva.",
         imgSrc: "images/interpersonalcommunication.png",
         experience:
-          "End User Support Co-op Student at United Farmers of Alberta \n\n Business Analyst (Intern) at Enserva \n\n Service Representative at Elections Canada",
+          "End User Support Co-op Student at United Farmers of Alberta \n Business Analyst (Intern) at Enserva \n Information Officer at Elections Canada",
 
       },
       {
         title: "Marketing",
         desc: "Studied marketing in MKTG 2150: Introduction to Marketing at Mount Royal University.",
         imgSrc: "images/marketing.png",
-        education: "Mount Royal University",
-        courses: "MKTG 2150: Introduction to Marketing",
+        education: "MKTG 2150: Introduction to Marketing",
+        experience: "Business Analyst (Intern) at Enserva",
       },
        {
         title: "Office Administration",
@@ -121,52 +124,50 @@ const SKILLS_DATA: SkillCategory[] = [
       },
       {
         title: "Problem Solving",
-        desc: "Solved complex problems at Mount Royal University and United Farmers of Alberta.",
+        desc: "Solved complex problems at Mount Royal University, Enserva, and United Farmers of Alberta.",
         imgSrc: "images/problemsolving.png",
-        education: "Mount Royal University",
-        experience: "Technical Enterprise IT Support Systems Optimization",
+        education: "COMP 4635: Distributed Systems \n COMP 4522: Database II: Advanced Database \n COMP 3512: Web II: Web Application Development",
+        experience: "End User Support Co-op at United Farmers of Alberta \n Business Analyst (Intern) at Enserva",
       },
        {
         title: "Project Management",
-        desc: "Solved complex problems at Mount Royal University and United Farmers of Alberta.",
+        desc: "Managed multiple projects at Mount Royal University, United Farmers of Alberta, and Enserva.",
         imgSrc: "images/project.png",
-        education: "Mount Royal University",
-        experience: "Technical Enterprise IT Support Systems Optimization",
+        education: "COMP 4543: Project Management & QA \n COMP 5590: Senior Project",
+        experience: "End User Support Co-op at United Farmers of Alberta \n Business Analyst (Intern) at Enserva",
       },
       {
         title: "Public Speaking",
         desc: "Developed public speaking skills in SPCH 2001: Intro to Public Speaking at Mount Royal University.",
         imgSrc: "images/publicspeaking.png",
-        education: "Mount Royal University",
-        courses: "SPCH 2001: Intro to Public Speaking",
+        education: "SPCH 2001: Intro to Public Speaking \n ENTR 3305: The Art of the Pitch",
       },
        {
         title: "Supply Chain",
-        desc: "Studied supply chain management in SCM 3000: Introduction to Supply Chain Management at Mount Royal University.",
+        desc: "Studied supply chain management by completing the Supply Chain Foundations Professional Certificate.",
         imgSrc: "images/supplychain.png",
-        education: "Mount Royal University",
-        courses: "SCM 3000: Introduction to Supply Chain Management",
+        education: "Supply Chain Foundations: The Essentials Professional Certificate by Council of Supply Chain Management Professionals (CSCMP)",
       },
       {
         title: "Teamwork",
-        desc: "Collaborated on group projects in multiple courses at Mount Royal University and at United Farmers of Alberta.",
+        desc: "Collaborated on group projects at Mount Royal University, United Farmers of Alberta, and Enserva.",
         imgSrc: "images/teamwork.png",
-        education: "Mount Royal University",
-        experience: "Cross-functional Agile Project Collaborations",
+        education: "MKTG 2150: Introduction to Marketing \nCOMP 4522: Database II: Advanced Database \nCOMP 3553: Human-Computer Interaction",
+        experience: "End User Support Co-op at United Farmers of Alberta \n Business Analyst (Intern) at Enserva",
       },
         {
         title: "Time Management",
         desc: "Developed strong time management skills through experience at Mount Royal University, UFA, and Enserva as well as courses taken.",
         imgSrc: "images/timemanagement.png",
-        experience: "Mount Royal University",
-        courses: "MKTG 2150: Introduction to Marketing",
+        education: "UGST 1001: Effective Learning \n UGST 1002: Change, Challenge and Choice",
+        experience: "End User Support Co-op at United Farmers of Alberta \n Business Analyst (Intern) at Enserva",
       },
       {
         title: "Written Communication",
         desc: "Developed business writing skills in MGMT 3210: Business Communication at Mount Royal University.",
         imgSrc: "images/writtencommunication.png",
-        education: "Mount Royal University",
-        courses: "MGMT 3210: Business Communication",
+        education: "MGMT 3210: Business Communication",
+        experience: "End User Support Co-op at United Farmers of Alberta \n Business Analyst (Intern) at Enserva",
       },
     ],
   },
@@ -203,9 +204,7 @@ const SKILLS_DATA: SkillCategory[] = [
         title: "Big Data",
         desc: "Explored Big Data in COMP 4522: Database II at Mount Royal University.",
         imgSrc: "images/bigdata.webp",
-        education:
-          "Bachelor of Computer Information Systems - Mount Royal University",
-        courses: "COMP 4522: Database II",
+        education: "COMP 4522: Database II",
       },
       {
         title: "Dashboards",
@@ -225,21 +224,19 @@ const SKILLS_DATA: SkillCategory[] = [
         title: "Databases",
         desc: "Worked with relational and non-relational databases at Mount Royal University.",
         imgSrc: "images/databases.png",
-        education: "Mount Royal University",
+        education: "COMP 2521: Database I: Modelling & Query \n COMP 4522: Database II: Advanced Database",
       },
       {
         title: "Distributed Databases",
         desc: "Studied distributed databases in COMP 4522: Database II at Mount Royal University.",
         imgSrc: "images/distributeddatabases.png",
-        education: "Mount Royal University",
-        courses: "COMP 4522: Database II",
+        education: "COMP 4522: Database II: Advanced Database",
       },
       {
         title: "Hadoop",
         desc: "Learned about Hadoop in COMP 4522: Database II at Mount Royal University.",
         imgSrc: "images/hadoop.png",
-        education: "Mount Royal University",
-        courses: "COMP 4522: Database II",
+        education: "COMP 4522: Database II: Advanced Database",
       },
        {
         title: "Monday.com",
@@ -251,8 +248,7 @@ const SKILLS_DATA: SkillCategory[] = [
         title: "MongoDB",
         desc: "Implemented NoSQL schemas in COMP 4522: Database II: Advanced Database at Mount Royal University.",
         imgSrc: "images/mongodb.png",
-        education: "Mount Royal University",
-        courses: "COMP 4522: Database II: Advanced Database",
+        education: "COMP 4522: Database II: Advanced Database",
       },
       {
         title: "Neo4j",
@@ -264,60 +260,57 @@ const SKILLS_DATA: SkillCategory[] = [
         title: "Pandas",
         desc: "Worked with Pandas in Python in COMP 4522: Database II: Advanced Database at Mount Royal University.",
         imgSrc: "images/pandas.png",
-        education: "Mount Royal University",
-        courses: "COMP 4522: Database II: Advanced Database",
+        education: "COMP 4522: Database II: Advanced Database",
       },
       {
         title: "Power BI",
         desc: "Created multiple dashboards utilized in quarterly board reporting at Enserva.",
         imgSrc: "images/powerbi.webp",
-        courses: "",
+        education: "Database II: Advanced Database",
       },
       {
         title: "Python",
         desc: "Utilized Python in COMP 4522: Database II: Advanced Database at Mount Royal University.",
         imgSrc: "images/python.png",
-        education: "Mount Royal University",
-        courses: "COMP 4522: Database II: Advanced Database",
+        education: "COMP 4522: Database II: Advanced Database",
+        certifications: "Python for Data Science Professional Certificate by Anaconda",
       },
       {
         title: "R",
-        desc: "Utilized R in COMP 4522: Database II: Advanced Database at Mount Royal University.",
+        desc: "Studied R by obtaining the Getting Started with R for Data Science Certificate from LinkedIn.",
         imgSrc: "images/r.webp",
-        education: "Mount Royal University",
-        courses: "COMP 4522: Database II: Advanced Database",
+        certifications: "Getting Started with R for Data Science Certificate by LinkedIn",
       },
       {
         title: "Scikit-Learn",
         desc: "Utilized Scikit-Learn in COMP 4522: Database II: Advanced Database at Mount Royal University.",
         imgSrc: "images/scikitlearn.png",
-        education: "Mount Royal University",
-        courses: "COMP 4522: Database II: Advanced Database",
+        education: "COMP 4522: Database II: Advanced Database",
       },
       {
         title: "SQL",
         desc: "Wrote queries in COMP 2521: Database I and COMP 4522: Database II: Advanced Database at Mount Royal University.",
         imgSrc: "images/sql.svg",
-        education: "Mount Royal University",
-        courses: "COMP 2521: Database I, COMP 4522: Database II",
+        education: "COMP 2521: Database I: Modelling & Query \n COMP 4522: Database II: Advanced Database",
       },
       {
         title: "SQL Server Management Studio",
         desc: "Proficient in Microsoft SSMS after volunteering at the Future Ready Initiative.",
         imgSrc: "images/mssql.png",
-        experience: "Volunteer Analyst at Future Ready Initiative",
+        experience: "OJCMS Accounts Administrator at Future Ready Initiative",
       },
       {
         title: "Statistics",
-        desc: "Created multiple dashboards utilized in quarterly board reporting at Enserva.",
+        desc: "Created multiple dashboards utilized in quarterly board reporting at Enserva and studied statistics via LinkedIn Learning.",
         imgSrc: "images/statistics.png",
-        courses: "",
+        certifications: "Statistics Foundations Professional Certificate by Wolfram Research",
+        experience: "Business Analyst (Intern) at Enserva",
       },
        {
         title: "Tableau",
-        desc: "Created multiple dashboards utilized in quarterly board reporting at Enserva.",
+        desc: "Completed a course in Tableau through LinkedIn Learning.",
         imgSrc: "images/tableau.svg",
-        courses: "",
+        courses: "Tableau Essential Training by LinkedIn",
       },
     ],
   },
@@ -339,30 +332,28 @@ const SKILLS_DATA: SkillCategory[] = [
       },
       {
         title: "GCP",
-        desc: "Deployed services on GCP in COMP 3512: Web II: Web Application Development.",
+        desc: "Utilized services on GCP in MKTG 3258: Evidence-Based Marketing.",
         imgSrc: "images/gcp.png",
-        education: "Mount Royal University",
-        courses: "COMP 3512: Web II",
+        education: "MKTG 3258: Evidence-Based Marketing",
       },
       {
         title: "Linux",
         desc: "Proficient in Linux after taking COMP 3532: System Administration at Mount Royal University.",
         imgSrc: "images/linux.webp",
-        education: "Mount Royal University",
-        courses: "COMP 3532: System Administration",
+        education: "COMP 3532: System Administration",
       },
          {
         title: "Network Administration",
         desc: "Proficient in network administration after taking COMP 3533: Network Infrastructure at Mount Royal University.",
         imgSrc: "images/network.png",
-        education: "COMP 3533: Network Infrastructure",
+        education: "COMP 3533: Network Infrastructure \n COMP 4635: Distributed Systems",
       },
       {
         title: "ServiceNow",
-        desc: "Managed tickets at United Farmers of Alberta as an End User Support Co-op student.",
+        desc: "Resolved over 1,000 tickets at United Farmers of Alberta as an End User Support Co-op student.",
         imgSrc: "images/snow.png",
         experience:
-          "End User Support Co-op at United Farmers of Alberta (Resolved 1,000+ Tickets)",
+          "End User Support Co-op at United Farmers of Alberta",
       },
         {
         title: "System Administration",
@@ -372,13 +363,13 @@ const SKILLS_DATA: SkillCategory[] = [
       },
       {
         title: "Technical Documentation",
-        desc: "Wrote technical documentation at United Farmers of Alberta as an End User Support Co-op student.",
+        desc: "Wrote technical documentation at United Farmers of Alberta and Enserva.",
         imgSrc: "../images/documentation.webp",
-        experience: "End User Support Co-op at United Farmers of Alberta",
+        experience: "End User Support Co-op at United Farmers of Alberta \n Business Analyst (Intern) at Enserva",
       },
       {
         title: "Troubleshooting",
-        desc: "Resolved over 1,000 tickets at United Farmers of Alberta as an End User Support Co-op student.",
+        desc: "Troubleshot issues at United Farmers of Alberta as an End User Support Co-op student.",
         imgSrc: "images/troubleshooting.png",
         experience: "End User Support Co-op at United Farmers of Alberta",
       },
@@ -392,8 +383,7 @@ const SKILLS_DATA: SkillCategory[] = [
         title: "Wireshark",
         desc: "Captured network traffic in COMP 3533: Network Infrastructure at Mount Royal University.",
         imgSrc: "images/wireshark.png",
-        education: "Mount Royal University",
-        courses: "COMP 3533: Network Infrastructure",
+        education: "COMP 3533: Network Infrastructure",
       },
     ],
   },
@@ -412,20 +402,20 @@ const SKILLS_DATA: SkillCategory[] = [
         imgSrc: "images/copilot.png",
         certifications:
           "Career Essentials in Cybersecurity by Microsoft and LinkedIn",
+        experience: "Business Analyst (Intern) at Enserva",
       },
       {
         title: "Microsoft Office",
         desc: "Proficient in Word, Excel, PowerPoint, and Outlook after working at United Farmers of Alberta and studying at Mount Royal University.",
         imgSrc: "images/office.png",
-        education: "Mount Royal University",
-        experience: "End User Support Co-op at United Farmers of Alberta",
+        education: "MGMT 3210: Business Communication \n GNED 1401: Writing for Academic Success \n COMP 4522: Database II: Advanced Database \n MKTG 3258: Evidence-Based Marketing",
+        experience: "End User Support Co-op at United Farmers of Alberta \n Business Analyst (Intern) at Enserva",
       },
       {
         title: "Microsoft Project",
         desc: "Utilized Microsoft Project in COMP 4543: Project Management & QA at Mount Royal University.",
         imgSrc: "images/microsoftproject.png",
-        education: "Mount Royal University",
-        courses: "COMP 4543: Project Management & QA",
+        education: "COMP 4543: Project Management & QA",
       },
       {
         title: "Microsoft System Center Configuration Manager",
@@ -435,9 +425,10 @@ const SKILLS_DATA: SkillCategory[] = [
       },
       {
         title: "Microsoft Teams",
-        desc: "Proficient in Microsoft Teams and Teams meetings rooms after working at United Farmers of Alberta.",
+        desc: "Proficient in Microsoft Teams and Teams meetings rooms after working at United Farmers of Alberta and Enserva.",
         imgSrc: "images/teams.png",
-        experience: "End User Support Co-op at United Farmers of Alberta",
+        experience: "End User Support Co-op at United Farmers of Alberta \n Business Analyst (Intern) at Enserva",
+        courses: "Modern Project Management in Microsoft 365 by LinkedIn \n Collaborating with Microsoft 365 by LinkedIn"
       },
       {
         title: "PowerShell",
@@ -455,54 +446,50 @@ const SKILLS_DATA: SkillCategory[] = [
         title: "Bubble",
         desc: "Created a site using Bubble for personal use.",
         imgSrc: "images/bubble.jpg",
-        experience: "Personal Web Development Portfolio Projects",
+        experience: "Personal Web Development",
       },
       {
         title: "CSS",
-        desc: "Styled responsive layouts and animations in COMP 2511: Web I at Mount Royal University.",
+        desc: "Styled responsive layouts and animations in COMP 2511: Web I and COMP 3512: Web II at Mount Royal University.",
         imgSrc: "images/css3.webp",
-        education: "Mount Royal University",
-        courses: "COMP 2511: Web I",
+        education: "COMP 2511: Web I: Client Development \n COMP 3512: Web II: Web Application Development",
       },
        {
         title: "DevOps",
-        desc: "Styled responsive layouts and animations in COMP 2511: Web I at Mount Royal University.",
+        desc: "Completed a course on DevOps foundations.",
         imgSrc: "images/devops.png",
-        courses: "DevOps Foundations",
+        courses: "DevOps Foundations by LinkedIn",
       },
       {
         title: "Figma",
         desc: "Designed prototypes in COMP 3553: Human-Computer Interaction.",
         imgSrc: "images/figma.png",
-        education: "Mount Royal University",
-        courses: "COMP 3553: Human-Computer Interaction",
+        education: "COMP 3553: Human-Computer Interaction",
       },
       {
         title: "Git",
         desc: "Managed version control using Git in multiple courses at Mount Royal University.",
         imgSrc: "images/git.png",
-        education: "Mount Royal University",
+        education: "COMP 1501: Programming I: Intro to Problem Solving \n COMP 2503: Programming III: Data Structures \n COMP 3512: Web II: Web Application Development",
       },
       {
         title: "HTML",
-        desc: "Built semantic HTML structures in COMP 2511: Web I at Mount Royal University.",
+        desc: "Built semantic HTML structures in COMP 2511: Web I and COMP 3512: Web II at Mount Royal University.",
         imgSrc: "images/html5.webp",
-        education: "Mount Royal University",
-        courses: "COMP 2511: Web I",
+        education: "COMP 2511: Web I: Client Development \n COMP 3512: Web II: Web Application Development",
       },
       {
         title: "Java",
-        desc: "Mastered Java object-oriented programming in COMP 1502: Programming II at Mount Royal University.",
+        desc: "Mastered Java object-oriented programming in COMP 1502: Programming II and COMP 2503: Programming III at Mount Royal University.",
         imgSrc: "images/java.png",
-        education: "Mount Royal University",
-        courses: "COMP 1502: Programming II",
+        education: "COMP 1502: Programming II: Object-Oriented Programming \n COMP 2503: Programming III: Data Structures",
       },
       {
         title: "JavaScript",
-        desc: "Implemented interactive features using JavaScript in COMP 2511: Web I at Mount Royal University.",
+        desc: "Implemented features using JavaScript in COMP 3512: Web II at Mount Royal University.",
         imgSrc: "images/javascript.webp",
-        education: "Mount Royal University",
-        courses: "COMP 2511: Web I",
+        education: "COMP 3512: Web II: Web Application Development",
+        certifications: "Become a Full-Stack Web Developer by LinkedIn",
       },
         {
         title: "Microservices",
@@ -512,56 +499,56 @@ const SKILLS_DATA: SkillCategory[] = [
       },
       {
         title: "NodeJS",
-        desc: "Built server-side applications in COMP 3512: Web II at Mount Royal University.",
+        desc: "Developed websites using Node.js for personal portfolio projects and learned Node.js through LinkedIn Learning training.",
         imgSrc: "images/nodejs.webp",
-        education: "Mount Royal University",
-        courses: "COMP 3512: Web II",
+        certifications: "Become a Full-Stack Web Developer by LinkedIn",
+        courses: "Node.js Essential Training by LinkedIn",
       },
 
       {
         title: "OOP",
-        desc: "Mastered object-oriented design in COMP 1502: Programming II at Mount Royal University.",
+        desc: "Mastered object-oriented design in COMP 1502: Programming II and COMP 2503: Programming III at Mount Royal University.",
         imgSrc: "images/oop.png",
-        education: "Mount Royal University",
-        courses: "COMP 1502: Programming II",
+        education: "COMP 1502: Programming II: Object-Oriented Programming \n COMP 2503: Programming III: Data Structures",
       },
       {
         title: "PHP",
-        desc: "Developed dynamic web pages in COMP 2511: Web I at Mount Royal University.",
+        desc: "Developed dynamic web pages in COMP 3512: Web II at Mount Royal University.",
         imgSrc: "images/php.png",
-        education: "Mount Royal University",
-        courses: "COMP 2511: Web I",
+        education: "COMP 3512: Web II: Web Application Development",
       },
       {
         title: "React",
-        desc: "Developed dynamic web pages in COMP 2511: Web I at Mount Royal University.",
+        desc: "Utilized React to create this site and learned about React through LinkedIn Learning training.",
         imgSrc: "images/react.webp",
-        courses: "COMP 2511: Web I",
+        courses: "React Essential Training by LinkedIn",
+        certifications: "Become a Full-Stack Web Developer by LinkedIn",
       },
        {
         title: "SASS",
-        desc: "Developed dynamic web pages in COMP 2511: Web I at Mount Royal University.",
+        desc: "Utilized SASS to create this site and learned about SASS through LinkedIn Learning training.",
         imgSrc: "images/sass.png",
-        courses: "COMP 2511: Web I",
+        certifications: "Become a Full-Stack Web Developer by LinkedIn",
+        courses: "SASS Essential Training by LinkedIn",
       },
       {
         title: "Tailwind CSS",
         desc: "Styled UIs using Tailwind in COMP 3512: Web II at Mount Royal University.",
         imgSrc: "images/tailwind.jpg",
-        education: "Mount Royal University",
-        courses: "COMP 3512: Web II",
+        education: "COMP 3512: Web II",
       },
        {
         title: "Typescript",
-        desc: "Developed dynamic web pages in COMP 2511: Web I at Mount Royal University.",
+        desc: "Utilized Typescript to create this site and learned about it through LinkedIn Learning training",
         imgSrc: "images/typescript.webp",
-        courses: "COMP 2511: Web I",
+        certifications: "Become a Full-Stack Web Developer by LinkedIn",
+        courses: "Typescript Essential Training by LinkedIn",
       },
       {
         title: "WordPress",
-        desc: "Created multiple WordPress sites for personal use.",
+        desc: "Created multiple sites for personal use and worked with WordPress and Elementor at Enserva.",
         imgSrc: "images/wordpress.png",
-        experience: "Personal Freelance Web Design Deployments",
+        experience: "Business Analyst (Intern) at Enserva",
       },
     ],
   },
@@ -569,12 +556,30 @@ const SKILLS_DATA: SkillCategory[] = [
   
 ];
 
+const createSkillId = (name: string) =>
+  name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 
 
 export const Skills: React.FC<SkillsProps> = ({ isHomePage = false }) => {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [activeSkill, setActiveSkill] = useState<Skill | null>(null);
+  const location = useLocation();
+  useEffect(() => {
+    if (location.hash) {
+      const targetId = location.hash.replace("#", "");
+      
+      // Small delay ensures DOM elements finish rendering before scrolling
+      const timer = setTimeout(() => {
+        const element = document.getElementById(targetId);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+      }, 150);
 
+      return () => clearTimeout(timer);
+    }
+  }, [location]);
+  
   const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
   };
@@ -607,7 +612,10 @@ export const Skills: React.FC<SkillsProps> = ({ isHomePage = false }) => {
   const hasResults = isHomePage ? homePageCategories.length > 0 : filteredCategories.length > 0;
 
   return (
-    <section id="skills" className="container">
+    <section 
+    id="skills" 
+    className={`container ${isHomePage ? "homepage-section" : ""}`}
+  >
       <h2>Skills</h2>
 
       {!isHomePage && (
@@ -616,7 +624,7 @@ export const Skills: React.FC<SkillsProps> = ({ isHomePage = false }) => {
             type="text"
             value={searchQuery}
             onChange={handleSearchChange}
-            placeholder="Search skills (Python, SQL, CSS, Project Management..."
+            placeholder="Search Skills (Python, SQL, CSS, Project Management..."
             aria-label="Search skills"
           />
           <span className="search-icon" role="img" aria-hidden="true">
@@ -636,6 +644,7 @@ export const Skills: React.FC<SkillsProps> = ({ isHomePage = false }) => {
                   {category.skills.map((skill) => (
                     <div
                       key={skill.title}
+                      id={createSkillId(skill.title)}
                       className="skill-card"
                       onClick={() => setActiveSkill(skill)}
                     >
@@ -666,6 +675,7 @@ export const Skills: React.FC<SkillsProps> = ({ isHomePage = false }) => {
                   {category.skills.map((skill) => (
                     <div
                       key={skill.title}
+                      id={createSkillId(skill.title)}
                       className="skill-card"
                       onClick={() => setActiveSkill(skill)}
                     >

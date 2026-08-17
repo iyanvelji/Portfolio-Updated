@@ -2,7 +2,11 @@
 $bg-translucent: rgba(6, 6, 6, 0.75);
 $text-light: #e6f1ff;
 $text-muted: #8a8a93;
-$accent-purple: rgb(89, 3, 113); // Updated variable name to match your theme color
+$accent-purple: rgb(
+  89,
+  3,
+  113
+); // Updated variable name to match your theme color
 $font-sans: "Space Grotesk", sans-serif;
 
 .navbar {
@@ -16,13 +20,15 @@ $font-sans: "Space Grotesk", sans-serif;
   -webkit-backdrop-filter: blur(12px);
   font-family: $font-sans;
 
-  // PREMIUM PURPLE NEON GLOW 
+  // PREMIUM PURPLE NEON GLOW
   // Uses multi-layered box-shadows to create a soft, high-end ambient bloom instead of a harsh line
-  border-bottom: 1px solid rgba($accent-purple, 0.3); 
-  box-shadow: 
-    0 4px 20px rgba($accent-purple, 0.15),   // Soft widespread under-glow
-    0 10px 40px rgba($accent-purple, 0.1),   // Deep ambient room bloom
-    0 1px 0px rgba($accent-purple, 0.4);     // Sharp neon bottom core line
+  border-bottom: 1px solid rgba($accent-purple, 0.3);
+  box-shadow:
+    0 4px 20px rgba($accent-purple, 0.15),
+    // Soft widespread under-glow
+    0 10px 40px rgba($accent-purple, 0.1),
+    // Deep ambient room bloom
+    0 1px 0px rgba($accent-purple, 0.4); // Sharp neon bottom core line
 
   .nav-container {
     max-width: 1200px;
@@ -31,19 +37,20 @@ $font-sans: "Space Grotesk", sans-serif;
     display: flex;
     justify-content: center; // Keeps links dead-centered
     align-items: center;
-    position: relative;      // Establishes tracking context for absolute logo positioning
+    position: relative; // Establishes tracking context for absolute logo positioning
     height: 70px;
     box-sizing: border-box;
   }
 
   .nav-logo {
-    position: absolute;      // Pulls logo out of the flex flow so center positioning stays perfect
+    position: static; // Pulls logo out of the flex flow so center positioning stays perfect
     left: 2rem;
     font-size: 1.5rem;
     font-weight: 700;
     color: $text-light;
     text-decoration: none;
     letter-spacing: -0.02em;
+    z-index: 1015;
 
     span {
       color: $accent-purple;
@@ -103,7 +110,7 @@ $font-sans: "Space Grotesk", sans-serif;
     border: none;
     cursor: pointer;
     padding: 0.5rem;
-    z-index: 1010;
+    z-index: 1015;
 
     .bar {
       display: block;
@@ -157,15 +164,22 @@ $font-sans: "Space Grotesk", sans-serif;
       backdrop-filter: blur(20px);
       width: 100%;
       height: 100vh;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
-      gap: 3rem;
-      
+      gap: 1.35rem;
+      z-index: 1005;
+
       // Hidden state parameters
       opacity: 0;
       transform: translateY(-100%);
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+      transition:
+        transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity 0.3s ease;
       pointer-events: none;
+
+      padding: 6.5rem 2rem 3rem 2rem; /* Pushes the first link safely below your navbar header */
+      overflow-y: auto; /* Enables vertical scrolling if the phone screen is short */
+      box-sizing: border-box;
 
       &.is-active {
         opacity: 1;
@@ -174,13 +188,13 @@ $font-sans: "Space Grotesk", sans-serif;
       }
 
       a {
-        font-size: 1.5rem; 
+        font-size: 1.5rem;
         color: $text-light;
 
         &::after {
-          display: none; 
+          display: none;
         }
-        
+
         &:hover {
           color: $accent-purple;
           text-shadow: 0 0 12px rgba($accent-purple, 0.8);

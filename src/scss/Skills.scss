@@ -6,7 +6,14 @@ $text-muted: #8a8a93;
 $transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 
 #skills {
-  padding: 4rem 0;
+padding: 4rem 1.25rem 1.5rem 1.25rem;
+  &.homepage-section,
+  &.is-home-page {
+    padding-top: 4rem !important;
+    padding-bottom: 0rem !important;
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+  }
 
   h2 {
     margin-bottom: 2rem;
@@ -101,8 +108,7 @@ $transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   }
 
   @media (max-width: 768px) {
-    // 2. MOBILE LOGIC (Strictly 2 items per row)
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
     gap: 1rem;
   }
 }
@@ -112,7 +118,7 @@ $transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   background-color: rgba($bg-dark-surface, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.03);
   border-radius: 10px;
-  padding: 1.5rem 1rem;
+  padding: 1.5rem 0.75rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -275,8 +281,9 @@ $transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     p {
       font-size: 0.95rem;
       color: $text-light;
-      line-height: 1.4;
+      line-height: 2;
       margin: 0;
+      white-space: pre-line;
     }
   }
 }
@@ -314,7 +321,10 @@ $transition-fancy: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   padding: 4rem 0;
 
   h2 {
+     font-size: clamp(2.25rem, 5vw, 3.5rem);
     margin-bottom: 2rem;
+        letter-spacing: 0.08em;
+
   }
 }
 
@@ -481,7 +491,7 @@ $transition-fancy: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 // ==========================================================================
 .home-preview-group {
   max-width: 900px;
-  margin: 0 auto 3rem auto; // Centers the box and adds clean spacing below each category section
+  margin: 0 auto 1.5rem auto; // Centers the box and adds clean spacing below each category section
 
   .group-title {
     text-align: left;
@@ -493,6 +503,11 @@ $transition-fancy: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 .home-preview-grid {
   max-width: 900px;
   margin: 0 auto;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.85rem;
+  }
 }
 
 .skills-see-more-container {
@@ -544,5 +559,47 @@ $transition-fancy: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 
   &:active {
     transform: translateY(0) scale(0.97);
+  }
+}
+
+@media (max-width: 600px) {
+  #skills {
+    padding: 2.5rem 1.25rem 1.5rem 1.25rem;
+  }
+
+  .skills-search-container {
+    max-width: 100%; // Expands search bar to fill padded viewport on mobile
+    margin-bottom: 2rem;
+  }
+
+  .group-title {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+}
+
+// ==========================================================================
+// MEDIUM / TABLET VIEWPORT RESPONSIVE FIX (601px - 1024px)
+// ==========================================================================
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  #skills {
+    padding: 3.5rem 2rem 1.5rem 2rem; // Prevents titles from touching tablet screen edges
+    box-sizing: border-box;
+  }
+
+  .skills-search-container {
+    max-width: 90%; // Keeps the search bar balanced across mid-sized displays
+    margin-bottom: 2.5rem;
+  }
+
+  .group-title {
+    font-size: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr); // Clean 2-column card layout on medium viewports
+    gap: 1.25rem;
   }
 }

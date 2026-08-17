@@ -44,7 +44,7 @@ $grid-gap: 8px;
 .glitch-title {
   width: 100%;
   text-align: center;     // 🎯 THE FIX: Centers the header text
-  margin-bottom: 6rem;
+  margin-bottom: 2rem;
      font-size: clamp(2.25rem, 5vw, 3.5rem);
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -457,11 +457,26 @@ $card-border-tint: rgba(209, 17, 119, 0.14);
     margin: 0 0 0.25rem 0;
     letter-spacing: 0.2px;
     
-    // Smooth energetic fuchsia color gradient mapping
-    background: linear-gradient(135deg, #fff 15%, $mru-identity-fuchsia 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+   display: inline-block; /* Ensures the gradient background behaves correctly with text width */
+  
+  // Clones the exact multi-stop gradient layout, swapping the accent color for your MRU fuchsia
+  background: linear-gradient(
+    120deg,
+    #ffffff 0%,
+    #f4d5fe 30%,
+    $mru-identity-fuchsia 50%,
+    #f4d5fe 70%,
+    #ffffff 100%
+  );
+  background-size: 200% auto;
+  
+  // Text masking layers to clip the background color to the letters
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+
+  // Reuses your existing global keyframe loop
+  animation: shimmerFlow 6s linear infinite;
   }
 
   .degree-text {
@@ -501,23 +516,128 @@ $card-border-tint: rgba(209, 17, 119, 0.14);
   }
 }
 
+@keyframes shimmerFlow {
+  0% {
+    background-position: 100% center;  /* Aligns gold precisely with the first letter */
+  }
+  100% {
+    background-position: -100% center; /* Sweeps all the way to the end */
+  }
+}
+
+    .mru-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Forces all elements to line up perfectly on the left edge */
+  justify-content: center;
+  gap: 0.5rem;             /* Generates clean, uniform spacing between the title, degree, and date */
+
+  .university-title,
+  .degree-text {
+    margin: 0;             /* Wipes out native browser margins that cause misalignment */
+    text-align: left;      /* Ensures text alignment is consistent */
+  }
+
+        .university-title { font-size: 1.4rem; }
+
+
+  .degree-text {
+    
+    color: $text-dim-purple; /* Keeps your existing premium color tokens */
+    font-size: 1rem;      /* Adjust size slightly if needed to balance the layout */
+  }
+}
+  
+
 // Clean Breakpoint Wrapping Matrix Controls
 @media (max-width: 600px) {
+  .cluster-theme-computing {
+    .cube-cluster-matrix{
+             transform-origin: center center;
+        margin-bottom: 40px;
+    }
+    .viewport-3d {
+      height: 320px; // Compacts height for the smaller matrix size
+    }
+  }
+
+  .cyber-edu-container {
+    padding: 2rem 0.75rem;
+  }
+
+  .glitch-title,
+  .glitch-title2 {
+    font-size: clamp(1.6rem, 7vw, 2.2rem);
+    letter-spacing: 1.5px;
+    margin-bottom: 1.5rem;
+  }
+
   .edu-hero-card {
     flex-direction: column;
     text-align: center;
-    padding: 2rem 1.5rem;
-    gap: 1.5rem;
+    padding: 1.75rem 1.25rem;
+    gap: 1.25rem;
   }
-  
+
   .mru-meta {
     align-items: center;
-    
-    .university-title { font-size: 1.4rem; }
-    .degree-text { font-size: 1rem; margin-bottom: 1rem; }
+    text-align: center;
+
+    .university-title {
+      font-size: 1.3rem;
+      text-align: center;
+    }
+
+    .degree-text {
+      color: $text-dim-purple;
+      font-size: 0.95rem;
+      text-align: center;
+    }
   }
 
   .date-wrapper {
     justify-content: center;
+  }
+
+  // 🎯 3D VIEWPORT & CUBE CENTERING FIX
+  .viewport-3d {
+    height: 380px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+    overflow: visible;
+  }
+
+  .cube-cluster-matrix {
+    transform-origin: 68% 40%;
+    // Scales down uniformly to keep isometric projection within screen bounds
+    transform: scale(0.8) rotateX(54deg) rotateZ(-42deg);
+
+    &:hover {
+      transform: scale(0.8) rotateX(50deg) rotateZ(-36deg);
+    }
+  }
+}
+
+// Extra narrow viewports (e.g. iPhone SE, 375px & below)
+@media (max-width: 400px) {
+  .viewport-3d {
+    height: 320px;
+  }
+
+  .cluster-theme-computing {
+   
+    .cube-cluster-matrix {
+       transform-origin: center center;
+    transform: scale(0.65) rotateX(54deg) rotateZ(-42deg);
+    }
+  }
+    
+  .cube-cluster-matrix {
+    transform: scale(0.65) rotateX(54deg) rotateZ(-42deg);
+
+    &:hover {
+      transform: scale(0.65) rotateX(50deg) rotateZ(-36deg);
+    }
   }
 }

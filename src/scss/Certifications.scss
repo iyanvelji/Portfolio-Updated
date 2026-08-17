@@ -9,7 +9,8 @@ $font-sans:
   Roboto,
   sans-serif;
 $font-mono: "Fira Code", monospace;
-
+$text-light: #ffffff;
+$accent-purple: rgb(89, 3, 113);
 $accent-primary: rgb(89, 3, 113);
 $accent-light: #bc3bf0; // Brightened up for intense neon emission
 $accent-neon: #df70ff; // Core highlight glow color
@@ -33,11 +34,28 @@ $transition-smooth: all 0.4s cubic-bezier(0.15, 0.85, 0.35, 1);
   position: relative;
   width: 100%;
   min-height: 100vh;
-  background-color: $bg-dark-pure;
+  background-color: #000000;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  &.homepage-section {
+    min-height: auto !important;
+    padding: 4rem 0 0.5rem 0;
+    background: #000000 !important;
+    background-color: #000000 !important;
+    background-image: none !important;
+
+    .timeline-content-inner {
+      padding: 0rem 2rem; // Reduced inner padding (was 5rem 2rem)
+    }
+
+    .cyber-grid-overlay,
+    .ambient-glow-core {
+      display: none !important;
+    }
+  }
 }
 
 // Tech Layer 1: Digital Laser Grid Blueprint
@@ -86,12 +104,13 @@ $transition-smooth: all 0.4s cubic-bezier(0.15, 0.85, 0.35, 1);
 // ==========================================================================
 
 .timeline-header {
-  margin-bottom: 4rem;
   text-align: center;
   width: 100%;
 
   h2 {
-    font-size: clamp(2.25rem, 5vw, 3.5rem);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    margin-bottom: 2rem;
+
     text-transform: uppercase;
     letter-spacing: 0.08em;
     font-weight: 900;
@@ -106,6 +125,69 @@ $transition-smooth: all 0.4s cubic-bezier(0.15, 0.85, 0.35, 1);
 
     border: none;
     padding-left: 0;
+  }
+
+  .search-container {
+    position: relative;
+    max-width: 80%;
+    margin: 0 auto 3rem auto;
+
+    .search-input {
+      width: 100%;
+      padding: 0.9rem 1.2rem 0.9rem 3rem; // Left padding leaves room for the search icon
+      background-color: $bg-dark-surface;
+      border: 1px solid rgba($accent-purple, 0.2);
+      border-radius: 8px;
+      color: $text-light;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: $transition-smooth;
+
+      &:focus {
+        outline: none;
+        border-color: rgba($accent-purple, 0.8);
+        box-shadow: 0 0 15px rgba($accent-purple, 0.25);
+      }
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 0.9rem;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+
+      img {
+        width: 20px;
+        height: 20px;
+        object-fit: contain;
+        opacity: 0.4;
+        filter: brightness(0) invert(1);
+        transition: opacity 0.25s ease;
+      }
+    }
+
+    .search-clear-btn {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: $text-light;
+      opacity: 0.6;
+      cursor: pointer;
+      font-size: 1rem;
+      padding: 0.2rem 0.5rem;
+      transition: opacity 0.2s ease;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
   }
 }
 
@@ -220,8 +302,6 @@ $transition-smooth: all 0.4s cubic-bezier(0.15, 0.85, 0.35, 1);
         width: 100%;
         height: 100%;
         object-fit: contain; // Prevents squaring math from squeezing or stretching the asset
-
-        
       }
     }
 
@@ -346,6 +426,99 @@ $transition-smooth: all 0.4s cubic-bezier(0.15, 0.85, 0.35, 1);
         color: #ffffff;
         transform: translate(2px, -2px);
       }
+    }
+  }
+}
+
+// See More Button Styles
+.see-more-container {
+  margin-top: 3.5rem;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.see-more-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 2.25rem;
+  font-family: $font-sans;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+  text-decoration: none;
+  background-color: rgba($bg-dark-surface, 0.85);
+  border: 1px solid rgba($accent-light, 0.4);
+  border-radius: 50px;
+  backdrop-filter: blur(8px);
+  transition: $transition-smooth;
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.6),
+    0 0 20px rgba($accent-primary, 0.35);
+
+  .see-more-arrow {
+    width: 20px;
+    height: 20px;
+    color: $accent-neon;
+    transition:
+      transform 0.35s cubic-bezier(0.15, 0.85, 0.35, 1),
+      color 0.35s ease;
+  }
+
+  &:hover {
+    background-color: rgba($bg-dark-elevated, 0.95);
+    border-color: rgba($accent-neon, 0.9);
+    transform: translateY(-3px);
+    box-shadow:
+      0 12px 35px rgba(0, 0, 0, 0.8),
+      0 0 30px rgba($accent-light, 0.6),
+      inset 0 0 15px rgba($accent-neon, 0.25);
+
+    .see-more-arrow {
+      color: #ffffff;
+      transform: translateX(6px);
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  // Reduces section and card padding to gain horizontal space
+  .timeline-content-inner {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .timeline-panel-card {
+    padding: 1.25rem;
+  }
+}
+
+@media (max-width: 540px) {
+  // Stacks header elements and prevents text overflow
+  .timeline-panel-card {
+    .panel-top-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .issuer-branding {
+      min-width: 0;
+
+      .issuer-meta {
+        min-width: 0;
+
+        h3 {
+          word-break: break-word;
+        }
+      }
+    }
+
+    .credential-indicator {
+      flex-shrink: 0;
     }
   }
 }

@@ -42,7 +42,7 @@ $font-mono: "Fira Code", monospace;
     //   word-break: keep-all;
       font-family: $font-display;
       font-size: clamp(
-        7rem,
+        5rem,
         9vw,
         15rem
       ); // Re-added responsive sizing so it fits the screen

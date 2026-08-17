@@ -1,7 +1,7 @@
 // Linked Palette System
 $accent-purple: rgb(89, 3, 113);
 $accent-neon-violet: #8a2be2;
-$accent-glow-magenta: #da70d6;
+$accent-glow-magenta: hsl(302, 59%, 65%);
 $accent-vivid-purple: #c084fc;
 $bg-dark-surface: #0e0814;
 $bg-card-high-contrast: #060309;
@@ -12,12 +12,20 @@ $transition-fancy: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 
 .projects-viewport-wrapper {
   width: 100%;
-  background-color: $bg-dark-surface;
+  background-color: #000000;
   padding: 6rem 0 0 0;
   display: flex;
+  margin-bottom: 0;
   flex-direction: column;
   align-items: center;
   overflow: hidden;
+
+  &.is-home-page,
+  &.homepage-section {
+    padding-top: 4rem !important; // Sets exactly 3rem top spacing
+    padding-bottom: 0rem;
+  }
+  
 }
 
 // ==========================================================================
@@ -26,14 +34,14 @@ $transition-fancy: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 .projects-page-header {
   width: 100%;
   max-width: 1200px;
-  padding: 0 2rem 4rem 2rem;
+  margin-bottom: 2rem;
   align-self: center;
 
   .projects-main-title {
-    font-size: clamp(2.2rem, 5vw, 3rem);
+    font-size: clamp(2.25rem, 5vw, 3.5rem);
     font-weight: 800;
     color: $text-light;
-    letter-spacing: -0.02em;
+    letter-spacing: 0.08em;
     margin: 0;
     text-transform: uppercase;
   }
@@ -74,7 +82,8 @@ $transition-fancy: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     background-position: center;
     background-repeat: no-repeat;
     z-index: 1;
-    
+    filter: brightness(0.2) contrast(1.1) saturate(0.6);
+  transition: filter 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     // Hardware acceleration optimization tags to prevent screen-tearing/jank
     will-change: transform;
     transform-style: preserve-3d;
@@ -112,6 +121,14 @@ $transition-fancy: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     justify-content: flex-start;
   }
 
+  // Hover state control
+.parallax-project-row:hover {
+  .parallax-bg-image {
+    // Only brightens to 35% on hover to keep foreground text easily legible
+    filter: brightness(0.35) contrast(1.15) saturate(0.85);
+  }
+}
+
   // ==========================================================================
   // HIGH-LUMINANCE PURPLE CONSOLE BOX
   // ==========================================================================
@@ -119,7 +136,7 @@ $transition-fancy: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     position: relative;
     width: 100%;
     max-width: 460px;
-    background: rgba($bg-card-high-contrast, 0.82);
+    background: rgba($bg-card-high-contrast, 0.95);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     
@@ -259,4 +276,62 @@ $transition-fancy: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 @keyframes laserSweep {
   0% { transform: translateY(-100%); }
   100% { transform: translateY(100%); }
+}
+
+// Pure black override for homepage
+.projects-viewport-wrapper.is-home-page {
+  background-color: #000000;
+}
+
+// ==========================================================================
+// "SEE MORE" PILL BUTTON
+// ==========================================================================
+.see-more-container {
+  margin-top: 3.5rem;
+  padding-bottom: 0;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+  z-index: 5;
+}
+
+.see-more-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+  padding: 0.9rem 2.8rem;
+  font-size: 0.95rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #06020a;
+  border: 1.5px solid rgba($accent-neon-violet, 0.7);
+  border-radius: 9999px;
+  transition: $transition-fancy;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+
+  .see-more-arrow {
+    width: 20px;
+    height: 20px;
+    color: $accent-glow-magenta;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), color 0.35s ease;
+  }
+
+  &:hover {
+    background-color: #0e0417;
+    border-color: $accent-glow-magenta;
+    transform: translateY(-2px);
+    box-shadow: 
+      0 8px 30px rgba(0, 0, 0, 0.8),
+      0 0 25px rgba($accent-neon-violet, 0.5);
+
+    .see-more-arrow {
+      color: #ffffff;
+      transform: translateX(5px);
+    }
+  }
 }

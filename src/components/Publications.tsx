@@ -7,6 +7,11 @@ interface Publication {
   link: string;
 }
 
+// 1. Add Props Interface
+interface PublicationsProps {
+  isHomePage?: boolean;
+}
+
 const PUBLICATIONS_DATA: Publication[] = [
   {
     id: 1,
@@ -20,22 +25,21 @@ const PUBLICATIONS_DATA: Publication[] = [
   },
 ];
 
-const Publications: React.FC = () => {
+// 2. Accept prop & conditionally append class name
+const Publications: React.FC<PublicationsProps> = ({ isHomePage }) => {
   return (
-    <div className="publications-viewport-wrapper">
+    <div className={`publications-viewport-wrapper ${isHomePage ? "homepage-section" : ""}`}>
       <main className="publications-main-container">
         <h2>Publications</h2>
 
         <div className="publications-side-grid">
           {PUBLICATIONS_DATA.map((pub) => (
             <article key={pub.id} className="premium-pub-card">
-              
               <div className="card-texture-overlay" />
               <div className="card-neon-core-glow" />
               <div className="card-interactive-pulse" />
               
               <div className="pub-card-inner-frame">
-                {/* RESTORED: Original CSS Copy-emulated Logo Header Structure 👇 */}
                 <div className="logo-emulation-header">
                   <span className="logo-the">the</span>
                   <span className="logo-reflector">reflector</span>
@@ -68,8 +72,6 @@ const Publications: React.FC = () => {
           ))}
         </div>
       </main>
-
-  
     </div>
   );
 };

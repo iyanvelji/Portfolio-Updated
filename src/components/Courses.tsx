@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo, type ChangeEvent } from "react";
 import "../scss/Courses.scss";
 
 interface Course {
@@ -12,490 +12,450 @@ interface Course {
 const COURSES_DATA: Course[] = [
   {
     id: 1,
-    title: "Job Skills: Supply Chain and Operations",
+    title: "R Code Challenges: Data Science",
     issuer: "LinkedIn",
-    date: "Jun 2026",
-    description: "Explored foundational logistics, material management strategy, and operational workflows required to build resilient end-to-end global distribution frameworks."
+    date: "Jul 2026",
+    description: "Short, bite-sized challenges you can use to practice R programming."
   },
   {
     id: 2,
-    title: "Careers in Supply Chain and Operations",
+    title: "Data Wrangling in R",
     issuer: "LinkedIn",
-    date: "Jun 2026",
-    description: "Analyzed corporate career pathways within global logistics ecosystems, procurement optimization, and lean manufacturing process mapping."
+    date: "Jul 2026",
+    description: "Learn about the principles of tidy data, discover how to create and manipulate data tibbles, and find out how to use the tibbles in importing, transforming, and cleaning your data. Uses R and the tidyverse packages to teach the concept of data wrangling."
   },
   {
     id: 3,
-    title: "Tableau Essential Training",
+    title: "R for Data Science: Analysis and Visualization",
     issuer: "LinkedIn",
-    date: "Jun 2026",
-    description: "Mastered data visualization pipelines, interactive dashboard architectures, calculated fields, and advanced analytical worksheets within the Tableau architecture."
+    date: "Jul 2026",
+    description: "The lessons explain how to get started with R, including installing R, RStudio, and code packages that extend R’s power. You also see first-hand how to use R and RStudio for beginner-level data modeling, visualization, and statistical analysis."
   },
   {
     id: 4,
-    title: "Sass Essential Training",
+    title: "Complete Guide to R: Wrangling, Visualizing, and Modeling Data",
     issuer: "LinkedIn",
-    date: "Jun 2026",
-    description: "Deep dive into CSS preprocessing workflows focusing on programmatic mixins, architectural inheritance patterns, map variables, and optimized nesting compilation systems."
+    date: "Jul 2026",
+    description: "A thorough introduction to R, with detailed instruction for installing and navigating R and RStudio and hands-on examples, from exploratory graphics to neural networks."
   },
   {
     id: 5,
-    title: "Career Essentials in Business Analysis by Microsoft and LinkedIn",
-    issuer: "Microsoft",
-    date: "Jun 2026",
-    description: "An elite credential combining core enterprise modeling concepts, stakeholder communication planning, software development lifecycles, and modern system mapping."
+    title: "Introduction to Data Science",
+    issuer: "LinkedIn",
+    date: "Jul 2026",
+    description: "What data science is and how it differs from other common data-related careers. Discover some of the most important tools used in the trade to develop your understanding of data libraries and data manipulation."
   },
   {
     id: 6,
-    title: "Skills for Change AI Training",
-    issuer: "Calgary Economic Development",
-    date: "Jun 2026",
-    description: "Specialized deep-dive into regional technology alignment focusing on prompt engineering frameworks, automated workflows, and corporate implementations of agentic AI systems."
+    title: "Supply Chain Foundations: Managing the Process",
+    issuer: "LinkedIn",
+    date: "Jul 2026",
+    description: "How to differentiate between the two leading supply chain models, the importance of process integration throughout the supply chain, the necessity for collaboration and partnership within the supply chain, and more."
   },
   {
     id: 7,
-    title: "Managing Data with Microsoft 365",
+    title: "Power BI Essential Training",
     issuer: "LinkedIn",
-    date: "Jun 2026",
-    description: "Focused on cloud data schemas, governance protocols, secure cross-platform data handling, and automated lifecycle policies inside the Microsoft 365 tenant infrastructure."
+    date: "Jul 2026",
+    description: "Examining the Power BI service, explaining how to import data, create visualizations, arrange those visualizations into reports, and use Copilot to build datasets and reports."
   },
   {
     id: 8,
-    title: "Business Analysis Foundations: Business Process Modeling",
+    title: "Job Skills: Supply Chain and Operations",
     issuer: "LinkedIn",
     date: "Jun 2026",
-    description: "Advanced methodology for engineering precise current-state and future-state workflow maps using standardized BPMN symbols and system gap tracking paradigms."
+    description: "How to communicate effectively with suppliers, customers, and colleagues, as well as how to manage inventory and forecast demand."
   },
   {
     id: 9,
-    title: "React Foundations by Pearson",
+    title: "Careers in Supply Chain and Operations",
     issuer: "LinkedIn",
     date: "Jun 2026",
-    description: "Comprehensive core JavaScript execution layer modeling inside declarative component architectures, virtual DOM reconciliation, and unidirectional state flows."
+    description: "Understand the roles, skills, and networking opportunities available, so you can get a job and prepare for a future in supply chain."
   },
   {
     id: 10,
-    title: "Zendesk Customer Service Professional Certificate",
-    issuer: "Zendesk",
+    title: "Tableau Essential Training",
+    issuer: "LinkedIn",
     date: "Jun 2026",
-    description: "Enterprise service desk blueprint mastery covering ticket channel optimization, triggers, custom automation flows, macro libraries, and global service SLA enforcement metrics."
+    description: "Create informative and attractive Tableau dashboards that promote greater engagement from stakeholders."
   },
   {
     id: 11,
-    title: "Creating Positive Conversations with Challenging Customers",
+    title: "Sass Essential Training",
     issuer: "LinkedIn",
     date: "Jun 2026",
-    description: "Applied psychological frameworks and corporate communication tactics optimized to diffuse systemic friction points and pivot encounters toward successful business resolutions."
+    description: "The best way to install Sass and work with its main features: variables, nesting, partials, and mixins. Plus, learn how to use SassScript to create complex functions from Sass lists and control statements."
   },
   {
     id: 12,
-    title: "Customer Service: Handling Abusive Customers",
+    title: "Managing Data with Microsoft 365",
     issuer: "LinkedIn",
     date: "Jun 2026",
-    description: "Corporate escalation procedure mapping and conversational boundary strategies built to manage hostile communication channels while enforcing platform policy security."
+    description: "How to use the Microsoft 365 suite to manage your data more effectively. Covers Forms, Power Automate, Excel, and PowerBI."
   },
   {
     id: 13,
-    title: "Serving Customers Using Social Media",
+    title: "Business Analysis Foundations: Business Process Modeling",
     issuer: "LinkedIn",
     date: "Jun 2026",
-    description: "Omnichannel customer resolution tracking across open digital platforms, optimizing for real-time response metrics, brand preservation, and structured public escalation containment."
+    description: "The most widely used business process modeling diagrams—context, functional flow, cross-functional flow, and flowchart—and the purpose of each one."
   },
   {
     id: 14,
-    title: "Customer Service Foundations",
+    title: "Creating Positive Conversations with Challenging Customers",
     issuer: "LinkedIn",
     date: "Jun 2026",
-    description: "Core tenets of cross-functional client alignment, relationship lifecycle retention modeling, dynamic listening metrics, and high-frequency issue isolation patterns."
+    description: "Approaches that can help you reframe conversations and use your words and actions to put a positive slant on an otherwise negative situation."
   },
   {
     id: 15,
-    title: "Modern Project Management in Microsoft 365",
+    title: "Customer Service: Handling Abusive Customers",
     issuer: "LinkedIn",
     date: "Jun 2026",
-    description: "Streamlining agile structures using Planner, Project, and loop components to coordinate resource allocations, project baselines, and team telemetry charts."
+    description: "The skills you need to formulate an action plan and navigate difficult customer service interactions with poise and professionalism."
   },
   {
     id: 16,
-    title: "Business Analysis: Essential Tools and Techniques",
+    title: "Serving Customers Using Social Media",
     issuer: "LinkedIn",
     date: "Jun 2026",
-    description: "Technical tool suite walkthrough covering requirement matrix prioritization tables, stakeholder RACI maps, SWAT analysis, and system requirement documents (FRD/BRD)."
+    description: "Examine real-world tweets, Facebook posts, ratings, and reviews to see what happens when skillful customer service reps talk down angry customers and even trolls."
   },
   {
     id: 17,
-    title: "Become a Full-Stack Web Developer",
+    title: "Customer Service Foundations",
     issuer: "LinkedIn",
     date: "Jun 2026",
-    description: "An intensive developmental roadmap spanning front-end rendering engines, application logic structures, back-end servers, and transactional persistent data layers."
+    description: "Learn how to build winning relationships, provide the right assistance at the right times, and effectively handle angry customers."
   },
   {
     id: 18,
-    title: "Learning REST APIs",
+    title: "Modern Project Management in Microsoft 365",
     issuer: "LinkedIn",
     date: "Jun 2026",
-    description: "Architectural blueprint parsing of HTTP request/response lifecycles, stateless verbs, contract design formatting, error code protocols, and secure endpoint communication rules."
+    description: "Learn about the Microsoft 365 tools and services—including Outlook, Planner, Teams, and more—that can help you manage your projects more efficiently."
   },
   {
     id: 19,
-    title: "Git Essential Training",
+    title: "Business Analysis: Essential Tools and Techniques",
     issuer: "LinkedIn",
     date: "Jun 2026",
-    description: "Distributed version control system mastery mapping out index tracking states, branch isolation structures, merge resolution algorithms, and rebasing techniques."
+    description: "This technology-agnostic course employs different tools to show you how to set up and deliver key business analysis artifacts."
   },
   {
     id: 20,
-    title: "HTML Essential Training",
+    title: "Learning REST APIs",
     issuer: "LinkedIn",
     date: "Jun 2026",
-    description: "Semantic DOM structural validation patterns, accessible node markup formatting (ARIA), layout micro-scaffolding, and document standard structures."
+    description: "Review how HTTP and REST APIs relate, explore the six constraints of REST, and learn about HTTP status messages. Learn how to get started with consuming REST APIs to incorporate them into data-driven applications."
   },
   {
     id: 21,
-    title: "Generative AI for Business Analysts",
+    title: "Git Essential Training",
     issuer: "LinkedIn",
     date: "Jun 2026",
-    description: "Integrating Large Language Models into systemic analysis pipelines to automate data collection, synthesis, user persona modeling, and synthetic user test generation."
+    description: "Find out why people use Git. Learn how Git works, locally or through a provider, and how you can get it installed, configured, and running the way you need it to work. Follow the full process of pushing your code with Git, then explore ways to make changes to files."
   },
   {
     id: 22,
-    title: "The Role of Business Analysis in Data Analytics",
+    title: "HTML Essential Training",
     issuer: "LinkedIn",
     date: "Jun 2026",
-    description: "Bridging corporate insight voids by aligning structured data warehousing queries with executable operational strategies, predictive trends, and corporate logic systems."
+    description: "The fundamental concepts and skills you need to know to start writing HTML, including terminology, syntax, how to create a document structure, and more."
   },
   {
     id: 23,
-    title: "TypeScript Essential Training",
+    title: "Generative AI for Business Analysts",
     issuer: "LinkedIn",
     date: "Jun 2026",
-    description: "Statically typed JavaScript engine optimization covering structural interfaces, abstract classes, generic declarations, type assertion rules, and automated compiler safety checks."
+    description: "Learn about generative AI's role in business analysis and how it can enhance your work—and navigate your own change curve to adoption."
   },
   {
     id: 24,
-    title: "SQL Essential Training",
+    title: "The Role of Business Analysis in Data Analytics",
     issuer: "LinkedIn",
     date: "Jun 2026",
-    description: "Relational database indexing logic optimization covering complex multitable JOIN engines, subquery aggregations, mathematical data mutations, and strict schema query patterns."
+    description: "Explore the five core steps of analytics: formulating research questions, sourcing data, analyzing and interpreting data, and integrating insights into decision-making. Prepare for real-world scenarios as you dive into strategic applications, best practices, and common challenges in the field."
   },
   {
     id: 25,
-    title: "Customer Service: Problem-Solving and Troubleshooting",
+    title: "TypeScript Essential Training",
     issuer: "LinkedIn",
     date: "Jun 2026",
-    description: "Root-cause diagnostics mapping using logic tree frameworks to efficiently deconstruct and patch infrastructure errors and software workflow anomalies reported by clients."
+    description: "How to leverage the full power of the TypeScript language in your JavaScript applications."
   },
   {
     id: 26,
-    title: "Agentic AI for Business Analysis",
+    title: "SQL Essential Training",
     issuer: "LinkedIn",
     date: "Jun 2026",
-    description: "Designing autonomous multi-agent systems via programmatic tool integration to independently scrape documentation, perform market mapping, and compile business strategy templates."
+    description: "The basic structure of databases—what they are, how they work, and how to successfully navigate them; how to use SQL to retrieve and understand data no matter the scale of a database; and how to master the most important SQL query syntax, along with how and when to use it best."
   },
   {
     id: 27,
-    title: "NoSQL Essential Training",
+    title: "Customer Service: Problem-Solving and Troubleshooting",
     issuer: "LinkedIn",
     date: "Jun 2026",
-    description: "Non-relational data clustering mechanisms specializing in schema-less document object models, high-frequency key-value collections, and scalable horizontally cluster distribution configurations."
+    description: "Learn critical problem-solving and troubleshooting processes for common sense customer service in a wide variety of applications."
   },
   {
     id: 28,
-    title: "Introduction to Business Analysis",
+    title: "Agentic AI for Business Analysis",
     issuer: "LinkedIn",
     date: "Jun 2026",
-    description: "Foundational breakdown of the core Business Analysis Body of Knowledge (BABOK), requirement gathering frameworks, and corporate scope definition protocols."
+    description: "Discover how AI can revolutionize enterprise systems, customer experiences, and processes, while understanding the risks and requirements for responsible implementation. Dive into robotic process automation (RPA), AI automation, the evolution of agentic AI, and the importance of human oversight and business analysis."
   },
   {
     id: 29,
-    title: "Learning ECMAScript 6+ (ES6+)",
+    title: "NoSQL Essential Training",
     issuer: "LinkedIn",
     date: "Jun 2026",
-    description: "Advanced engineering patterns utilizing modern core JS features including lexical scopes, asynchronous promises, destructuring paradigms, and module injection compilation systems."
+    description: "Just exactly what NoSQL is, the pros and cons, and tradeoffs you’ll make when using NoSQL."
   },
   {
     id: 30,
-    title: "Statistics Foundations Professional Certificate by Wolfram Research",
-    issuer: "Wolfram",
+    title: "Introduction to Business Analysis",
+    issuer: "LinkedIn",
     date: "Jun 2026",
-    description: "Elite statistical data modeling processing pipelines analyzing mathematical distributions, regression logic variables, variance systems, and complex analytics code execution parameters."
+    description: "Explore how business analysis spans various contexts, including, software, AI, technical integrations, process improvements, and vendor evaluations. Understand the importance of balancing urgency with structured analysis to achieve impactful results."
   },
   {
     id: 31,
-    title: "Excel Statistics Essential Training: 2",
+    title: "Learning ECMAScript 6+ (ES6+)",
     issuer: "LinkedIn",
     date: "Jun 2026",
-    description: "Advanced numerical modeling inside spreadsheet grids using statistical functions, automated Z-tests, ANOVA matrix arrays, and complex correlation trend tracking maps."
+    description: "The new keywords and operators that can help simplify code, as well as new ways of creating functions and objects. How to write and search through template strings, create map objects to store key/value pairs, move values from one array to another—or one object to another—with the spread operator, build reusable classes, and use arrow functions and generators. Plus, learn how to handle asynchronous data and tasks with promises, fetch, and the async/await syntax."
   },
   {
     id: 32,
-    title: "Statistical Analysis with Wolfram Language",
+    title: "Excel Statistics Essential Training: 2",
     issuer: "LinkedIn",
-    date: "May 2026",
-    description: "Programmatic algorithmic engineering using Wolfram symbolic language configurations to generate predictive data trends and automate multi-variable calculations."
+    date: "Jun 2026",
+    description: "Find out how to perform hypothesis tests, ANOVA, regression, and correlation testing and run simulations in Microsoft Excel."
   },
   {
     id: 33,
-    title: "Node.js Essential Training",
+    title: "Excel Statistics Essential Training",
     issuer: "LinkedIn",
     date: "May 2026",
-    description: "Asynchronous non-blocking V8 backend runtime processing covering event-loop telemetry tracking, filesystem stream handling, and secure cluster routing configurations."
+    description: "Utilize Microsoft Excel to learn the fundamentals of descriptive and inferential statistics."
   },
   {
     id: 34,
-    title: "JavaScript Essential Training",
+    title: "Node.js Essential Training",
     issuer: "LinkedIn",
     date: "May 2026",
-    description: "Core prototype-based programming logic principles mapping out memory stack references, dynamic event capturing loops, and algorithmic DOM manipulation logic architectures."
+    description: "Learn the essentials of Node.js and start creating your own JavaScript applications."
   },
   {
     id: 35,
-    title: "Statistics Foundations 4: Advanced Topics",
+    title: "JavaScript Essential Training",
     issuer: "LinkedIn",
     date: "May 2026",
-    description: "Analyzing modern multi-sample hypothesis testing systems, non-parametric analysis engines, chi-square evaluation profiles, and complex probability curves."
+    description: "Build your understanding of JavaScript piece by piece, from core principles like variables, data types, conditionals, and functions through advanced topics including loops, and DOM scripting."
   },
   {
     id: 36,
-    title: "Search Techniques for Web Developers",
+    title: "Statistics Foundations 4: Advanced Topics",
     issuer: "LinkedIn",
     date: "May 2026",
-    description: "Engineering performant client data querying algorithms, advanced indexing methods, search engine crawler optimization schemas, and asynchronous text filtering engines."
+    description: "The practical study and application of experimental design, analysis of variance (ANOVA), two-population comparisons, and regression analysis."
   },
   {
     id: 37,
-    title: "React Essential Training",
+    title: "Search Techniques for Web Developers",
     issuer: "LinkedIn",
     date: "May 2026",
-    description: "Component hook state management structures, side-effect dependencies tracking, custom context layer injections, and structural component tree optimizations."
+    description: "How to master searches with search techniques for Google, other search engines, internal site searches, and GitHub."
   },
   {
     id: 38,
-    title: "DevOps Foundations",
+    title: "React Essential Training",
     issuer: "LinkedIn",
     date: "May 2026",
-    description: "Continuous development deployment architecture pipelines tracking CI/CD build scripts, automated system monitoring, container configurations, and infrastructure-as-code foundations."
+    description: "Get familiar with libraries like Next and Vite, and discover the differences between React Server Components and Client Components. Find out how to use the latest tools, techniques, and patterns that will help futureproof applications and make them more scalable and performant."
   },
   {
     id: 39,
-    title: "Statistics Foundations 3: Using Data Sets",
+    title: "DevOps Foundations",
     issuer: "LinkedIn",
     date: "May 2026",
-    description: "Isolating anomalies and normalizations across dirty raw corporate datasets using descriptive index metrics, tracking distributions, and checking parameter boundaries."
+    description: "An overview of the DevOps movement, focusing on the core value of CAMS (culture, automation, measurement, and sharing). The various methodologies and tools an organization can adopt to transition into DevOps, looking at both agile and lean project management principles and how old-school principles like ITIL, ITSM, and SDLC fit within DevOps."
   },
   {
     id: 40,
-    title: "Career Essentials in System Administration by Microsoft and LinkedIn",
-    issuer: "Microsoft",
+    title: "Statistics Foundations 3: Using Data Sets",
+    issuer: "LinkedIn",
     date: "May 2026",
-    description: "Professional infrastructure tracking blueprint mastery analyzing secure network directory setups, user permission configurations, server terminal setups, and automated backup routines."
+    description: "Practical, example-based lessons on the intermediate skills associated with statistics: Samples and sampling, standard errors, confidence intervals, and hypothesis testing."
   },
   {
     id: 41,
     title: "Statistics Foundations 2: Probability",
     issuer: "LinkedIn",
     date: "May 2026",
-    description: "Permutation calculations, combination tracking, conditional probability calculations, and Bayes theorem modeling optimized for data forecasting scenarios."
+    description: "Covers permutations, combinations, and percentiles, and goes into how to describe and calculate them."
   },
   {
     id: 42,
     title: "Statistics Foundations 1: The Basics",
     issuer: "LinkedIn",
     date: "May 2026",
-    description: "Core central tendency mathematical models parsing out mean, median, standard deviations, variations, and descriptive chart distributions mapping structures."
+    description: "Master the terms, formulas, and techniques needed to perform the most common types of statistics."
   },
   {
     id: 43,
-    title: "Career Essentials in Generative AI by Microsoft and LinkedIn",
-    issuer: "Microsoft",
-    date: "May 2026",
-    description: "Elite theoretical AI framework processing mapping foundational prompt logic parameters, cognitive bias reduction targets, and corporate ethical implementation constraints."
-  },
-  {
-    id: 44,
     title: "Everyday AI Concepts",
     issuer: "LinkedIn",
     date: "May 2026",
-    description: "Demystifying everyday neural network processing loops, recommendation systems algorithms, machine learning logic blocks, and data parsing mechanics."
+    description: "Understand key AI concepts and discover how artificial intelligence can benefit your team, organization, products, and services."
   },
   {
-    id: 45,
+    id: 44,
     title: "Ethics in the Age of Generative AI",
     issuer: "LinkedIn",
     date: "May 2026",
-    description: "Parsing algorithmic fairness objectives, copyright vulnerabilities within generative training pipelines, intellectual property security, and responsible model fine-tuning frameworks."
+    description: "Better understand and act on the emerging ethical risks and considerations of generative artificial intelligence. Get a solid introduction to the ethical concerns around generative AI, then learn how to use a framework of ethical analysis to address these concerns."
   },
   {
-    id: 46,
+    id: 45,
     title: "Learning Microsoft 365 Copilot for Work",
     issuer: "LinkedIn",
     date: "May 2026",
-    description: "Maximizing enterprise productivity graphs by writing precise orchestrations connecting natural language prompts to tenant data repositories."
+    description: "Discover how—through Copilot—AI can help you create documents, summarize messages, and analyze data from natural language requests in Word, Excel, Outlook, Teams, and PowerPoint."
   },
   {
-    id: 47,
+    id: 46,
     title: "What Is Generative AI?",
     issuer: "LinkedIn",
     date: "May 2026",
-    description: "Structural parsing of deep neural architectures, transformers, tokens embeddings logic tracks, and the underlying probability modeling of conversational text generators."
+    description: "The basics of generative AI, with topics including what it is, how it works, how to create your own content, different types of models, future predictions, and ethical implications."
   },
   {
-    id: 48,
+    id: 47,
     title: "Your Top AI Questions Answered: AI Literacy for Everyone",
     issuer: "LinkedIn",
     date: "May 2026",
-    description: "Deconstructing core machine learning capabilities, model limitations, vector search spaces, and future automation impacts across modern information tech fields."
+    description: "Discover the differences between traditional AI and generative AI, before diving into constructing effective prompts to enhance the usefulness of AI responses in various contexts. Learn about key technologies including transformer architecture, large language models (LLMs), and real-world applications like chatbots, translators, and agents."
   },
   {
-    id: 49,
-    title: "Career Essentials in Administrative Assistance by Microsoft and LinkedIn",
-    issuer: "Microsoft",
-    date: "Jun 2025",
-    description: "Operational infrastructure optimization focusing on digital documentation control, record architecture maintenance, and high-frequency communication calendar management models."
-  },
-  {
-    id: 50,
+    id: 48,
     title: "Collaborating with Microsoft 365",
     issuer: "LinkedIn",
     date: "Jun 2025",
-    description: "Architecting cloud-based collaborative structures utilizing synchronous cross-platform networks, shared asset hubs, and enterprise communication systems."
+    description: "This course teaches you how to use both Teams and SharePoint to collaborate with others more effectively."
   },
   {
-    id: 51,
+    id: 49,
     title: "Note-Taking for Business Professionals",
     issuer: "LinkedIn",
     date: "Jun 2025",
-    description: "Information synthesis modeling converting dense real-time boardroom verbal arrays into highly indexed, task-prioritized strategic roadmap records."
+    description: "Effective note-taking is a core skill that professionals at all levels can improve upon—and this course shows you how. It explains how to decide when to take linear vs. visual notes, how to effectively listen, how to document action plans, and how to effectively write meeting minutes."
   },
   {
-    id: 52,
+    id: 50,
     title: "Time Management Fundamentals",
     issuer: "LinkedIn",
     date: "Jun 2025",
-    description: "Algorithmic time block allocation methodologies engineered to neutralize focus cognitive leakage vectors and optimize cross-project deliverable milestones."
+    description: "How to develop habits to be more organized and reduce the clutter in your workspace; how to stay mentally on task and eliminate the to-dos you have floating in your head; and how to develop a time budget to get the most done during your workday and focus on your most valuable activities. If you’ve been looking for strategies to help you manage your time more efficiently, this course may be well worth your time."
   },
   {
-    id: 53,
+    id: 51,
     title: "Tips for Writing Business Emails",
     issuer: "LinkedIn",
     date: "Jun 2025",
-    description: "Structural business messaging parsing aimed at minimizing communication loops by engineering highly directive, crystal-clear professional correspondence styles."
+    description: "Tips to strengthen your email skills and shape a positive online reputation."
   },
   {
-    id: 54,
+    id: 52,
     title: "Communication Foundations",
     issuer: "LinkedIn",
     date: "Jun 2025",
-    description: "Deconstructing systemic team interaction loops, situational vocal phrasing, and assertive feedback architectures to elevate organizational output speed."
+    description: "The four building blocks of communication—people, message, context, and listening—and show how they apply in different circumstances."
   },
   {
-    id: 55,
+    id: 53,
     title: "Administrative Professional Tips",
     issuer: "LinkedIn",
     date: "May 2025",
-    description: "Micro-optimization workflows for professional operations, data capture methods, and priority scheduling mechanics."
+    description: "Key skills such as gatekeeping, project management, and navigating office politics. Tools to help you be more productive and efficient—including a detailed look at ways you can leverage new AI tools in your work—and shares resources to find answers specific to your industry."
   },
   {
-    id: 56,
+    id: 54,
     title: "Administrative Professional Foundations",
     issuer: "LinkedIn",
     date: "May 2025",
-    description: "Core tenets of project coordination, standard business documentation layouts, office technology optimization tracking, and internal stakeholder relations."
+    description: "New techniques for effective communication, time management, and leveraging AI, while exploring career growth opportunities and professional development. Learn to manage complex schedules, plan impactful events, and support multiple executives."
   },
   {
-    id: 57,
-    title: "Career Essentials in Cybersecurity by Microsoft and LinkedIn",
-    issuer: "Microsoft",
-    date: "May 2025",
-    description: "Elite security credential mapping infrastructure threat vectors, data encryption standards, verification loops, and access permission protocols."
-  },
-  {
-    id: 58,
+    id: 55,
     title: "Microsoft Security Copilot (2024)",
     issuer: "LinkedIn",
     date: "May 2025",
     description: "Harnessing real-time automated AI logic setups to parse system network security alerts, analyze malware signatures, and compile fast incident remediation responses."
   },
   {
-    id: 59,
+    id: 56,
     title: "Cybersecurity Foundations",
     issuer: "LinkedIn",
     date: "May 2025",
-    description: "Foundational asset-protection blueprint mapping out defensive hardware perimeters, authentication standards, social engineering mitigation vectors, and network sniffing defenses."
+    description: "Details pertinent cyber threats and how they operate, including how cyber criminals hide their attacks, how advanced persistent threats work, and even how to determine what's real and what's merely cyber fear, uncertainty, and doubt (FUD)."
   },
   {
-    id: 60,
+    id: 57,
     title: "Cybersecurity Awareness: Cybersecurity Terminology",
     issuer: "LinkedIn",
     date: "May 2025",
-    description: "Indexing technical taxonomies across modern attack vectors including ransomware mechanisms, cross-site injection profiles, and malicious payload distribution tracking."
+    description: "Discover core concepts in the cybersecurity field by exploring the relationship between people, processes, and technology, noting the variety of terminology in the constantly shifting security landscape, and building your skills along the way."
   },
   {
-    id: 61,
+    id: 58,
     title: "The Cybersecurity Threat Landscape",
     issuer: "LinkedIn",
     date: "May 2025",
-    description: "Analytical mapping tracking geopolitical advanced persistent threats, zero-day vulnerabilities mitigation, and distributed botnet swarm tracking systems."
+    description: "Some of the most common cybersecurity threats, including phishing and ransomware, deepfakes, unmanaged Internet of Things (IoT) devices, business email compromise, and more."
   },
   {
-    id: 62,
-    title: "Career Essentials in Data Analysis by Microsoft and LinkedIn",
-    issuer: "Microsoft",
-    date: "May 2025",
-    description: "Enterprise analytical tracking credentials mapping relational semantic storage systems, data ingestion cleanup passes, and KPI calculation modeling pipelines."
-  },
-  {
-    id: 63,
+    id: 59,
     title: "Learning Data Analytics Part 2: Extending and Applying Core Knowledge",
     issuer: "LinkedIn",
     date: "May 2025",
-    description: "Statistical correlation analysis modeling parsing sample sizes distributions and executing predictive trending equations over clean server data aggregates."
+    description: "How to create data sets with queries, joins, and appends, then goes into building aggregate data with total queries. How to use pivots to build basic dashboards and visualizations, and how to use Power Query for data transformations."
   },
   {
-    id: 64,
+    id: 60,
     title: "Learning Data Analytics: 1 Foundations",
     issuer: "LinkedIn",
     date: "May 2025",
-    description: "Parsing data architecture systems, understanding data storage schemas, tracking primary data collection pipelines, and validating transactional outputs."
+    description: "How to work with data, including how to import data, work with flat files such as CSVs, and create datasets for others. Introduces you to SQL queries, PowerBI, and more"
   },
   {
-    id: 65,
+    id: 61,
     title: "Introduction to Career Skills in Data Analytics",
     issuer: "LinkedIn",
     date: "May 2025",
-    description: "Mapping technological tracks across SQL analysis, cloud reporting structures, and formatting data to resolve business optimization challenges."
+    description: "Explore the power of data and data analysis to develop a better understanding of the role. Learn about business intelligence, data-driven decision-making, data collection methods, discovery, and interpretation, as well as how to structure, assess, and transform data using core functions in Excel and Power BI."
   },
   {
-    id: 66,
+    id: 62,
     title: "What Is Business Analysis?",
     issuer: "LinkedIn",
     date: "Apr 2025",
-    description: "Deconstructing requirement analysis pipelines, scope validation parameters, structural enterprise gaps, and systems engineering bridge concepts."
-  },
-  {
-    id: 67,
-    title: "Neo4j Certified Professional",
-    issuer: "Neo4j",
-    date: "Mar 2022",
-    description: "Elite graph database certification analyzing nodes relationships tracking logic patterns, high-velocity Cypher database querying scripts, and index execution tracing optimizations."
-  },
-  {
-    id: 68,
-    title: "Google Analytics Certification",
-    issuer: "Google",
-    date: "Jul 2023",
-    description: "Advanced web event-stream orchestration setup tracking data layers custom streams variables, user acquisition funnel tracking calculations, and custom dimension tagging."
+    description: "Establishes a comprehensive viewpoint of the breadth of the business analysis profession, then helps you to recognize a core set of competencies required to effectively perform business analysis."
   }
 ];
 
-// Helper to render inline tech SVGs to eliminate broken local file paths
+// Helper to render inline tech SVGs
 const IssuerLogo: React.FC<{ issuer: string }> = ({ issuer }) => {
   const norm = issuer.toLowerCase();
   if (norm.includes("linkedin")) {
     return (
-      <svg className="issuer-svg ink-linkedin" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-      </svg>
+      <img
+        src="images/linkedin.svg"
+        alt="LinkedIn logo"
+        className="issuer-svg ink-linkedin"
+      />
     );
   }
   if (norm.includes("microsoft")) {
@@ -512,7 +472,6 @@ const IssuerLogo: React.FC<{ issuer: string }> = ({ issuer }) => {
       </svg>
     );
   }
-  // Alternate sleek tech geometric node icon for customized regional authorities
   return (
     <svg className="issuer-svg ink-generic" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
       <polygon points="12 2 2 7 12 12 22 7 12 2" />
@@ -523,46 +482,82 @@ const IssuerLogo: React.FC<{ issuer: string }> = ({ issuer }) => {
 };
 
 const Courses: React.FC = () => {
+  const [searchQuery, setSearchQuery] = useState<string>("");
   const [activeCourse, setActiveCourse] = useState<Course | null>(null);
+
+  const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const filteredCourses = useMemo(() => {
+    const query = searchQuery.toLowerCase().trim();
+    if (!query) return COURSES_DATA;
+
+    return COURSES_DATA.filter(
+      (course) =>
+        course.title.toLowerCase().includes(query) ||
+        course.issuer.toLowerCase().includes(query) ||
+        course.description.toLowerCase().includes(query)
+    );
+  }, [searchQuery]);
 
   return (
     <section className="courses-viewport-wrapper">
       <div className="courses-layout-container">
         
         <header className="courses-section-header">
-          <div className="header-telemetry">SYS // CREDENTIALS_INDEX</div>
-          <h2 className="courses-main-title">Specializations & Certifications</h2>
+          <h2 className="courses-main-title">Courses</h2>
+          
+          {/* Added Search Bar Control */}
+          <div className="courses-search-container">
+            <input
+              type="text"
+              className="courses-search-input"
+              placeholder="Search Courses (R, PowerBI, Business Analysis ..."
+              value={searchQuery}
+              onChange={handleSearchChange}
+            />
+            <div className="search-icon">
+              <img src="images/search.png" alt="Search icon" />
+            </div>
+          </div>
         </header>
 
         {/* Small Responsive Grid Configuration */}
         <div className="courses-dense-grid">
-          {COURSES_DATA.map((course) => (
-            <article 
-              key={course.id} 
-              className={`small-course-card ${activeCourse?.id === course.id ? "targeted" : ""}`}
-              onClick={() => setActiveCourse(course)}
-            >
-              {/* Sci-Fi Background Layers */}
-              <div className="card-mesh-texture" />
-              <div className="card-reactive-neon-glow" />
-              <span className="card-corner-bracket topleft" />
-              <span className="card-corner-bracket bottomright" />
+          {filteredCourses.length > 0 ? (
+            filteredCourses.map((course) => (
+              <article 
+                key={course.id} 
+                className={`small-course-card ${activeCourse?.id === course.id ? "targeted" : ""}`}
+                onClick={() => setActiveCourse(course)}
+              >
+                {/* Sci-Fi Background Layers */}
+                <div className="card-mesh-texture" />
+                <div className="card-reactive-neon-glow" />
+                <span className="card-corner-bracket topleft" />
+                <span className="card-corner-bracket bottomright" />
 
-              <div className="card-content-wrapper">
-                <div className="card-top-meta">
-                  <IssuerLogo issuer={course.issuer} />
-                  <span className="issuer-name-text">{course.issuer}</span>
-                </div>
+                <div className="card-content-wrapper">
+                  <div className="card-top-meta">
+                    <IssuerLogo issuer={course.issuer} />
+                    <span className="issuer-name-text">{course.issuer}</span>
+                  </div>
 
-                <h3 className="course-title-heading">{course.title}</h3>
-                
-                <div className="card-bottom-meta">
-                  <time className="course-date-stamp">{course.date}</time>
-                  <span className="telemetry-action-hint">DETAILS //</span>
+                  <h3 className="course-title-heading">{course.title}</h3>
+                  
+                  <div className="card-bottom-meta">
+                    <time className="course-date-stamp">{course.date}</time>
+                    <span className="telemetry-action-hint">DETAILS //</span>
+                  </div>
                 </div>
-              </div>
-            </article>
-          ))}
+              </article>
+            ))
+          ) : (
+            <div className="courses-no-results">
+              <p>No courses found matching "{searchQuery}".</p>
+            </div>
+          )}
         </div>
       </div>
 
@@ -573,9 +568,6 @@ const Courses: React.FC = () => {
             <div className="console-scanner-line" />
             
             <header className="console-box-header">
-              <div className="console-telemetry-status">
-                <span className="pulse-node" /> STATUS // CREDENTIAL_VERIFIED_2026
-              </div>
               <button className="console-close-button" onClick={() => setActiveCourse(null)}>
                 &times; CLOSE
               </button>
@@ -584,11 +576,11 @@ const Courses: React.FC = () => {
             <div className="console-box-body">
               <div className="console-meta-row">
                 <div className="meta-block">
-                  <span className="meta-label">ISSUING_AUTHORITY</span>
+                  <span className="meta-label">ISSUING AUTHORITY</span>
                   <span className="meta-val highlight">{activeCourse.issuer}</span>
                 </div>
                 <div className="meta-block">
-                  <span className="meta-label">TIMELINE_STAMP</span>
+                  <span className="meta-label">DATE</span>
                   <span className="meta-val">{activeCourse.date}</span>
                 </div>
               </div>
@@ -598,14 +590,10 @@ const Courses: React.FC = () => {
               <h4 className="console-course-title">{activeCourse.title}</h4>
               
               <div className="console-description-wrapper">
-                <span className="terminal-prompt">&gt; DESCRIPTION:</span>
+                <span className="terminal-prompt">DESCRIPTION:</span>
                 <p className="console-description-text">{activeCourse.description}</p>
               </div>
             </div>
-
-            <footer className="console-box-footer">
-              <span className="footer-telemetry-string">LOG_ID_MRU_EX_A0{activeCourse.id}</span>
-            </footer>
           </div>
         </div>
       )}

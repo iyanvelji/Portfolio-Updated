@@ -11,6 +11,9 @@ import Experience from "./components/Experience";
 import Courses from "./components/Courses";
 import Projects from "./components/Projects";
 import Awards from "./components/Awards";
+import Footer from "./components/Footer";
+
+
 
 function App() {
   const carouselSlides = [
@@ -53,6 +56,11 @@ function App() {
               <>
                 <Carousel items={carouselSlides} />
                 <Skills isHomePage={true} />
+                <Certifications isHomePage={true} />
+                <Publications isHomePage={true} />
+                <Awards isHomePage={true} />
+                <Projects limit={2} isHomePage={true} />
+                <Experience limit={1} isHomePage={true} />
               </>
             }
           />
@@ -65,6 +73,8 @@ function App() {
           <Route path="/awards" element={<Awards />} />
           <Route path="/publications" element={<Publications />} />
         </Routes>
+
+        <Footer />
       </Router>
     </>
   );

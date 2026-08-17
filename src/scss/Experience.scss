@@ -2,6 +2,7 @@ $bg-dark-core: #030106;
 $panel-bg-glass: rgba(14, 8, 24, 0.65);
 $accent-neon-purple: #bc3bf0;
 $accent-cyan-laser: #00bfff;
+$accent-glow-magenta: #da70d6;
 $text-muted-purple: #a698b5;
 $text-bright-white: #fdfbff;
 $border-glass-line: rgba(188, 59, 240, 0.12);
@@ -10,7 +11,8 @@ $accent-dim: rgba(188, 59, 240, 0.15);
 .experience-header {
   width: 100%;
   text-align: center;     // 🎯 THE FIX: Centers the header text
-  margin-bottom: 4.5rem;  // Spacing for the entire header section wrapper
+  margin-bottom: 2rem;
+  // Spacing for the entire header section wrapper
   
   // ❌ REMOVED: border-left and padding-left so it centers flawlessly
 
@@ -32,9 +34,8 @@ $accent-dim: rgba(188, 59, 240, 0.15);
     padding-left: 0;
     text-transform: uppercase;
     letter-spacing: 3px;
-    
-    // 🎯 THE FIX: Adds exactly 10px of space directly under the text
-    margin: 0 0 10px 0; 
+    margin: 0;
+    margin-bottom: 2rem;
 
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -47,10 +48,19 @@ $accent-dim: rgba(188, 59, 240, 0.15);
   min-height: 100vh;
   background-color: $bg-dark-core;
   color: $text-bright-white;
-  padding: 6rem 2rem;
+  padding: 4rem 2rem 2rem 2rem;
   overflow: hidden;
   display: flex;
   justify-content: center;
+
+  &.is-home-page {
+    background-color: #000000;
+
+    .cyber-grid-overlay,
+    .ambient-glow-core {
+      display: none;
+    }
+  }
 }
 
 // Background Matrix Elements
@@ -424,6 +434,67 @@ $accent-dim: rgba(188, 59, 240, 0.15);
       color: #fff;
     }
   }
+}
+
+// ==========================================================================
+// "SEE MORE" PILL BUTTON
+// ==========================================================================
+.see-more-container {
+  margin-top: 4rem;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+  z-index: 5;
+}
+
+.see-more-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+  padding: 0.9rem 2.8rem;
+  font-size: 0.95rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #06020a;
+  border: 1.5px solid rgba($accent-neon-purple, 0.7);
+  border-radius: 9999px;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+
+  .see-more-arrow {
+    width: 20px;
+    height: 20px;
+    color: $accent-glow-magenta;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), color 0.35s ease;
+  }
+
+  &:hover {
+    background-color: #0e0417;
+    border-color: $accent-glow-magenta;
+    transform: translateY(-2px);
+    box-shadow: 
+      0 8px 30px rgba(0, 0, 0, 0.8),
+      0 0 25px rgba($accent-neon-purple, 0.5);
+
+    .see-more-arrow {
+      color: #ffffff;
+      transform: translateX(5px);
+    }
+  }
+}
+
+@media (max-width: 650px) {
+  .timeline-master-wrapper { padding-left: 2.5rem; }
+  .timeline-neon-rail { left: 0.5rem; }
+  .timeline-hub-anchor { left: calc(-2.5rem + 0.5rem); }
+  .company-group-card { padding: 1.75rem; }
+  .company-main-row { gap: 1.25rem; }
+  .company-logo-frame { width: 52px; height: 52px; }
 }
 
 // Media Control Queries
