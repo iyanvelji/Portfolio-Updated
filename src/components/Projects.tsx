@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../scss/Projects.scss";
+import { Link } from "react-router-dom";
 
 interface ProjectData {
   id: number;
@@ -154,12 +155,12 @@ const Projects: React.FC<ProjectsProps> = ({ limit, isHomePage = false }) => {
 
       {isHomePage && (
         <div className="see-more-container">
-          <a href="/projects" className="see-more-btn">
+          <Link to="/projects" className="see-more-btn">
             <span>SEE MORE</span>
             <svg className="see-more-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
-          </a>
+          </Link>
         </div>
       )}
     </section>

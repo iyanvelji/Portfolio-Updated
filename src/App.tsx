@@ -6,7 +6,7 @@ import Education from "./components/Education";
 import { Skills } from "./components/Skills";
 import Publications from "./components/Publications";
 import Certifications from "./components/Certifications";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import Experience from "./components/Experience";
 import Courses from "./components/Courses";
 import Projects from "./components/Projects";
@@ -47,7 +47,7 @@ function App() {
   return (
     <>
       <Heading />
-      <Router basename={import.meta.env.BASE_URL}>
+      <Router>
         <Nav />
         <Routes>
           <Route

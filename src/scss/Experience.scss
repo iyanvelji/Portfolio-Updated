@@ -499,10 +499,49 @@ $accent-dim: rgba(188, 59, 240, 0.15);
 
 // Media Control Queries
 @media (max-width: 650px) {
-  .timeline-master-wrapper { padding-left: 2.5rem; }
-  .timeline-neon-rail { left: 0.5rem; }
-  .timeline-hub-anchor { left: calc(-2.5rem + 0.5rem); }
-  .company-group-card { padding: 1.75rem; }
-  .company-main-row { gap: 1.25rem; }
-  .company-logo-frame { width: 52px; height: 52px; }
+  // Reclaim outer horizontal screen real estate
+  .experience-section-container {
+    padding: 3rem 0.75rem 1.5rem 0.75rem; 
+  }
+
+  // Shift timeline track closer to the left edge
+  .timeline-master-wrapper { 
+    padding-left: 1.6rem; 
+  }
+
+  .timeline-neon-rail { 
+    left: 0.35rem; 
+  }
+
+  .timeline-hub-anchor { 
+    left: calc(-1.6rem + 0.35rem); 
+  }
+
+  // Maximize available text space inside experience cards
+  .company-group-card { 
+    padding: 1.25rem 1rem; 
+  }
+
+  .company-main-row { 
+    gap: 0.85rem; 
+  }
+
+  .company-logo-frame { 
+    width: 46px; 
+    height: 46px; 
+  }
+
+  // Reduce inner nested role timeline indent to prevent text squeezing
+  .nested-roles-container {
+    padding-left: 1rem;
+    gap: 1.5rem;
+
+    .nested-role-node .role-bullet-indicator {
+      left: -1rem;
+    }
+  }
+
+  .role-bullet-list {
+    padding-left: 1rem;
+  }
 }

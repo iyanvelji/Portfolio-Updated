@@ -1,5 +1,6 @@
 import React from "react";
 import "../scss/Awards.scss";
+import { Link } from "react-router-dom";
 
 interface Award {
   id: string;
@@ -132,7 +133,7 @@ const Awards: React.FC<AwardsProps> = ({ isHomePage = false, awardsData = AWARDS
 
             {/* See More Button (Modeled after Certifications) */}
             <div className="see-more-container">
-              <a href="/awards" className="see-more-btn">
+              <Link to="/awards" className="see-more-btn">
                 <span>SEE MORE</span>
                 <svg
                   className="see-more-arrow"
@@ -146,7 +147,7 @@ const Awards: React.FC<AwardsProps> = ({ isHomePage = false, awardsData = AWARDS
                   <line x1="5" y1="12" x2="19" y2="12" />
                   <polyline points="12 5 19 12 12 19" />
                 </svg>
-              </a>
+              </Link>
             </div>
           </>
         ) : (

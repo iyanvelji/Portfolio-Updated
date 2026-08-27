@@ -126,7 +126,6 @@ const certificationData: Certification[] = [
     issuer: 'Microsoft and LinkedIn',
     issueDate: 'Issued May 2025',
     image: 'images/microsoft.png',
-    url: "https://www.linkedin.com/learning/certificates/005662171122365e7c5546c6d03e3c824a0247ab9222b327d043c9d3fdfa93be?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3BFJVSiFBZRpy%2BCOa1dJq61A%3D%3D"
   },
   {
     id: 'cert-14',

@@ -298,12 +298,12 @@ export const Experience: React.FC<ExperienceProps> = ({ limit, isHomePage = fals
         </div>
         {isHomePage && (
           <div className="see-more-container">
-            <a href="/experience" className="see-more-btn" onClick={() => window.scrollTo(0, 0)}>
+            <Link to="/experience" className="see-more-btn" onClick={() => window.scrollTo(0, 0)}>
               <span>SEE MORE</span>
               <svg className="see-more-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
-            </a>
+            </Link>
           </div>
         )}
       </div>
