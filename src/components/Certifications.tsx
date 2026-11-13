@@ -36,7 +36,7 @@ const certificationData: Certification[] = [
     id: "cert-2",
     title: "Google Prompting Essentials",
     issuer: "Google",
-    issueDate: "Issued Jul 2026",
+    issueDate: "Issued Aug 2026",
     image: "images/google.png",
     url: "https://www.coursera.org/account/accomplishments/specialization/781IWXX6Q35F",
   },
