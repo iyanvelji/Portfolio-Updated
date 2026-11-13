@@ -124,7 +124,7 @@ $font-sans: "Space Grotesk", sans-serif;
 }
 
 // Responsive Mobile Breakpoint
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
   .navbar {
     .nav-container {
       justify-content: space-between; // Standard split layout for mobile viewports
