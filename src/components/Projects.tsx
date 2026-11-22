@@ -18,9 +18,9 @@ interface ProjectsProps {
 const PROJECTS_DATA: ProjectData[] = [
   {
     id: 1,
-    title: "Plus 15 map",
+    title: "Plus 15 map and Transit Dashboard",
     category: "PYTHON",
-    link: "https://iyanvelji-plus-15-map-project.share.connect.posit.cloud/",
+    link: "https://iyanvelji.github.io/Plus-15-Map-Project/",
     backgroundImage: "images/calgary.avif",
   },
   {
